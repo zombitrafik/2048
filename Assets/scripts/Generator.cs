@@ -29,43 +29,46 @@ public class Generator : MonoBehaviour {
 	{
 		if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
-			//MoveItemsLeft();
+			MoveItemsLeft();
 			GeneratePositions();
 		}
 		if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
 			MoveItemsRight();
-			//GeneratePositions();
+			GeneratePositions();
 		}
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
-			//MoveItemsUp();
+			MoveItemsUp();
 			GeneratePositions();
 		}
 		if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
-			//MoveItemsDown();
+			MoveItemsDown();
 			GeneratePositions();
 		}
 	}
 
-	void GeneratePositions()
+	public void GeneratePositions()
 	{
 		int color = 0;
 		int posX = 0, posY = 0;
-		int i=0;
-		while(i<startCount){
+		int i = 0;
+		while (i < startCount)
+		{
 			color = Random.Range(1, 6);
 			posX = Random.Range(0, 10);
 			posY = Random.Range(0, 10);
-			if (arr[posX, posY] != 0) continue;
-			SetItem(posX,posY,color);
+
+
+			if (arr[9 - posY, posX] != 0) continue;
+			SetItem(9 - posY, posX, color);
 			i++;
 		}
 	}
-	void SetItem(int posX, int posY, int color)
+	public void SetItem(int posY, int posX, int color)
 	{
-		arr[posX, posY] = color;
+		arr[posY, posX] = color;
 		Sprite selectedSprite;
 		switch(color){
 			case RED: selectedSprite = redSprite;
@@ -85,10 +88,47 @@ public class Generator : MonoBehaviour {
 		GameObject item = new GameObject();
 		item.AddComponent<SpriteRenderer>();
 		item.GetComponent<SpriteRenderer>().sprite = selectedSprite;
-		item.transform.position = new Vector2(marginX + posX, marginY + posY);
+
+		PushItems(item, new Vector3(marginX + posX, marginY + posY, 0));
+
 		item.name = posX + "_" + posY;
 	}
 
+	public void PushItems(GameObject obj, Vector3 pos)
+	{
+		Vector2 startPos = pos;
+		startPos += new Vector2(0.3f, 0.3f);
+		obj.transform.position = startPos;
+		iTween.MoveTo(obj, iTween.Hash("position", pos, "time", 0.7f, "easetype", iTween.EaseType.easeOutSine));
+	}
+
+	void MoveItemsLeft()
+	{
+		for (int i = 9; i >= 0; i--)
+		{
+			int itemsCount = 0;
+			for (int j = 0; j < 10; j++)
+			{
+				if (arr[i, j] != 0)
+				{
+					if (j < itemsCount + 1)
+					{
+						itemsCount++;
+						continue;
+					}
+					Debug.Log(j + "_" + i);
+					GameObject item = GameObject.Find(j + "_" + i);
+					arr[i, itemsCount] = arr[i, j];
+					arr[i, j] = 0;
+					item.name = itemsCount + "_" + i;
+
+					iTween.MoveTo(item, iTween.Hash("position", new Vector3(itemsCount + marginX, i + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine));
+
+					itemsCount++;
+				}
+			}
+		}
+	}
 
 	void MoveItemsRight()
 	{
@@ -99,25 +139,81 @@ public class Generator : MonoBehaviour {
 			{
 				if (arr[i, j] != 0)
 				{
-					if (j == 9 - itemsCount)
+					if (j > 8 - itemsCount)
 					{
-						//Debug.Log("if proc " + j);
-						//itemsCount++;
-						//continue;
+						itemsCount++;
+						continue;
 					}
+
+					GameObject item = GameObject.Find(j + "_" + i);
 					arr[i, 9 - itemsCount] = arr[i, j];
-					GameObject item = GameObject.Find(i + "_" + j);
-
-					item.name = i + "_" + (9 - itemsCount);
-
-					item.transform.position = new Vector2((9 - itemsCount) + marginX, j + marginY);
 					arr[i, j] = 0;
+					item.name = (9 - itemsCount) + "_" + i;
+
+					iTween.MoveTo(item, iTween.Hash("position", new Vector3((9 - itemsCount) + marginX, i + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine));
+
 					itemsCount++;
 				}
 			}
-			Debug.Log(i + " " + itemsCount) ;
 		}
 	}
 
 
+	void MoveItemsDown()
+	{
+		for (int i = 9; i >= 0; i--)
+		{
+			int itemsCount = 0;
+			for (int j = 0; j < 10; j++)
+			{
+				if (arr[j, i] != 0)
+				{
+					if (j < itemsCount + 1)
+					{
+						itemsCount++;
+						continue;
+					}
+
+					GameObject item = GameObject.Find(i + "_" + j);
+					arr[itemsCount, i] = arr[j, i];
+					arr[j, i] = 0;
+					item.name = i + "_" + itemsCount;
+
+					iTween.MoveTo(item, iTween.Hash("position", new Vector3(i + marginX, itemsCount + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine));
+
+					itemsCount++;
+				}
+			}
+		}
+	}
+
+	void MoveItemsUp()
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			int itemsCount = 0;
+			for (int j = 9; j >= 0; j--)
+			{
+				if (arr[j, i] != 0)
+				{
+					if (j == 9 - itemsCount)//8-itemsCount)
+					{
+						Debug.Log("if proc " + j + " " + (8 + itemsCount));
+						itemsCount++;
+						continue;
+					}
+
+					GameObject item = GameObject.Find(i + "_" + j);
+					arr[9 - itemsCount, i] = arr[j, i];
+					arr[j, i] = 0;
+					Debug.Log(i + "_" + (9 - itemsCount) + "     ");
+					item.name = i + "_" + (9 - itemsCount);
+
+					iTween.MoveTo(item, iTween.Hash("position", new Vector3(i + marginX, (9 - itemsCount) + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine));
+
+					itemsCount++;
+				}
+			}
+		}
+	}
 }

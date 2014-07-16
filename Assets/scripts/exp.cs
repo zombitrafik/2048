@@ -3,26 +3,24 @@ using System.Collections;
 
 public class Exp : MonoBehaviour {
 
-	public static void newExp(int value, Vector2 position)
+
+	public static void newExp(int value, Vector3 position, Color color)
 	{
-		GameObject objText = new GameObject("Text3D");
-		TextMesh textMesh = objText.AddComponent<TextMesh>();
-		objText.AddComponent<MeshRenderer>();
-		textMesh.renderer.material = new Material(Shader.Find("GUI/Text Shader"));
-		textMesh.text = "Hello World!";
+		GameObject instance = (GameObject)Instantiate(Resources.Load("text", typeof(GameObject)), position, Quaternion.identity);
+		instance.GetComponent<TextMesh>().text = "+"+value;
+		MoveAndHide(instance, color);
 	}
 
-	private static void Ini_Tpl(GameObject experience)
+	private static void MoveAndHide(GameObject obj, Color color)
 	{
-		
-		GameObject text = GameObject.Find("text");
-		experience.GetComponent<TextMesh>().characterSize = text.GetComponent<TextMesh>().characterSize;
-		experience.GetComponent<TextMesh>().font = text.GetComponent<TextMesh>().font;
-		experience.GetComponent<TextMesh>().fontStyle = text.GetComponent<TextMesh>().fontStyle;
-		experience.GetComponent<TextMesh>().anchor = text.GetComponent<TextMesh>().anchor;
-		experience.GetComponent<TextMesh>().alignment = text.GetComponent<TextMesh>().alignment;
-		experience.GetComponent<TextMesh>().color = text.GetComponent<TextMesh>().color;
-
+		Vector3 pos = obj.transform.position + new Vector3(0, 1.5f, 0);
+		iTween.MoveTo(obj, iTween.Hash("position", pos, "time", 1f, "easetype", iTween.EaseType.easeOutSine));
+		iTween.ColorTo(obj, iTween.Hash("r", color.r, "g", color.g, "b", color.b, "time", 0.3f, "easetype", iTween.EaseType.easeOutQuint));
+		iTween.ColorTo(obj, iTween.Hash("a", 0f, "delay", 0.5f));
+		GameObject.Destroy(obj, 2);
 	}
 
+
+
+	
 }
