@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System;
 
 public class Generator : MonoBehaviour {
 	
@@ -18,8 +20,12 @@ public class Generator : MonoBehaviour {
 
 	const float marginX = -4.5f;
 	const float marginY = -4.5f;
-	int[,] arr = new int[10,10];
-	// Use this for initialization
+	int[,] arr = new int[10, 10];
+	int[,] figures = new int[10, 10];
+
+	Hashtable hash = new Hashtable();
+
+	// Use this for initializationd
 	void Start () {
 		GeneratePositions();
 	}
@@ -56,15 +62,17 @@ public class Generator : MonoBehaviour {
 		int i = 0;
 		while (i < startCount)
 		{
-			color = Random.Range(1, 6);
-			posX = Random.Range(0, 10);
-			posY = Random.Range(0, 10);
+			//color = 1;
+			color = UnityEngine.Random.Range(1, 6);
+			posX = UnityEngine.Random.Range(0, 10);
+			posY = UnityEngine.Random.Range(0, 10);
 
 
 			if (arr[9 - posY, posX] != 0) continue;
 			SetItem(9 - posY, posX, color);
 			i++;
 		}
+		//Exploid();
 	}
 	public void SetItem(int posY, int posX, int color)
 	{
@@ -92,6 +100,7 @@ public class Generator : MonoBehaviour {
 		PushItems(item, new Vector3(marginX + posX, marginY + posY, 0));
 
 		item.name = posX + "_" + posY;
+
 	}
 
 	public void PushItems(GameObject obj, Vector3 pos)
@@ -122,7 +131,7 @@ public class Generator : MonoBehaviour {
 					arr[i, j] = 0;
 					item.name = itemsCount + "_" + i;
 
-					iTween.MoveTo(item, iTween.Hash("position", new Vector3(itemsCount + marginX, i + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine));
+					iTween.MoveTo(item, iTween.Hash("position", new Vector3(itemsCount + marginX, i + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine, "onComplete", "RunEnd", "onCompleteTarget", gameObject));
 
 					itemsCount++;
 				}
@@ -150,7 +159,7 @@ public class Generator : MonoBehaviour {
 					arr[i, j] = 0;
 					item.name = (9 - itemsCount) + "_" + i;
 
-					iTween.MoveTo(item, iTween.Hash("position", new Vector3((9 - itemsCount) + marginX, i + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine));
+					iTween.MoveTo(item, iTween.Hash("position", new Vector3((9 - itemsCount) + marginX, i + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine, "onComplete", "RunEnd", "onCompleteTarget", gameObject));
 
 					itemsCount++;
 				}
@@ -178,8 +187,8 @@ public class Generator : MonoBehaviour {
 					arr[itemsCount, i] = arr[j, i];
 					arr[j, i] = 0;
 					item.name = i + "_" + itemsCount;
-
-					iTween.MoveTo(item, iTween.Hash("position", new Vector3(i + marginX, itemsCount + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine));
+					//item.transform.position = new Vector3(i + marginX, itemsCount + marginY, 0);
+					iTween.MoveTo(item, iTween.Hash("position", new Vector3(i + marginX, itemsCount + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine, "onComplete", "RunEnd", "onCompleteTarget", gameObject));
 
 					itemsCount++;
 				}
@@ -198,22 +207,213 @@ public class Generator : MonoBehaviour {
 				{
 					if (j == 9 - itemsCount)//8-itemsCount)
 					{
-						Debug.Log("if proc " + j + " " + (8 + itemsCount));
 						itemsCount++;
 						continue;
 					}
-
 					GameObject item = GameObject.Find(i + "_" + j);
 					arr[9 - itemsCount, i] = arr[j, i];
 					arr[j, i] = 0;
-					Debug.Log(i + "_" + (9 - itemsCount) + "     ");
 					item.name = i + "_" + (9 - itemsCount);
 
-					iTween.MoveTo(item, iTween.Hash("position", new Vector3(i + marginX, (9 - itemsCount) + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine));
+					iTween.MoveTo(item, iTween.Hash("position", new Vector3(i + marginX, (9 - itemsCount) + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine, "onComplete", "RunEnd", "onCompleteTarget", gameObject));
 
 					itemsCount++;
+
+					
 				}
 			}
 		}
+	}
+
+	public void RunEnd()
+	{
+		Exploid();
+	}
+
+	private void Exploid()
+	{
+		Copy();
+		FindByColor(RED);
+		FindByColor(GREEN);
+		FindByColor(BLUE);
+		FindByColor(YELLOW);
+		FindByColor(PURPLE);	
+	}
+
+	private void Copy()
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				figures[i, j] = arr[i, j];
+			}
+		}
+	}
+
+	private void FindByColor(int col)
+	{
+		int count = 0;
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				if (figures[i, j] == col)
+				{
+					count = FindNearests(i, j, col);
+					if (count >= 3)
+					{
+						DestroyFigs();
+						int value = Factorial(count);
+						Exp.newExp(value, GetPosFromList(), GetColorById(col));
+						UpdateScore(value);
+						
+					}
+					RepairIndexes(col);
+					hash.Clear();
+					
+					
+				}
+			}
+		}
+	}
+
+	private int FindNearests(int i, int j, int col)
+	{
+		int count = 0;
+		figures[i, j] = -1;
+		try
+		{
+			try
+			{
+				if (figures[i - 1, j] == col)
+				{
+					count += FindNearests(i - 1, j, col);
+					//Debug.Log("Count =" + count);
+				}
+			}
+			catch (Exception)
+			{
+
+			}
+
+			try
+			{
+				if (figures[i + 1, j] == col)
+				{
+					count += FindNearests(i + 1, j, col);
+					//Debug.Log("Count =" + count);
+				}
+			}
+			catch (Exception)
+			{
+
+			}
+
+			try
+			{
+				if (figures[i, j + 1] == col)
+				{
+					count += FindNearests(i, j + 1, col);
+					//Debug.Log("Count =" + count);
+				}
+			}
+			catch (Exception)
+			{
+
+			}
+
+			try
+			{
+				if (figures[i, j - 1] == col)
+				{
+
+					count += FindNearests(i, j - 1, col);
+					//Debug.Log("Count =" + count);
+				}
+			}
+			catch (Exception)
+			{
+
+			}
+			
+		}
+		catch (Exception)
+		{
+
+		}
+		
+		count++;
+		hash.Add(count, new Vector2(i, j));
+		return count;
+	}
+
+	private void DestroyFigs()
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				if (figures[i, j] == -1)
+				{
+					figures[i, j] = 0;
+					arr[i, j] = 0;
+					Destroy(GameObject.Find(j + "_" + i));
+				}
+			}
+		}
+	}
+
+	private void RepairIndexes(int col)
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				if (figures[i, j] == -1)
+				{
+					figures[i, j] = col;
+				}
+			}
+		}
+	}
+
+
+	private Color GetColorById(int color)
+	{
+		Color res = Color.black;
+		switch (color)
+		{
+			case RED: res = Color.red;
+				break;
+			case GREEN: res = Color.green;
+				break;
+			case BLUE: res = Color.blue;
+				break;
+			case YELLOW: res = Color.yellow;
+				break;
+			case PURPLE: res = new Color(159, 0, 197);
+				break;
+			default: res = Color.black;
+				break;
+		}
+		return res;
+	}
+
+	private Vector3 GetPosFromList()
+	{
+		Vector2 t = (Vector2)hash[(int)(hash.Count / 2 + 0.5f)];
+		return GameObject.Find(t.y + "_" + t.x).transform.position;
+	}
+
+	private void UpdateScore(int newVal)
+	{
+		int oldValue = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", ""));
+		GameObject.Find("Score").GetComponent<TextMesh>().text = "Score: " + (oldValue + newVal);
+	}
+
+	int Factorial(int x)
+	{
+		return (x == 0) ? 1 : x * Factorial(x - 1);
 	}
 }
