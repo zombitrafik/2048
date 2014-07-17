@@ -6,6 +6,7 @@ using System;
 public class Generator : MonoBehaviour {
 	
 	public int startCount = 3;
+    public int minFigureSize = 3;
 	public Sprite redSprite;
 	public Sprite greenSprite;
 	public Sprite blueSprite;
@@ -17,11 +18,18 @@ public class Generator : MonoBehaviour {
 	const int BLUE = 3;
 	const int YELLOW = 4;
 	const int PURPLE = 5;
-
 	const float marginX = -4.5f;
 	const float marginY = -4.5f;
+
 	int[,] arr = new int[10, 10];
 	int[,] figures = new int[10, 10];
+
+    private int SwipeID;
+    private Vector2 StartPos;
+    private float buttonCooler;
+    private float minMovement = 30;
+    private float swipeCD = 0.7f;
+    private float lastSwipe = 0;
 
 	Hashtable hash = new Hashtable();
 
@@ -33,27 +41,90 @@ public class Generator : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.LeftArrow))
-		{
-			MoveItemsLeft();
-			GeneratePositions();
-		}
-		if (Input.GetKeyDown(KeyCode.RightArrow))
-		{
-			MoveItemsRight();
-			GeneratePositions();
-		}
-		if (Input.GetKeyDown(KeyCode.UpArrow))
-		{
-			MoveItemsUp();
-			GeneratePositions();
-		}
-		if (Input.GetKeyDown(KeyCode.DownArrow))
-		{
-			MoveItemsDown();
-			GeneratePositions();
-		}
+        if (Time.time-lastSwipe>=swipeCD)
+        {
+            
+            Swipes();
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                lastSwipe = Time.time;
+                if (MoveItemsLeft()) GeneratePositions();
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                lastSwipe = Time.time;
+                if (MoveItemsRight()) GeneratePositions();
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                lastSwipe = Time.time;
+                if (MoveItemsUp()) GeneratePositions();
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                lastSwipe = Time.time;
+                if (MoveItemsDown()) GeneratePositions();
+            }
+        }
+		
 	}
+
+    public void Swipes()
+    {
+        foreach (var T in Input.touches)
+        {
+            var P = T.position;
+            var C = T.tapCount;
+            if (T.phase == TouchPhase.Began && SwipeID == -1)
+            {
+                SwipeID = T.fingerId;
+                StartPos = P;
+            }
+            else if (T.fingerId == SwipeID)
+            {
+                var delta = P - StartPos;
+                if (T.phase == TouchPhase.Moved && delta.magnitude > minMovement)
+                {
+                    SwipeID = -1;
+                    if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
+                    {
+                        if (delta.x > 0)
+                        {
+                            if (MoveItemsRight()) GeneratePositions();
+                        }
+                        else
+                        {
+                            if (MoveItemsLeft()) GeneratePositions();
+                        }
+                    }
+                }
+                else
+                {
+                    if (delta.y > 0)
+                    {
+                        if (MoveItemsUp()) GeneratePositions();
+                    }
+                    else
+                    {
+                        if (MoveItemsDown()) GeneratePositions();
+                    }
+                }
+            }
+            else if (T.phase == TouchPhase.Canceled || T.phase == TouchPhase.Ended)
+            {
+                SwipeID = -1;
+                if (buttonCooler > 0 && C >= 2)
+                {
+                    //двойной тап
+                }
+                else
+                {
+                    buttonCooler = 0.5f;
+                    C += 1;
+                }
+            }
+        }
+    }
 
 	public void GeneratePositions()
 	{
@@ -111,8 +182,9 @@ public class Generator : MonoBehaviour {
 		iTween.MoveTo(obj, iTween.Hash("position", pos, "time", 0.7f, "easetype", iTween.EaseType.easeOutSine));
 	}
 
-	void MoveItemsLeft()
+	bool MoveItemsLeft()
 	{
+        bool res = false;
 		for (int i = 9; i >= 0; i--)
 		{
 			int itemsCount = 0;
@@ -125,22 +197,24 @@ public class Generator : MonoBehaviour {
 						itemsCount++;
 						continue;
 					}
-					Debug.Log(j + "_" + i);
+                    res = true;
 					GameObject item = GameObject.Find(j + "_" + i);
 					arr[i, itemsCount] = arr[i, j];
 					arr[i, j] = 0;
 					item.name = itemsCount + "_" + i;
 
-					iTween.MoveTo(item, iTween.Hash("position", new Vector3(itemsCount + marginX, i + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine, "onComplete", "RunEnd", "onCompleteTarget", gameObject));
+                    iTween.MoveTo(item, iTween.Hash("position", new Vector3(itemsCount + marginX, i + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine, "onComplete", "RunEnd", "onCompleteTarget", gameObject));
 
 					itemsCount++;
 				}
 			}
 		}
+        return res;
 	}
 
-	void MoveItemsRight()
+	bool MoveItemsRight()
 	{
+        bool res = false;
 		for (int i = 9; i >= 0; i--)
 		{
 			int itemsCount = 0;
@@ -153,23 +227,25 @@ public class Generator : MonoBehaviour {
 						itemsCount++;
 						continue;
 					}
-
+                    res = true;
 					GameObject item = GameObject.Find(j + "_" + i);
 					arr[i, 9 - itemsCount] = arr[i, j];
 					arr[i, j] = 0;
 					item.name = (9 - itemsCount) + "_" + i;
 
-					iTween.MoveTo(item, iTween.Hash("position", new Vector3((9 - itemsCount) + marginX, i + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine, "onComplete", "RunEnd", "onCompleteTarget", gameObject));
+                    iTween.MoveTo(item, iTween.Hash("position", new Vector3((9 - itemsCount) + marginX, i + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine, "onComplete", "RunEnd", "onCompleteTarget", gameObject));
 
 					itemsCount++;
 				}
 			}
 		}
+        return res;
 	}
 
 
-	void MoveItemsDown()
+	bool MoveItemsDown()
 	{
+        bool res = false;
 		for (int i = 9; i >= 0; i--)
 		{
 			int itemsCount = 0;
@@ -182,22 +258,24 @@ public class Generator : MonoBehaviour {
 						itemsCount++;
 						continue;
 					}
-
+                    res = true;
 					GameObject item = GameObject.Find(i + "_" + j);
 					arr[itemsCount, i] = arr[j, i];
 					arr[j, i] = 0;
 					item.name = i + "_" + itemsCount;
 					//item.transform.position = new Vector3(i + marginX, itemsCount + marginY, 0);
-					iTween.MoveTo(item, iTween.Hash("position", new Vector3(i + marginX, itemsCount + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine, "onComplete", "RunEnd", "onCompleteTarget", gameObject));
+                    iTween.MoveTo(item, iTween.Hash("position", new Vector3(i + marginX, itemsCount + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine, "onComplete", "RunEnd", "onCompleteTarget", gameObject));
 
 					itemsCount++;
 				}
 			}
 		}
+        return res;
 	}
 
-	void MoveItemsUp()
+	bool MoveItemsUp()
 	{
+        bool res = false;
 		for (int i = 0; i < 10; i++)
 		{
 			int itemsCount = 0;
@@ -210,25 +288,26 @@ public class Generator : MonoBehaviour {
 						itemsCount++;
 						continue;
 					}
+                    res = true;
 					GameObject item = GameObject.Find(i + "_" + j);
 					arr[9 - itemsCount, i] = arr[j, i];
 					arr[j, i] = 0;
 					item.name = i + "_" + (9 - itemsCount);
 
-					iTween.MoveTo(item, iTween.Hash("position", new Vector3(i + marginX, (9 - itemsCount) + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine, "onComplete", "RunEnd", "onCompleteTarget", gameObject));
+                    iTween.MoveTo(item, iTween.Hash("position", new Vector3(i + marginX, (9 - itemsCount) + marginY, 0), "time", 0.3f, "easetype", iTween.EaseType.easeOutSine, "onComplete", "RunEnd", "onCompleteTarget", gameObject));
 
 					itemsCount++;
 
-					
 				}
 			}
 		}
+        return res;
 	}
 
-	public void RunEnd()
-	{
-		Exploid();
-	}
+    public void RunEnd()
+    {
+        Exploid();
+    }
 
 	private void Exploid()
 	{
@@ -261,7 +340,7 @@ public class Generator : MonoBehaviour {
 				if (figures[i, j] == col)
 				{
 					count = FindNearests(i, j, col);
-					if (count >= 3)
+					if (count >= minFigureSize)
 					{
 						DestroyFigs();
 						int value = Factorial(count);
@@ -348,6 +427,13 @@ public class Generator : MonoBehaviour {
 		return count;
 	}
 
+    private void Exploision(GameObject obj)
+    {
+        Vector3 newScale = obj.transform.localScale + new Vector3(0.3f, 0.3f, 0.3f);
+        iTween.ScaleTo(obj, iTween.Hash("scale", newScale, "time", 0.2f));
+        iTween.ScaleTo(obj, iTween.Hash("scale", Vector3.zero, "time", 0.4f, "delay", 0.2f));
+    }
+
 	private void DestroyFigs()
 	{
 		for (int i = 0; i < 10; i++)
@@ -358,7 +444,9 @@ public class Generator : MonoBehaviour {
 				{
 					figures[i, j] = 0;
 					arr[i, j] = 0;
-					Destroy(GameObject.Find(j + "_" + i));
+
+                    Exploision(GameObject.Find(j + "_" + i));
+                    Destroy(GameObject.Find(j + "_" + i), 0.4f);
 				}
 			}
 		}
