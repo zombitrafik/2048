@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Exp : MonoBehaviour {
 
@@ -27,5 +28,22 @@ public class Exp : MonoBehaviour {
 		instance.GetComponent<TextMesh>().characterSize = 0.6f + value / 50;
 		MoveAndHide(instance, color);
 	}
-		
+
+	public static void UpdateCombo(int value)
+	{
+		GameObject.Find("Combo").GetComponent<TextMesh>().text = "x " + value;
+		if (value <= 1) return;
+		Exp.newCombo(value, new Vector3(0, 5.5f, 1f), Color.white);
+	}
+
+	public static void UpdateScore(int newVal)
+	{
+		int oldValue = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", ""));
+		GameObject.Find("Score").GetComponent<TextMesh>().text = "Score: " + (oldValue + newVal);
+
+		if ((newVal + oldValue) > Convert.ToInt32(GameObject.Find("BestScore").GetComponent<TextMesh>().text.Replace("Your best score: ", "")))
+		{
+			GameObject.Find("BestScore").GetComponent<TextMesh>().text = "Your best score: " + (oldValue + newVal);
+		}
+	}
 }
