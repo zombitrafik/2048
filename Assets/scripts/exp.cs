@@ -20,7 +20,12 @@ public class Exp : MonoBehaviour {
 		GameObject.Destroy(obj, 2);
 	}
 
-
-
-	
+	public static void newCombo(int value, Vector3 position, Color color)
+	{
+		GameObject instance = (GameObject)Instantiate(Resources.Load("text", typeof(GameObject)), position, Quaternion.identity);
+		instance.GetComponent<TextMesh>().text = "X " + value;
+		instance.GetComponent<TextMesh>().characterSize = 0.6f + value / 50;
+		MoveAndHide(instance, color);
+	}
+		
 }

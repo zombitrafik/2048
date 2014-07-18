@@ -9,3 +9,5 @@ D:\Unity projects\2048\Temp\bin\Debug\ICSharpCode.NRefactory.dll
 D:\Unity projects\2048\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache
 D:\Unity projects\2048\obj\Debug\Assembly-CSharp.dll
 D:\Unity projects\2048\obj\Debug\Assembly-CSharp.pdb
+D:\Unity projects\2048\Temp\bin\Debug\Assembly-UnityScript-firstpass.dll
+D:\Unity projects\2048\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
