@@ -62,8 +62,7 @@ public class Boom : MonoBehaviour {
 				if (col != 0)
 				{
 					FindNearests(i, j, col);
-					bool ForBoom = DestroyFigs(col);
-					if (ForBoom) isBoom = true;
+                    isBoom = DestroyFigs(col)?true:isBoom;
 					RepairIndexes(col);
 					hash.Clear();
 				}
@@ -84,11 +83,7 @@ public class Boom : MonoBehaviour {
 			{
 				FindNearests(i - 1, j, col);
 			}
-		}
-		catch (Exception)
-		{
-
-		}
+		}catch (Exception){}
 
 		try
 		{
@@ -96,11 +91,7 @@ public class Boom : MonoBehaviour {
 			{
 				FindNearests(i + 1, j, col);
 			}
-		}
-		catch (Exception)
-		{
-
-		}
+		}catch (Exception){}
 
 		try
 		{
@@ -108,24 +99,15 @@ public class Boom : MonoBehaviour {
 			{
 				FindNearests(i, j + 1, col);
 			}
-		}
-		catch (Exception)
-		{
-
-		}
+		}catch (Exception){}
 
 		try
 		{
 			if (figures[i, j - 1] == col)
 			{
-
 				FindNearests(i, j - 1, col);
 			}
-		}
-		catch (Exception)
-		{
-
-		}
+		}catch (Exception){}
 
 	}
 

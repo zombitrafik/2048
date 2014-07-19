@@ -14,7 +14,8 @@ public class Generating : MonoBehaviour {
 	}
 
 	public int activeItems = 0;
-	private int startCount = 3;
+	public int startCount = 3;
+    private int generateCount = 3;
 	public int[,] arr;
 
 	public Sprite redSprite;
@@ -36,18 +37,14 @@ public class Generating : MonoBehaviour {
 
 	public int[,] GeneratePositions()
 	{
-		int color = 0;
+        int color = 0;
 		int posX = 0, posY = 0;
 		int i = 0;
-		
-		if (activeItems + startCount >= 100)
-		{
-			GameOver.Instance.Over();
-			MainClass.Instance.isGameOverMenu = true;
-			return new int[10,10];
-		}
 
-		while (i < startCount)
+        
+        generateCount = 100 - activeItems >= startCount ? startCount : 100 - activeItems;
+
+		while (i < generateCount)
 		{
 			color = UnityEngine.Random.Range(1, 6);
 			posX = UnityEngine.Random.Range(0, 10);
@@ -103,5 +100,13 @@ public class Generating : MonoBehaviour {
 	{
 		Boom.Instance.Init(arr, activeItems);
 		arr = Boom.Instance.Exploid();
+        Debug.Log("runEnd " + activeItems);
+        
+        
+        if (activeItems + startCount >= 100)
+        {
+            GameOver.Instance.Over();
+            MainClass.Instance.isGameOverMenu = true;
+        }
 	}
 }
