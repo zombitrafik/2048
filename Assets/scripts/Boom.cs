@@ -113,6 +113,7 @@ public class Boom : MonoBehaviour {
 
 	private void Exploision(GameObject obj)
 	{
+		GameObject.Find("Drip").GetComponent<AudioSource>().volume = Sound.volumeValue;
 		GameObject.Find("Drip").GetComponent<AudioSource>().Play();
 		Vector3 newScale = obj.transform.localScale + new Vector3(0.3f, 0.3f, 0.3f);
 		iTween.ScaleTo(obj, iTween.Hash("scale", newScale, "time", 0.2f));

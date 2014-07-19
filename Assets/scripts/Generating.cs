@@ -100,7 +100,6 @@ public class Generating : MonoBehaviour {
 	{
 		Boom.Instance.Init(arr, activeItems);
 		arr = Boom.Instance.Exploid();
-        Debug.Log("runEnd " + activeItems);
         
         
         if (activeItems + startCount >= 100)
