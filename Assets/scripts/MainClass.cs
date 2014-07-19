@@ -31,6 +31,7 @@ public class MainClass : MonoBehaviour {
 		gameObject.GetComponent<Blur>().enabled = false;
 		DoMagic();
 		Ini.LoadScore();
+
 	}
 
 	void OnGUI()
@@ -39,17 +40,16 @@ public class MainClass : MonoBehaviour {
 		{
 			MenuGUI.ShowGameOverMenu(style);
 		}
-		if (isPauseMenu)
-		{
-			isPauseMenu = MenuGUI.ShowBackMenu(style, isPauseMenu);
-		}
+		
 	}
 
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			if(isPauseMenu)	isPauseMenu = false; else isPauseMenu = true;
+			if (!MenuGUI.Instance.IsShow()) MenuGUI.Instance.ShowBackMenu();
+			else MenuGUI.Instance.HideBackMenu();
+			
 		}
 
         if (Time.time-lastSwipe>=swipeCD && !isGameOverMenu)
