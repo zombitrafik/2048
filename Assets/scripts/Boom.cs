@@ -16,7 +16,7 @@ public class Boom : MonoBehaviour {
 	Hashtable hash = new Hashtable();
 	private int[,] figures = new int[10, 10];
 	private int comboValue = 0;
-	public int minFigureSize = 3;
+	public int minFigureSize = 0;
 
 
 	public int[,] arr;
@@ -24,6 +24,7 @@ public class Boom : MonoBehaviour {
 
 	void Start()
 	{
+		minFigureSize = Ini.LoadMinBoom();
 		instance = this;
 	}
 
@@ -206,6 +207,6 @@ public class Boom : MonoBehaviour {
 
 	private int Factorial(int x)
 	{
-		return (x == 0) ? 1 : x * Factorial(x - 1);
+		return (x == 0) ? 1 : x + Factorial(x - 1);
 	}
 }

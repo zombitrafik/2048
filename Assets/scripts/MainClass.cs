@@ -22,7 +22,6 @@ public class MainClass : MonoBehaviour {
     private float swipeCD = 0.4f;
     private float lastSwipe = 0;
 
-	public bool isGameOverMenu = false;
 	public bool isPauseMenu = false;
 
 	void Start () {
@@ -34,25 +33,15 @@ public class MainClass : MonoBehaviour {
 
 	}
 
-	void OnGUI()
-	{
-		if (isGameOverMenu)
-		{
-			MenuGUI.ShowGameOverMenu(style);
-		}
-		
-	}
-
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
 			if (!MenuGUI.Instance.IsShow()) MenuGUI.Instance.ShowBackMenu();
 			else MenuGUI.Instance.HideBackMenu();
-			
 		}
 
-        if (Time.time-lastSwipe>=swipeCD && !isGameOverMenu)
+        if (Time.time-lastSwipe>=swipeCD)
         {
             
             Swipes();

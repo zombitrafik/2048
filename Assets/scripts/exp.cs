@@ -46,4 +46,21 @@ public class Exp : MonoBehaviour {
 			GameObject.Find("BestScore").GetComponent<TextMesh>().text = "Your best score: " + (oldValue + newVal);
 		}
 	}
+
+	public static GameObject ViewScore(int score, string text)
+	{
+		GameObject instance = (GameObject)Instantiate(Resources.Load("text", typeof(GameObject)), Vector3.zero, Quaternion.identity);
+		instance.GetComponent<TextMesh>().text = text + score;
+		instance.GetComponent<TextMesh>().color = new Color(192, 192, 192);
+		return instance;
+	}
+
+	public static GameObject Label(string text, float charSize)
+	{
+		GameObject instance = (GameObject)Instantiate(Resources.Load("text", typeof(GameObject)), Vector3.zero, Quaternion.identity);
+		instance.GetComponent<TextMesh>().text = text;
+		instance.GetComponent<TextMesh>().characterSize = charSize;
+		instance.GetComponent<TextMesh>().color = new Color(192, 192, 192);
+		return instance;
+	}
 }

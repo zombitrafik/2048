@@ -38,22 +38,36 @@ public class MenuGUI : MonoBehaviour {
 		instance = this;
 	}
 
-	public static void ShowGameOverMenu(GUIStyle style)
+	public void ShowGameOverMenu()
 	{
 		int score = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", ""));
 		int bestScore = Convert.ToInt32(GameObject.Find("BestScore").GetComponent<TextMesh>().text.Replace("Your best score: ", ""));
-		GUI.Label(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 240, 100, 40), "Score: " + score.ToString(), style);
-		GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 180, 200, 40), "Best score: " + bestScore.ToString(), style);
 
-		if (GUI.Button(new Rect(Screen.width / 2 - 150, Screen.height / 2, 100, 50), "Retry"))
-		{
-			Application.LoadLevel("main");
-		}
-		if (GUI.Button(new Rect(Screen.width / 2 + 50, Screen.height / 2, 100, 50), "Exit"))
-		{
-			Application.LoadLevel("main_menu");
-		}
+		retryCopy = (GameObject)Instantiate(retry, new Vector3(-2, -12, -5), Quaternion.identity);
+		exitCopy = (GameObject)Instantiate(exit, new Vector3(2, -12, -5), Quaternion.identity);
+
+		Destroy(GameObject.Find("GUI"));
+
+		GameObject scoreCopy = Exp.ViewScore(score, "Score: ");
+		scoreCopy.transform.position = new Vector3(12, 9, -5);
+		GameObject bestScoreCopy = Exp.ViewScore(bestScore, "Best score: ");
+		bestScoreCopy.transform.position = new Vector3(12, 7, -5);
+
+		iTween.ValueTo(gameObject, iTween.Hash("from", 0, "to", 0.85f, "time", .5f, "delay", 0.5f, "onupdate", "changeColor"));
+
+		iTween.MoveTo(retryCopy, iTween.Hash("position", new Vector3(-2, -7, -5), "time", 0.5f, "delay", 0.8f, "easetype", iTween.EaseType.easeOutSine));
+		iTween.MoveTo(exitCopy, iTween.Hash("position", new Vector3(2, -7, -5), "time", 0.5f, "delay", 1f, "easetype", iTween.EaseType.easeOutSine));
+
+		iTween.MoveTo(scoreCopy, iTween.Hash("position", new Vector3(0, 9, -5), "time", 0.5f, "delay", 0.4f, "easetype", iTween.EaseType.easeOutSine));
+		iTween.MoveTo(bestScoreCopy, iTween.Hash("position", new Vector3(0, 7, -5), "time", 0.5f, "delay", 0.6f, "easetype", iTween.EaseType.easeOutSine));
+
 		if (score == bestScore) Ini.SaveRecord(bestScore);
+	}
+
+	void changeColor(float val)
+	{
+		GameObject bg = GameObject.Find("bg");
+		bg.GetComponent<SpriteRenderer>().color = new Color(0,0,0,val);
 	}
 
 	public void ShowBackMenu()
@@ -63,21 +77,21 @@ public class MenuGUI : MonoBehaviour {
 		pause = true;
 
 		backCopy = (GameObject)Instantiate(back, new Vector3(cameraMargin + 7, 4, -5), Quaternion.identity);
-		if (Sound.volumeValue == 1) sound_enCopy = (GameObject)Instantiate(sound_en, new Vector3(cameraMargin + 7, 2, -5), Quaternion.identity);
-		if (Sound.volumeValue == 0) sound_disCopy = (GameObject)Instantiate(sound_dis, new Vector3(cameraMargin + 7, 2, -5), Quaternion.identity);
+		if (Ini.LoadVolume() == 1) sound_enCopy = (GameObject)Instantiate(sound_en, new Vector3(cameraMargin + 7, 2, -5), Quaternion.identity);
+		if (Ini.LoadVolume() == 0) sound_disCopy = (GameObject)Instantiate(sound_dis, new Vector3(cameraMargin + 7, 2, -5), Quaternion.identity);
 		retryCopy = (GameObject)Instantiate(retry, new Vector3(cameraMargin + 7, 0, -5), Quaternion.identity);
 		exitCopy = (GameObject)Instantiate(exit, new Vector3(cameraMargin + 7, -2, -5), Quaternion.identity);
 
 
 		iTween.MoveTo(backCopy, iTween.Hash("position", new Vector3(cameraMargin + -1, 4, -5), "time", 0.5f, "delay", 0.2f, "easetype", iTween.EaseType.easeOutSine));
-		if (Sound.volumeValue == 1) iTween.MoveTo(sound_enCopy, iTween.Hash("position", new Vector3(cameraMargin + -0.5f, 2, -5), "time", 0.5f, "delay", 0.22f, "easetype", iTween.EaseType.easeOutSine));
-		if (Sound.volumeValue == 0) iTween.MoveTo(sound_disCopy, iTween.Hash("position", new Vector3(cameraMargin + -0.5f, 2, -5), "time", 0.5f, "delay", 0.22f, "easetype", iTween.EaseType.easeOutSine));
+		if (Ini.LoadVolume() == 1) iTween.MoveTo(sound_enCopy, iTween.Hash("position", new Vector3(cameraMargin + -0.5f, 2, -5), "time", 0.5f, "delay", 0.22f, "easetype", iTween.EaseType.easeOutSine));
+		if (Ini.LoadVolume() == 0) iTween.MoveTo(sound_disCopy, iTween.Hash("position", new Vector3(cameraMargin + -0.5f, 2, -5), "time", 0.5f, "delay", 0.22f, "easetype", iTween.EaseType.easeOutSine));
 		iTween.MoveTo(retryCopy, iTween.Hash("position", new Vector3(cameraMargin + 0, 0, -5), "time", 0.5f, "delay", 0.24f, "easetype", iTween.EaseType.easeOutSine));
 		iTween.MoveTo(exitCopy, iTween.Hash("position", new Vector3(cameraMargin + 0.5f, -2, -5), "time", 0.5f, "delay", 0.26f, "easetype", iTween.EaseType.easeOutSine));
 
 		iTween.MoveTo(backCopy, iTween.Hash("position", new Vector3(cameraMargin + -0.6f, 4, -5), "time", 0.2f, "delay", 0.7f, "easetype", iTween.EaseType.easeOutSine));
-		if (Sound.volumeValue == 1) iTween.MoveTo(sound_enCopy, iTween.Hash("position", new Vector3(cameraMargin + -0.1f, 2, -5), "time", 0.2f, "delay", 0.72f, "easetype", iTween.EaseType.easeOutSine));
-		if (Sound.volumeValue == 0) iTween.MoveTo(sound_disCopy, iTween.Hash("position", new Vector3(cameraMargin + -0.1f, 2, -5), "time", 0.2f, "delay", 0.72f, "easetype", iTween.EaseType.easeOutSine));
+		if (Ini.LoadVolume() == 1) iTween.MoveTo(sound_enCopy, iTween.Hash("position", new Vector3(cameraMargin + -0.1f, 2, -5), "time", 0.2f, "delay", 0.72f, "easetype", iTween.EaseType.easeOutSine));
+		if (Ini.LoadVolume() == 0) iTween.MoveTo(sound_disCopy, iTween.Hash("position", new Vector3(cameraMargin + -0.1f, 2, -5), "time", 0.2f, "delay", 0.72f, "easetype", iTween.EaseType.easeOutSine));
 		iTween.MoveTo(retryCopy, iTween.Hash("position", new Vector3(cameraMargin + 0.4f, 0, -5), "time", 0.2f, "delay", 0.74f, "easetype", iTween.EaseType.easeOutSine));
 		iTween.MoveTo(exitCopy, iTween.Hash("position", new Vector3(cameraMargin + 0.9f, -2, -5), "time", 0.2f, "delay", 0.76f, "easetype", iTween.EaseType.easeOutSine));
 	}
@@ -89,8 +103,8 @@ public class MenuGUI : MonoBehaviour {
 		pause = false;
 
 		iTween.MoveTo(backCopy, iTween.Hash("position", new Vector3(cameraMargin + 7, 4, -5), "time", 0.5f, "easetype", iTween.EaseType.easeOutSine));
-		if (Sound.volumeValue == 1) iTween.MoveTo(sound_enCopy, iTween.Hash("position", new Vector3(cameraMargin + 7, 2, -5), "time", 0.5f, "delay", 0.02f, "easetype", iTween.EaseType.easeOutSine));
-		if (Sound.volumeValue == 0) iTween.MoveTo(sound_disCopy, iTween.Hash("position", new Vector3(cameraMargin + 7, 2, -5), "time", 0.5f, "delay", 0.02f, "easetype", iTween.EaseType.easeOutSine));
+		if (Ini.LoadVolume() == 1) iTween.MoveTo(sound_enCopy, iTween.Hash("position", new Vector3(cameraMargin + 7, 2, -5), "time", 0.5f, "delay", 0.02f, "easetype", iTween.EaseType.easeOutSine));
+		if (Ini.LoadVolume() == 0) iTween.MoveTo(sound_disCopy, iTween.Hash("position", new Vector3(cameraMargin + 7, 2, -5), "time", 0.5f, "delay", 0.02f, "easetype", iTween.EaseType.easeOutSine));
 		iTween.MoveTo(retryCopy, iTween.Hash("position", new Vector3(cameraMargin + 7, 0, -5), "time", 0.5f, "delay", 0.04f, "easetype", iTween.EaseType.easeOutSine));
 		iTween.MoveTo(exitCopy, iTween.Hash("position", new Vector3(cameraMargin + 7, -2, -5), "time", 0.5f, "delay", 0.06f, "easetype", iTween.EaseType.easeOutSine));
 		
@@ -169,12 +183,12 @@ public class MenuGUI : MonoBehaviour {
 				}
 				if (activeClicked.GetComponent<Button>().GetName() == "sound_dis" && hit.transform.gameObject.name == "sound_down_dis(Clone)")
 				{
-					Sound.volumeValue = 1;
+					Ini.SaveVolume(1);
 					ReloadMenu();
 				}
 				if (activeClicked.GetComponent<Button>().GetName() == "sound_en" && hit.transform.gameObject.name == "sound_down_en(Clone)")
 				{
-					Sound.volumeValue = 0;
+					Ini.SaveVolume(0);
 					ReloadMenu();
 				}
 			}
@@ -192,8 +206,8 @@ public class MenuGUI : MonoBehaviour {
 		Destroy(sound_disCopy);
 
 		backCopy = (GameObject)Instantiate(back, new Vector3(cameraMargin + -0.6f, 4, -5), Quaternion.identity);
-		if (Sound.volumeValue == 1) sound_enCopy = (GameObject)Instantiate(sound_en, new Vector3(cameraMargin + -0.1f, 2, -5), Quaternion.identity);
-		if (Sound.volumeValue == 0) sound_disCopy = (GameObject)Instantiate(sound_dis, new Vector3(cameraMargin + -0.1f, 2, -5), Quaternion.identity);
+		if (Ini.LoadVolume() == 1) sound_enCopy = (GameObject)Instantiate(sound_en, new Vector3(cameraMargin + -0.1f, 2, -5), Quaternion.identity);
+		if (Ini.LoadVolume() == 0) sound_disCopy = (GameObject)Instantiate(sound_dis, new Vector3(cameraMargin + -0.1f, 2, -5), Quaternion.identity);
 		retryCopy = (GameObject)Instantiate(retry, new Vector3(cameraMargin + 0.4f, 0, -5), Quaternion.identity);
 		exitCopy = (GameObject)Instantiate(exit, new Vector3(cameraMargin + 0.9f, -2, -5), Quaternion.identity);
 	}

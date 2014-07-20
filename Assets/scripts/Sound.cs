@@ -3,6 +3,6 @@ using System.Collections;
 
 public class Sound : MonoBehaviour {
 
-	public static float volumeValue = 1;
+	public static float volumeValue = Ini.LoadVolume();
 
 }

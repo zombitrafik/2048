@@ -20,13 +20,18 @@ public class GameOver : MonoBehaviour {
 		cam = GameObject.Find("Main Camera");
 	}
 
+
+
 	public void Over()
 	{
+		MenuGUI.Instance.ShowGameOverMenu();
+		/*
 		cam.GetComponent<Blur>().enabled = true;
 		iTween.ValueTo(cam, iTween.Hash("from", 0, "to", 1.5f, "time", .5f, "delay", 0.5f, "onupdate", "changeMotionBlur"));
-		iTween.ValueTo(cam, iTween.Hash("from", 0, "to", 3.5f, "time", .5f, "delay", 0.5f, "onupdate", "changeMotionBlurBlurSize"));
+		iTween.ValueTo(cam, iTween.Hash("from", 0, "to", 3.5f, "time", .5f, "delay", 0.5f, "onupdate", "changeMotionBlurBlurSize", "onComplete", "ShowMenu", "onCompleteTarget", gameObject));
 		iTween.ValueTo(cam, iTween.Hash("from", 3, "to", 3f, "time", .5f, "delay", 0.5f, "onupdate", "changeMotionBlurBlurIterations"));
-	}
+		*/
+	 }
 
 	void changeMotionBlurDownSample(float newValue)
 	{
@@ -40,4 +45,6 @@ public class GameOver : MonoBehaviour {
 	{
 		cam.GetComponent<Blur>().blurIterations = (int)newValue;
 	}
+
+
 }

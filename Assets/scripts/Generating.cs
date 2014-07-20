@@ -14,7 +14,7 @@ public class Generating : MonoBehaviour {
 	}
 
 	public int activeItems = 0;
-	public int startCount = 3;
+	public int startCount = 0;
     private int generateCount = 3;
 	public int[,] arr;
 
@@ -26,6 +26,7 @@ public class Generating : MonoBehaviour {
 
 	void Start()
 	{
+		startCount = Ini.LoadGeneratingCount();
 		instance = this;
 	}
 
@@ -102,10 +103,10 @@ public class Generating : MonoBehaviour {
 		arr = Boom.Instance.Exploid();
         
         
-        if (activeItems + startCount >= 100)
+        if (activeItems >= 100)
         {
             GameOver.Instance.Over();
-            MainClass.Instance.isGameOverMenu = true;
+           // MainClass.Instance.isGameOverMenu = true;
         }
 	}
 }
