@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class GameOver : MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class GameOver : MonoBehaviour {
 		}
 	}
 
+    
 	private GameObject cam;
 
 	void Start()
@@ -24,6 +26,8 @@ public class GameOver : MonoBehaviour {
 
 	public void Over()
 	{
+        int bestScore = Convert.ToInt32(GameObject.Find("BestScore").GetComponent<TextMesh>().text.Replace("Your best score: ", ""));
+        GooglePlayServices.Instance.UpdateRecord(bestScore);
 		MenuGUI.Instance.ShowGameOverMenu();
 		/*
 		cam.GetComponent<Blur>().enabled = true;
@@ -45,6 +49,5 @@ public class GameOver : MonoBehaviour {
 	{
 		cam.GetComponent<Blur>().blurIterations = (int)newValue;
 	}
-
-
+    
 }

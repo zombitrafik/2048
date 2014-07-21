@@ -197,7 +197,7 @@ public class MainMenu : MonoBehaviour {
 				}
 				if (activeClicked.GetComponent<Button>().GetName() == "about" && hit.transform.gameObject.name == "about_down(Clone)")
 				{
-
+                    GooglePlayServices.Instance.ShowLeaderBoard();
 				}
 				if (activeClicked.GetComponent<Button>().GetName() == "exit" && hit.transform.gameObject.name == "exit_down(Clone)")
 				{
