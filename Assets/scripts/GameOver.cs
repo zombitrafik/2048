@@ -4,6 +4,9 @@ using System;
 
 public class GameOver : MonoBehaviour {
 
+    private const string NORMAL_MODE_BOARD = "leaderboardMoveCrushLeaderboard";
+    private const string GAMES_COUNT_ACHIEVE = "achievementHeyStopItd";
+
 	private static GameOver instance;
 	public static GameOver Instance
 	{
@@ -12,7 +15,6 @@ public class GameOver : MonoBehaviour {
 			return instance;
 		}
 	}
-
     
 	private GameObject cam;
 
@@ -27,8 +29,9 @@ public class GameOver : MonoBehaviour {
 	public void Over()
 	{
         int bestScore = Convert.ToInt32(GameObject.Find("BestScore").GetComponent<TextMesh>().text.Replace("Your best score: ", ""));
-        GooglePlayServices.Instance.UpdateRecord(bestScore);
-		MenuGUI.Instance.ShowGameOverMenu();
+        GooglePlayServices.Instance.UpdateRecord(NORMAL_MODE_BOARD,bestScore);
+        GooglePlayServices.Instance.UpdateAchieveProgress(GAMES_COUNT_ACHIEVE, 10);
+        MenuGUI.Instance.ShowGameOverMenu();
 		/*
 		cam.GetComponent<Blur>().enabled = true;
 		iTween.ValueTo(cam, iTween.Hash("from", 0, "to", 1.5f, "time", .5f, "delay", 0.5f, "onupdate", "changeMotionBlur"));

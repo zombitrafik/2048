@@ -3,6 +3,8 @@ using System.Collections;
 using System;
 public class MainMenu : MonoBehaviour {
 
+    private const string NORMAL_MODE_BOARD = "leaderboardMoveCrushLeaderboard";
+
 	// Main
 	public GameObject play;
 	private GameObject playCopy;
@@ -193,11 +195,11 @@ public class MainMenu : MonoBehaviour {
 				}
 				if (activeClicked.GetComponent<Button>().GetName() == "tutorial" && hit.transform.gameObject.name == "tutorial_down(Clone)")
 				{
-
+                    GooglePlayServices.Instance.ShowAchievements();
 				}
 				if (activeClicked.GetComponent<Button>().GetName() == "about" && hit.transform.gameObject.name == "about_down(Clone)")
 				{
-                    GooglePlayServices.Instance.ShowLeaderBoard();
+                    GooglePlayServices.Instance.ShowLeaderBoard(NORMAL_MODE_BOARD);
 				}
 				if (activeClicked.GetComponent<Button>().GetName() == "exit" && hit.transform.gameObject.name == "exit_down(Clone)")
 				{

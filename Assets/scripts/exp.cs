@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 
 public class Exp : MonoBehaviour {
-
+    private const string ACHIEVE_1000_POINTS = "achievement1000Point";
 
 	public static void newExp(int value, Vector3 position, Color color)
 	{
@@ -45,6 +45,10 @@ public class Exp : MonoBehaviour {
 		{
 			GameObject.Find("BestScore").GetComponent<TextMesh>().text = "Your best score: " + (oldValue + newVal);
 		}
+        if (newVal + oldValue >= 1000)
+        {
+            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_1000_POINTS, 100);
+        }
 	}
 
 	public static GameObject ViewScore(int score, string text)
