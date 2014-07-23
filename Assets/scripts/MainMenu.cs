@@ -189,6 +189,7 @@ public class MainMenu : MonoBehaviour {
 				{
 					HideAll();
 					ShowSelectModeMenu();
+                    Application.LoadLevel("main");
 				}
 				if (activeClicked.GetComponent<Button>().GetName() == "settings" && hit.transform.gameObject.name == "settings_down(Clone)")
 				{
