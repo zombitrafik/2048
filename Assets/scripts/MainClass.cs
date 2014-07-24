@@ -25,11 +25,25 @@ public class MainClass : MonoBehaviour {
 	public bool isPauseMenu = false;
 
 	void Start () {
+        if (GoogleAnalytics.instance)
+        {
+            GoogleAnalytics.instance.LogScreen("game");
+        }
+
 		instance = this;
 
 		gameObject.GetComponent<Blur>().enabled = false;
-		DoMagic();
-		Ini.LoadScore();
+        if (Ini.HaveSavedGame())
+        {
+            Generating.Instance.Init(arr);
+            Generating.Instance.GeneratePositions(Ini.LoadGameState());
+            GameObject.Find("Score").GetComponent<TextMesh>().text = "Score: " + Ini.LoadScore();
+        }
+        else
+        {
+            GeneratePos();
+        }
+		Ini.LoadRecord();
 
 	}
 
@@ -48,22 +62,22 @@ public class MainClass : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 lastSwipe = Time.time;
-				if (MovieControlls.MoveItemsLeft(arr)) DoMagic(); else Neon.Instance.NeonLight("left");
+				if (MovieControlls.MoveItemsLeft(arr)) GeneratePos(); else Neon.Instance.NeonLight("left");
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 lastSwipe = Time.time;
-				if (MovieControlls.MoveItemsRight(arr)) DoMagic(); else Neon.Instance.NeonLight("right");
+				if (MovieControlls.MoveItemsRight(arr)) GeneratePos(); else Neon.Instance.NeonLight("right");
             }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 lastSwipe = Time.time;
-				if (MovieControlls.MoveItemsUp(arr)) DoMagic(); else Neon.Instance.NeonLight("up");
+				if (MovieControlls.MoveItemsUp(arr)) GeneratePos(); else Neon.Instance.NeonLight("up");
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 lastSwipe = Time.time;
-				if (MovieControlls.MoveItemsDown(arr)) DoMagic(); else Neon.Instance.NeonLight("down");
+				if (MovieControlls.MoveItemsDown(arr)) GeneratePos(); else Neon.Instance.NeonLight("down");
             }
         }
 	}
@@ -89,12 +103,12 @@ public class MainClass : MonoBehaviour {
 						if (delta.x > 0)
 						{
 							lastSwipe = Time.time;
-							if (MovieControlls.MoveItemsRight(arr)) DoMagic(); else Neon.Instance.NeonLight("right"); 
+							if (MovieControlls.MoveItemsRight(arr)) GeneratePos(); else Neon.Instance.NeonLight("right"); 
 						}
 						else
 						{
 							lastSwipe = Time.time;
-							if (MovieControlls.MoveItemsLeft(arr)) DoMagic(); else Neon.Instance.NeonLight("left"); 
+							if (MovieControlls.MoveItemsLeft(arr)) GeneratePos(); else Neon.Instance.NeonLight("left"); 
 						}
 					}
 					else
@@ -102,12 +116,12 @@ public class MainClass : MonoBehaviour {
 						if (delta.y > 0)
 						{
 							lastSwipe = Time.time;
-							if (MovieControlls.MoveItemsUp(arr)) DoMagic(); else Neon.Instance.NeonLight("up"); 
+							if (MovieControlls.MoveItemsUp(arr)) GeneratePos(); else Neon.Instance.NeonLight("up"); 
 						}
 						else
 						{
 							lastSwipe = Time.time;
-							if (MovieControlls.MoveItemsDown(arr)) DoMagic(); else Neon.Instance.NeonLight("down"); 
+							if (MovieControlls.MoveItemsDown(arr)) GeneratePos(); else Neon.Instance.NeonLight("down"); 
 						}
 					}
 				}
@@ -115,10 +129,20 @@ public class MainClass : MonoBehaviour {
 		}
 	}
 
-	private void DoMagic()
+	private void GeneratePos()
 	{
 		Generating.Instance.Init(arr);
 		arr = Generating.Instance.GeneratePositions();
 	}
-	
+
+    void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+        {
+            Debug.Log("appPause");
+            Ini.SaveGameState(arr);
+            Ini.SaveScore(Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", "")));
+        }
+    }
+
 }

@@ -5,10 +5,10 @@ using System.IO;
 
 public class Ini : MonoBehaviour {
 
-	public static void LoadScore()
+	public static void LoadRecord()
 	{
 		StreamReader fileReader;
-		string fileName = Application.persistentDataPath + "/bestScore.txt";
+		string fileName = Application.persistentDataPath + "/record.txt";
 		if (File.Exists(fileName))
 		{
 			fileReader = File.OpenText(fileName);
@@ -20,7 +20,7 @@ public class Ini : MonoBehaviour {
 	public static void SaveRecord(int value)
 	{
 		StreamWriter fileWriter;
-		string fileName = Application.persistentDataPath + "/bestScore.txt";
+		string fileName = Application.persistentDataPath + "/record.txt";
 		File.WriteAllText(fileName, String.Empty);
 		fileWriter = File.CreateText(fileName);
 		fileWriter.WriteLine(value);
@@ -101,4 +101,87 @@ public class Ini : MonoBehaviour {
 		}
 		return res;
 	}
+
+    public static bool HaveSavedGame()
+    {
+        return File.Exists(Application.persistentDataPath + "/savedGame.txt");
+    }
+
+    public static void SaveGameState(int[,] arr)
+    {
+        StreamWriter fileWriter;
+        string fileName = Application.persistentDataPath + "/savedGame.txt";
+        File.WriteAllText(fileName, String.Empty);
+        fileWriter = File.CreateText(fileName);
+        
+        for (int i = 0; i < 10; i++)
+        {
+            string line = "";
+            for (int j = 0; j < 10; j++)
+            {
+                line += arr[i, j] + " ";
+            }
+            fileWriter.WriteLine(line);
+        }
+        fileWriter.Close();
+    }
+
+    public static int[,] LoadGameState()
+    {
+        StreamReader fileReader;
+        Debug.Log(Application.persistentDataPath + "/savedGame.txt");
+        string fileName = Application.persistentDataPath + "/savedGame.txt";
+        int[,] res = new int[10,10];
+        if (File.Exists(fileName))
+        {
+            fileReader = File.OpenText(fileName);
+            for (int i = 0; i < 10; i++)
+            {
+                string[] stringArr = fileReader.ReadLine().Split(' ');
+                for (int j = 0; j < 10; j++)
+                {
+                    res[i, j] = Convert.ToInt32(stringArr[j]);
+                }
+
+            }
+            fileReader.Close();
+        }
+        return res;
+    }
+
+    public static void DeleteSavedGame()
+    {
+        try
+        {
+            File.Delete(Application.persistentDataPath + "/savedGame.txt");
+            File.Delete(Application.persistentDataPath + "/savedScore.txt");
+        }
+        catch (Exception) { }
+        
+    }
+
+    public static int LoadScore()
+    {
+        StreamReader fileReader;
+        string fileName = Application.persistentDataPath + "/savedScore.txt";
+        int res = 0;
+        if (File.Exists(fileName))
+        {
+            fileReader = File.OpenText(fileName);
+            res = Convert.ToInt32(fileReader.ReadLine());
+            fileReader.Close();
+        }
+        return res;
+    }
+
+    public static void SaveScore(int value)
+    {
+        StreamWriter fileWriter;
+        string fileName = Application.persistentDataPath + "/savedScore.txt";
+        File.WriteAllText(fileName, String.Empty);
+        fileWriter = File.CreateText(fileName);
+        fileWriter.WriteLine(value);
+        fileWriter.Close();
+    }
+
 }

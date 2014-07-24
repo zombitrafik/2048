@@ -36,6 +36,22 @@ public class Generating : MonoBehaviour {
 		arr = mas;
 	}
 
+    public void GeneratePositions(int[,] savedArr){
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                if (savedArr[i, j] == 0)
+                {
+                    continue;
+                }
+                SetItem(i, j, savedArr[i, j]);
+                activeItems++;
+            }
+        }
+        iTween.MoveTo(gameObject, iTween.Hash("position", gameObject.transform.position, "time", 0f, "delay", 0.3f, "onComplete", "RunEnd", "onCompleteTarget", gameObject));
+    }
+
 	public int[,] GeneratePositions()
 	{
         int color = 0;

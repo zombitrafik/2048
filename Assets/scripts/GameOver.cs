@@ -28,6 +28,7 @@ public class GameOver : MonoBehaviour {
 
 	public void Over()
 	{
+        Ini.DeleteSavedGame();
         int bestScore = Convert.ToInt32(GameObject.Find("BestScore").GetComponent<TextMesh>().text.Replace("Your best score: ", ""));
         GooglePlayServices.Instance.UpdateRecord(NORMAL_MODE_BOARD,bestScore);
         GooglePlayServices.Instance.UpdateAchieveProgress(GAMES_COUNT_ACHIEVE, 10);

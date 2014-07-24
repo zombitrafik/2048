@@ -52,6 +52,10 @@ public class MainMenu : MonoBehaviour {
 
 	void Start()
 	{
+        if (GoogleAnalytics.instance)
+        {
+            GoogleAnalytics.instance.LogScreen("main menu");
+        }
 		if (Ini.LoadGeneratingCount() == 0)
 		{
 			Ini.SaveGeneratingCount(3);

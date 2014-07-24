@@ -212,6 +212,7 @@ public class MenuGUI : MonoBehaviour {
 				}
 				if (activeClicked.GetComponent<Button>().GetName() == "retry" && hit.transform.gameObject.name == "retry_down(Clone)")
 				{
+                    Ini.DeleteSavedGame();
 					Application.LoadLevel("main");
 				}
 				if (activeClicked.GetComponent<Button>().GetName() == "sound_dis" && hit.transform.gameObject.name == "sound_down_dis(Clone)")
