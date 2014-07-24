@@ -70,7 +70,7 @@ public class Boom : MonoBehaviour {
 			}
 		}
 
-		if (!isBoom) comboValue = 0;
+		if (!isBoom) comboValue = 1;
 		Exp.UpdateCombo(comboValue);
 	}
 
@@ -156,12 +156,12 @@ public class Boom : MonoBehaviour {
 				}
 			}
 			int value = Factorial(count);
-			value *= comboValue + 1;
+			value *= comboValue;
 			Exp.newExp(value, GetPosFromList(), GetColorById(col));
 			Exp.UpdateScore(value);
 			comboValue++;
 		}
-		if (isBoom) return true; else return false;
+        return isBoom;
 	}
 
 	private void RepairIndexes(int col)
@@ -207,6 +207,6 @@ public class Boom : MonoBehaviour {
 
 	private int Factorial(int x)
 	{
-		return (x == 0) ? 1 : x + Factorial(x - 1);
+		return (x == 1) ? 1 : x + Factorial(x - 1);
 	}
 }
