@@ -27,7 +27,10 @@ public class GooglePlayServices : MonoBehaviour {
         }
     }
 
-
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
     
 	void Start () {
         instance = this;
