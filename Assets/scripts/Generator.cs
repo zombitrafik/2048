@@ -368,7 +368,6 @@ public class Generator : MonoBehaviour {
 
 	private void FindByColor()
 	{
-		int count = 0;
 		bool isBoom = false;
 		for (int i = 0; i < 10; i++)
 		{
