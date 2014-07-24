@@ -34,7 +34,7 @@ public class Exp : MonoBehaviour {
 	{
 		GameObject instance = (GameObject)Instantiate(Resources.Load("text", typeof(GameObject)), position, Quaternion.identity);
 		instance.GetComponent<TextMesh>().text = "X " + value;
-		instance.GetComponent<TextMesh>().characterSize = 0.6f + value / 50;
+		instance.GetComponent<TextMesh>().characterSize = 0.3f + value / 100;
 		MoveAndHide(instance, color);
 	}
 

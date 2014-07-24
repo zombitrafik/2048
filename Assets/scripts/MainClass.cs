@@ -22,6 +22,8 @@ public class MainClass : MonoBehaviour {
     private float swipeCD = 0.4f;
     private float lastSwipe = 0;
 
+    public bool isGameOver = false;
+
 	public bool isPauseMenu = false;
 
 	void Start () {
@@ -55,7 +57,7 @@ public class MainClass : MonoBehaviour {
 			else MenuGUI.Instance.HideBackMenu();
 		}
 
-        if (Time.time-lastSwipe>=swipeCD)
+        if (Time.time-lastSwipe>=swipeCD && !isGameOver)
         {
             
             Swipes();
@@ -137,9 +139,8 @@ public class MainClass : MonoBehaviour {
 
     void OnApplicationPause(bool pauseStatus)
     {
-        if (pauseStatus)
+        if (pauseStatus && !isGameOver)
         {
-            Debug.Log("appPause");
             Ini.SaveGameState(arr);
             Ini.SaveScore(Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", "")));
         }

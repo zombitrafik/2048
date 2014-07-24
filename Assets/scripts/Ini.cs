@@ -5,6 +5,7 @@ using System.IO;
 
 public class Ini : MonoBehaviour {
 
+    
 	public static void LoadRecord()
 	{
 		StreamReader fileReader;
@@ -129,7 +130,6 @@ public class Ini : MonoBehaviour {
     public static int[,] LoadGameState()
     {
         StreamReader fileReader;
-        Debug.Log(Application.persistentDataPath + "/savedGame.txt");
         string fileName = Application.persistentDataPath + "/savedGame.txt";
         int[,] res = new int[10,10];
         if (File.Exists(fileName))
