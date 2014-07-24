@@ -13,10 +13,19 @@ public class GooglePlayServices : MonoBehaviour {
 
     private Hashtable resMap = new Hashtable(){
         {"achievementFirstStep","CgkI8PPD1pcBEAIQAQ"},
-        {"achievement1000Point","CgkI8PPD1pcBEAIQAg"},
+        {"achievement1000Points","CgkI8PPD1pcBEAIQAg"},
         {"achievement10000Points","CgkI8PPD1pcBEAIQAw"},
         {"achievement100000Points","CgkI8PPD1pcBEAIQBA"},
         {"achievementHeyStopItd","CgkI8PPD1pcBEAIQBQ"},
+        {"achievementEpicFail","CgkI8PPD1pcBEAIQBw"},
+        {"achievementFirstCombo","CgkI8PPD1pcBEAIQCA"},
+        {"achievementX10Combo","CgkI8PPD1pcBEAIQCQ"},
+        {"achievementX15Combo","CgkI8PPD1pcBEAIQCg"},
+        {"achievementCcccomboBreaker","CgkI8PPD1pcBEAIQCw"},
+        {"achievementNoviceBuilder","CgkI8PPD1pcBEAIQDA"},
+        {"achievementAdvancedBuilder","CgkI8PPD1pcBEAIQDQ"},
+        {"achievementMasterBuilder","CgkI8PPD1pcBEAIQDg"},
+        {"achievementSociallyActive","CgkI8PPD1pcBEAIQDw"},
         {"leaderboardMoveCrushLeaderboard","CgkI8PPD1pcBEAIQBg"}
     };
     public static GooglePlayServices Instance

@@ -4,6 +4,8 @@ using System;
 
 public class MenuGUI : MonoBehaviour {
 
+    private const string ACHIEVE_SOCIALLY_ACTIVE = "achievementSociallyActive";
+
 	private static MenuGUI instance;
 	public static MenuGUI Instance
 	{
@@ -33,6 +35,10 @@ public class MenuGUI : MonoBehaviour {
 
 	private int cameraMargin = 12;
 
+    private int score = 0;
+    private int bestScore = 0;
+    private bool achieveChecked = false;
+
 	private bool showRepostIco = false;
 	public Texture facebook;
 	public Texture twitter;
@@ -51,15 +57,18 @@ public class MenuGUI : MonoBehaviour {
 			if (GUI.Button(new Rect(Screen.width / 2 - 32, Screen.height / 2 + 32, 64, 64), facebook, style))
 			{
 				Application.OpenURL("https://www.facebook.com/sharer/sharer.php?m2w&u=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");
-			}
+                CheckAchieve();
+            }
 			if (GUI.Button(new Rect(Screen.width / 2 - 128, Screen.height / 2 + 32, 64, 64), twitter, style))
 			{
 				Application.OpenURL("https://twitter.com/intent/tweet?text=&url=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");
-			}
+                CheckAchieve();
+            }
 			if (GUI.Button(new Rect(Screen.width / 2 + 64, Screen.height / 2 + 32, 64, 64), vk, style))
 			{
 				Application.OpenURL("http://vk.com/share.php?url=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html&title=&description=&");
-			}
+                CheckAchieve();
+            }
 			//twitter   Application.OpenURL("https://twitter.com/intent/tweet?text=&url=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");
 			//facebook  Application.OpenURL("https://www.facebook.com/sharer/sharer.php?m2w&u=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");
 			//vk.com    Application.OpenURL("http://vk.com/share.php?url=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html&title=&description=");
@@ -67,11 +76,23 @@ public class MenuGUI : MonoBehaviour {
 		}
 	}
 
+    private void CheckAchieve()
+    {
+        if (!achieveChecked)
+        {
+            if (score == bestScore)
+            {
+                GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_SOCIALLY_ACTIVE, 20);
+            }
+            achieveChecked = true;
+        }    
+    }
+
 	public void ShowGameOverMenu()
 	{
 
-		int score = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", ""));
-		int bestScore = Convert.ToInt32(GameObject.Find("BestScore").GetComponent<TextMesh>().text.Replace("Your best score: ", ""));
+		score = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", ""));
+		bestScore = Convert.ToInt32(GameObject.Find("BestScore").GetComponent<TextMesh>().text.Replace("Your best score: ", ""));
 
 		retryCopy = (GameObject)Instantiate(retry, new Vector3(-2, -12, -5), Quaternion.identity);
 		exitCopy = (GameObject)Instantiate(exit, new Vector3(2, -12, -5), Quaternion.identity);

@@ -3,7 +3,16 @@ using System.Collections;
 using System;
 
 public class Exp : MonoBehaviour {
-    private const string ACHIEVE_1000_POINTS = "achievement1000Point";
+    private const string ACHIEVE_1000_POINTS = "achievement1000Points";
+    private const string ACHIEVE_FIRST_STEP = "achievementFirstStep";
+    private const string ACHIEVE_10000_POINTS = "achievement10000Points";
+    private const string ACHIEVE_100000_POINTS = "achievement10000Points";
+    private const string ACHIEVE_1000000_POINTS = "achievementHeyStopItd";
+    private const string ACHIEVE_FIRST_COMBO = "achievementFirstCombo";
+    private const string ACHIEVE_X10_COMBO = "achievementX10Combo";
+    private const string ACHIEVE_X15_COMBO = "achievementX15Combo";
+    private const string ACHIEVE_X20_COMBO = "achievementCcccomboBreaker";
+
 
 	public static void newExp(int value, Vector3 position, Color color)
 	{
@@ -30,7 +39,23 @@ public class Exp : MonoBehaviour {
 	}
 
 	public static void UpdateCombo(int value)
-	{
+    {
+        if (value == 5)
+        {
+            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_FIRST_COMBO, 100);
+        }
+        if (value == 10)
+        {
+            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_X10_COMBO, 100);
+        }
+        if (value == 15)
+        {
+            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_X15_COMBO, 100);
+        }
+        if (value == 20)
+        {
+            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_X20_COMBO, 100);
+        }
 		GameObject.Find("Combo").GetComponent<TextMesh>().text = "x " + value;
 		if (value <= 1) return;
 		Exp.newCombo(value, new Vector3(0, 5.5f, 1f), Color.white);
@@ -38,6 +63,8 @@ public class Exp : MonoBehaviour {
 
 	public static void UpdateScore(int newVal)
 	{
+        GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_FIRST_STEP, 100);
+
 		int oldValue = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", ""));
 		GameObject.Find("Score").GetComponent<TextMesh>().text = "Score: " + (oldValue + newVal);
 
@@ -48,6 +75,18 @@ public class Exp : MonoBehaviour {
         if (newVal + oldValue >= 1000)
         {
             GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_1000_POINTS, 100);
+        }
+        if (newVal + oldValue >= 10000)
+        {
+            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_10000_POINTS, 100);
+        }
+        if (newVal + oldValue >= 100000)
+        {
+            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_100000_POINTS, 100);
+        }
+        if (newVal + oldValue >= 1000000)
+        {
+            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_1000000_POINTS, 100);
         }
 	}
 

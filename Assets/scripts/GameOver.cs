@@ -5,7 +5,7 @@ using System;
 public class GameOver : MonoBehaviour {
 
     private const string NORMAL_MODE_BOARD = "leaderboardMoveCrushLeaderboard";
-    private const string GAMES_COUNT_ACHIEVE = "achievementHeyStopItd";
+    private const string ACHIEVE_EPIC_FAIL = "achievementEpicFail";
 
 	private static GameOver instance;
 	public static GameOver Instance
@@ -31,7 +31,12 @@ public class GameOver : MonoBehaviour {
         Ini.DeleteSavedGame();
         int bestScore = Convert.ToInt32(GameObject.Find("BestScore").GetComponent<TextMesh>().text.Replace("Your best score: ", ""));
         GooglePlayServices.Instance.UpdateRecord(NORMAL_MODE_BOARD,bestScore);
-        GooglePlayServices.Instance.UpdateAchieveProgress(GAMES_COUNT_ACHIEVE, 10);
+        int score = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", ""));
+        if (score == 0)
+        {
+            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_EPIC_FAIL, 100);
+        }
+        
         MenuGUI.Instance.ShowGameOverMenu();
 		/*
 		cam.GetComponent<Blur>().enabled = true;

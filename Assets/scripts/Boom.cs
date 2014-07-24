@@ -4,6 +4,11 @@ using System;
 
 public class Boom : MonoBehaviour {
 
+    private const string ACHIEVE_NOWICE_BUILDER = "achievementNoviceBuilder";
+    private const string ACHIEVE_ADVANCED_BUILDER = "achievementAdvancedBuilder";
+    private const string ACHIEVE_MASTER_BUILDER = "achievementMasterBuilder";
+
+
 	private static Boom instance;
 	public static Boom Instance
 	{
@@ -136,6 +141,9 @@ public class Boom : MonoBehaviour {
 		}
 		int hashCounter = 1;
 		bool isBoom = false;
+
+        CheckAchieve(count);
+
 		if (count >= minFigureSize)
 		{
 			for (int i = 0; i < 10; i++)
@@ -209,4 +217,20 @@ public class Boom : MonoBehaviour {
 	{
 		return (x == 1) ? 1 : x + Factorial(x - 1);
 	}
+
+    private void CheckAchieve(int count)
+    {
+        if (count >= 5)
+        {
+            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_NOWICE_BUILDER, 100);
+        }
+        if (count >= 7)
+        {
+            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_ADVANCED_BUILDER, 100);
+        }
+        if (count >= 10)
+        {
+            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_MASTER_BUILDER, 100);
+        }
+    }
 }
