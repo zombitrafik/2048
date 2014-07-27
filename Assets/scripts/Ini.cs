@@ -5,6 +5,29 @@ using System.IO;
 
 public class Ini : MonoBehaviour {
 
+    public static void SaveDifficulty(string value)
+    {
+        StreamWriter fileWriter;
+        string fileName = Application.persistentDataPath + "/difficulty.txt";
+        File.WriteAllText(fileName, String.Empty);
+        fileWriter = File.CreateText(fileName);
+        fileWriter.WriteLine(value);
+        fileWriter.Close();
+    }
+
+    public static string LoadDifficulty()
+    {
+        StreamReader fileReader;
+        string fileName = Application.persistentDataPath + "/difficulty.txt";
+        string res = "";
+        if (File.Exists(fileName))
+        {
+            fileReader = File.OpenText(fileName);
+            res = fileReader.ReadLine();
+            fileReader.Close();
+        }
+        return res;
+    }
     
 	public static void LoadRecord()
 	{
@@ -61,7 +84,6 @@ public class Ini : MonoBehaviour {
 		fileWriter = File.CreateText(fileName);
 		fileWriter.WriteLine(value);
 		fileWriter.Close();
-		Sound.volumeValue = value;
 	}
 
 	public static int LoadMinBoom()

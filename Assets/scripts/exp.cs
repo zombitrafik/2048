@@ -40,19 +40,19 @@ public class Exp : MonoBehaviour {
 
 	public static void UpdateCombo(int value)
     {
-        if (value == 5)
+        if (value >= 5)
         {
             GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_FIRST_COMBO, 100);
         }
-        if (value == 10)
+        if (value >= 10)
         {
             GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_X10_COMBO, 100);
         }
-        if (value == 15)
+        if (value >= 15)
         {
             GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_X15_COMBO, 100);
         }
-        if (value == 20)
+        if (value >= 20)
         {
             GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_X20_COMBO, 100);
         }
