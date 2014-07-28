@@ -1,0 +1,376 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SmartLocalization_Editor</name>
+    </assembly>
+    <members>
+        <member name="T:SmartLocalization.Editor.CSVDelimiter">
+            <summary>
+            The delimiter type for CSV
+            </summary>
+        </member>
+        <member name="F:SmartLocalization.Editor.CSVDelimiter.COMMA">
+            <summary> COMMA</summary>
+        </member>
+        <member name="F:SmartLocalization.Editor.CSVDelimiter.SEMI_COLON">
+            <summary> SEMI_COLON</summary>
+        </member>
+        <member name="F:SmartLocalization.Editor.CSVDelimiter.TAB">
+            <summary> TAB</summary>
+        </member>
+        <member name="F:SmartLocalization.Editor.CSVDelimiter.VERTICAL_BAR">
+            <summary> VERTICAL_BAR</summary>
+        </member>
+        <member name="F:SmartLocalization.Editor.CSVDelimiter.CARET">
+            <summary> CARET</summary>
+        </member>
+        <member name="T:SmartLocalization.Editor.CSVExporter">
+            <summary>
+            A CSV Exporter
+            </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.CSVExporter.GetDelimiter(SmartLocalization.Editor.CSVDelimiter)">
+            <summary>
+            Gets the actual delimiter char based on the CSVDelimiter type
+            </summary>
+            <param name="delimiter">The delimiter type</param>
+            <returns>the delimiter</returns>
+        </member>
+        <member name="M:SmartLocalization.Editor.CSVExporter.WriteCSV(System.String,System.Char,System.Collections.Generic.List{System.Collections.Generic.List{System.String}})">
+            <summary>
+            Write the csv to file
+            </summary>
+            <param name="path">The destination path</param>
+            <param name="delimiter">The delimiter to separate values with</param>
+            <param name="input">The Values</param>
+        </member>
+        <member name="M:SmartLocalization.Editor.CSVExporter.ReadCSV(System.String,System.Char)">
+            <summary>
+            Read a csv file
+            </summary>
+            <param name="path">The path to the file</param>
+            <param name="delimiter">The delimiter used in the file</param>
+            <returns>The parsed csv values</returns>
+        </member>
+        <member name="M:SmartLocalization.Editor.DirectoryUtility.ExistsRelative(System.String)">
+            <summary> Appends the relativePath to Application.dataPath </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.DirectoryUtility.GetFiles(System.String)">
+            <summary> Returns the names of files(including their paths) in the directory </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.DirectoryUtility.GetFilesRelative(System.String)">
+            <summary> Appends the relativePath to Application.dataPath </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.DirectoryUtility.CheckAndCreate(System.String)">
+            <summary>
+            Checks the folder and creates it if it does not exist, only returns false if the directory failed to create
+            </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.DirectoryUtility.CreateRelative(System.String)">
+            <summary> Appends the relativePath to Application.dataPath </summary>
+        </member>
+        <member name="T:SmartLocalization.Editor.SerializableStringPair">
+            <summary> Serializable string pair. Helper class for a string pair that is serializeable(for the undo functionality)</summary>
+        </member>
+        <member name="T:SmartLocalization.Editor.SerializableLocalizationObjectPair">
+            <summary>Serializable localization object pair. Helper class for a string pair that is serializeable(for the undo functionality)</summary>
+        </member>
+        <member name="F:SmartLocalization.Editor.EditRootLanguageFileWindow.changedRootKeys">
+            <summary>Containing the original keys and the changes to them, if any.</summary>
+        </member>
+        <member name="F:SmartLocalization.Editor.EditRootLanguageFileWindow.changedRootValues">
+            <summary>Containing the original values and any changes to them</summary>
+        </member>
+        <member name="F:SmartLocalization.Editor.EditRootLanguageFileWindow.scrollPosition">
+            <summary>The scroll view position</summary>
+        </member>
+        <member name="F:SmartLocalization.Editor.EditRootLanguageFileWindow.guiChanged">
+            <summary>Did the GUI change?</summary>
+        </member>
+        <member name="F:SmartLocalization.Editor.EditRootLanguageFileWindow.searchText">
+            <summary>Search field.</summary>
+        </member>
+        <member name="F:SmartLocalization.Editor.EditRootLanguageFileWindow.undoManager">
+            <summary>The Undo Manager</summary>
+        </member>
+        <member name="F:SmartLocalization.Editor.EditRootLanguageFileWindow.parsedRootValues">
+            <summary>The parsed root values. This is used to check root key duplicates</summary>
+        </member>
+        <member name="F:SmartLocalization.Editor.EditRootLanguageFileWindow.keyTypes">
+            <summary>The key types</summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.EditRootLanguageFileWindow.SetRootValues(System.Collections.Generic.Dictionary{System.String,SmartLocalization.LocalizedObject})">
+            <summary>
+            Sets the dictionaries necessary to change them within the extension
+            </summary>
+            <param name='rootValues'>
+            Root values.
+            </param>
+        </member>
+        <member name="M:SmartLocalization.Editor.EditRootLanguageFileWindow.AddNewKey">
+            <summary>
+            Adds a new key to the dictionary
+            </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.FileUtility.GetFileExtension(System.String,System.String)">
+            <summary>
+            Gets the file extension for the file at the specified path
+            </summary>
+            <param name='fileName'>
+            The file name without the extension. If the full name is for example hello.png, this parameter
+            should be only "hello"
+            </param>
+            <param name='relativeFolderPath'>
+            The relative path to the folder containing the asset file
+            relativeFolderPath should be relative to the project folder. Like: "Assets/MyTextures/".
+            </param>
+        </member>
+        <member name="M:SmartLocalization.Editor.FileUtility.ExistsRelative(System.String)">
+            <summary> Appends the relativePath to Application.dataPath </summary>
+        </member>
+        <member name="T:SmartLocalization.Editor.HOEditorUndoManager">
+            <summary>
+            Editor undo manager.
+            To use it:
+            <list type="number">
+            <item>
+            <description>Store an instance in the related Editor Class (instantiate it inside the <code>OnEnable</code> method).</description>
+            </item>
+            <item>
+            <description>Call <code>undoManagerInstance.CheckUndo()</code> BEFORE the first UnityGUI call in <code>OnInspectorGUI</code>.</description>
+            </item>
+            <item>
+            <description>Call <code>undoManagerInstance.CheckDirty()</code> AFTER the last UnityGUI call in <code>OnInspectorGUI</code>.</description>
+            </item>
+            </list>
+            </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.HOEditorUndoManager.#ctor(UnityEngine.Object,System.String)">
+            <summary>
+            Creates a new HOEditorUndoManager,
+            setting it so that the target is marked as dirty each time a new undo is stored. 
+            </summary>
+            <param name="p_target">
+            The default <see cref="T:UnityEngine.Object"/> you want to save undo info for.
+            </param>
+            <param name="p_name">
+            The default name of the thing to undo (displayed as "Undo [name]" in the main menu).
+            </param>
+        </member>
+        <member name="M:SmartLocalization.Editor.HOEditorUndoManager.#ctor(UnityEngine.Object,System.String,System.Boolean)">
+            <summary>
+            Creates a new HOEditorUndoManager. 
+            </summary>
+            <param name="p_target">
+            The default <see cref="T:UnityEngine.Object"/> you want to save undo info for.
+            </param>
+            <param name="p_name">
+            The default name of the thing to undo (displayed as "Undo [name]" in the main menu).
+            </param>
+            <param name="p_autoSetDirty">
+            If TRUE, marks the target as dirty each time a new undo is stored.
+            </param>
+        </member>
+        <member name="M:SmartLocalization.Editor.HOEditorUndoManager.CheckUndo">
+            <summary>
+            Call this method BEFORE any undoable UnityGUI call.
+            Manages undo for the default target, with the default name.
+            </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.HOEditorUndoManager.CheckUndo(UnityEngine.Object)">
+            <summary>
+            Call this method BEFORE any undoable UnityGUI call.
+            Manages undo for the given target, with the default name.
+            </summary>
+            <param name="p_target">
+            The <see cref="T:UnityEngine.Object"/> you want to save undo info for.
+            </param>
+        </member>
+        <member name="M:SmartLocalization.Editor.HOEditorUndoManager.CheckUndo(UnityEngine.Object,System.String)">
+            <summary>
+            Call this method BEFORE any undoable UnityGUI call.
+            Manages undo for the given target, with the given name.
+            </summary>
+            <param name="p_target">
+            The <see cref="T:UnityEngine.Object"/> you want to save undo info for.
+            </param>
+            <param name="p_name">
+            The name of the thing to undo (displayed as "Undo [name]" in the main menu).
+            </param>
+        </member>
+        <member name="M:SmartLocalization.Editor.HOEditorUndoManager.CheckDirty">
+            <summary>
+            Call this method AFTER any undoable UnityGUI call.
+            Manages undo for the default target, with the default name,
+            and returns a value of TRUE if the target is marked as dirty.
+            </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.HOEditorUndoManager.CheckDirty(UnityEngine.Object)">
+            <summary>
+            Call this method AFTER any undoable UnityGUI call.
+            Manages undo for the given target, with the default name,
+            and returns a value of TRUE if the target is marked as dirty.
+            </summary>
+            <param name="p_target">
+            The <see cref="T:UnityEngine.Object"/> you want to save undo info for.
+            </param>
+        </member>
+        <member name="M:SmartLocalization.Editor.HOEditorUndoManager.CheckDirty(UnityEngine.Object,System.String)">
+            <summary>
+            Call this method AFTER any undoable UnityGUI call.
+            Manages undo for the given target, with the given name,
+            and returns a value of TRUE if the target is marked as dirty.
+            </summary>
+            <param name="p_target">
+            The <see cref="T:UnityEngine.Object"/> you want to save undo info for.
+            </param>
+            <param name="p_name">
+            The name of the thing to undo (displayed as "Undo [name]" in the main menu).
+            </param>
+        </member>
+        <member name="M:SmartLocalization.Editor.HOEditorUndoManager.ForceDirty">
+            <summary>
+            Call this method AFTER any undoable UnityGUI call.
+            Forces undo for the default target, with the default name.
+            Used to undo operations that are performed by pressing a button,
+            which doesn't set the GUI to a changed state.
+            </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.HOEditorUndoManager.ForceDirty(UnityEngine.Object)">
+            <summary>
+            Call this method AFTER any undoable UnityGUI call.
+            Forces undo for the given target, with the default name.
+            Used to undo operations that are performed by pressing a button,
+            which doesn't set the GUI to a changed state.
+            </summary>
+            <param name="p_target">
+            The <see cref="T:UnityEngine.Object"/> you want to save undo info for.
+            </param>
+        </member>
+        <member name="M:SmartLocalization.Editor.HOEditorUndoManager.ForceDirty(UnityEngine.Object,System.String)">
+            <summary>
+            Call this method AFTER any undoable UnityGUI call.
+            Forces undo for the given target, with the given name.
+            Used to undo operations that are performed by pressing a button,
+            which doesn't set the GUI to a changed state.
+            </summary>
+            <param name="p_target">
+            The <see cref="T:UnityEngine.Object"/> you want to save undo info for.
+            </param>
+            <param name="p_name">
+            The name of the thing to undo (displayed as "Undo [name]" in the main menu).
+            </param>
+        </member>
+        <member name="M:SmartLocalization.Editor.IAutomaticTranslator.TranslateTextArray(SmartLocalization.Editor.TranslateTextArrayEventHandler,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.String,System.String)">
+            <summary> Translate an array of texts to a specific language. Note: the event handler can be called multiple times if splitting of the array is necessary </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:SmartLocalization.Editor.LanguageDictionaryHelper.AddNewKeyPersistent(System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:SmartLocalization.Editor.LanguageDictionaryHelper.AddNewKeyPersistent(System.Collections.Generic.Dictionary{System.String,SmartLocalization.LocalizedObject},System.String,SmartLocalization.LocalizedObject)" -->
+        <member name="M:SmartLocalization.Editor.LanguageHandlerEditor.CreateSerializableLocalizationList(System.Collections.Generic.Dictionary{System.String,SmartLocalization.LocalizedObject})">
+            <summary>
+            Creates the serializable localization list from the parsed LocalizedObjects
+            </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.LanguageHandlerEditor.SaveRootLanguageFile(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},SmartLocalization.SmartCultureInfoCollection)">
+            <summary>
+            Saves the root language file and updates all the available languages.
+            </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.LanguageHandlerEditor.SaveLanguageFile(System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
+            <summary>
+            Saves a language file(.resx) at the specified path containing the values in the languageValueDictionary
+            </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.LanguageHandlerEditor.LoadParsedLanguageFile(System.String,System.Boolean)">
+            <summary>
+            Loads the parsed language file.(without the type identifiers)
+            </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.LanguageHandlerEditor.LoadLanguageFile(System.String,System.Boolean)">
+            <summary>
+            Loads the language file and returns the RAW values
+            </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.LanguageHandlerEditor.DeleteLanguage(SmartLocalization.SmartCultureInfo)">
+            <summary> Deletes the language. </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.LanguageHandlerEditor.LoadAllAssets(System.Collections.Generic.List{SmartLocalization.Editor.SerializableLocalizationObjectPair})">
+            <summary> Loads all assets in language values if they have a valid file path </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.LanguageHandlerEditor.CopyFileIntoResources(SmartLocalization.Editor.SerializableLocalizationObjectPair,SmartLocalization.SmartCultureInfo)">
+            <summary> Copies the file into the resources folder. Naming the new asset to KEY </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.LanguageHandlerEditor.DeleteFileFromResources(System.String,SmartLocalization.SmartCultureInfo)">
+            <summary> Deletes the localized file from resources.</summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.LanguageHandlerEditor.RenameFileFromResources(System.String,System.String,SmartLocalization.SmartCultureInfo)">
+            <summary>Renames the localized file from resources.</summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.LocalizationWindowUtility.ShouldShowWindow">
+            <summary>
+            Returns true if the window should show, returns false if not.
+            If false, it will draw an editor label that says the window is unavailable
+            </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.LocalizedKeySelector.SelectKeyGUI(System.String,System.Boolean,SmartLocalization.LocalizedObjectType)">
+            <summary> Call this from OnInspectorGUI in your own editor class </summary>
+        </member>
+        <member name="T:SmartLocalization.Editor.MiniJSON.Json">
+             <summary>
+             This class encodes and decodes JSON strings.
+             Spec. details, see http://www.json.org/
+            
+             JSON uses Arrays and Objects. These correspond here to the datatypes IList and IDictionary.
+             All numbers are parsed to doubles.
+             </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.MiniJSON.Json.Deserialize(System.String)">
+            <summary>
+            Parses the string json into a value
+            </summary>
+            <param name="json">A JSON string.</param>
+            <returns>An List&lt;object&gt;, a Dictionary&lt;string, object&gt;, a double, an integer,a string, null, true, or false</returns>
+        </member>
+        <member name="M:SmartLocalization.Editor.MiniJSON.Json.Serialize(System.Object)">
+            <summary>
+            Converts a IDictionary / IList object or a simple type (string, int, etc.) into a JSON string
+            </summary>
+            <param name="json">A Dictionary&lt;string, object&gt; / List&lt;object&gt;</param>
+            <returns>A JSON encoded string, or null if object 'json' is not serializable</returns>
+        </member>
+        <member name="M:SmartLocalization.Editor.SmartLocalizationWindow.SaveMicrosoftTranslatorSettings">
+            <summary>
+            Saves the microsoft translator settings in EditorPrefs
+            Keys = cws_mtCliendID, cws_mtCliendSecret
+            </summary>
+        </member>
+        <member name="F:SmartLocalization.Editor.TranslateLanguageWindow.translateFromDictionary">
+            <summary> The language dictionary to translate from</summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.TranslateLanguageWindow.InitializeLanguage(SmartLocalization.SmartCultureInfo,System.Collections.Generic.Dictionary{System.String,SmartLocalization.LocalizedObject},System.Collections.Generic.Dictionary{System.String,SmartLocalization.LocalizedObject})">
+            <summary>
+            Initializes the Language
+            </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.TranslateLanguageWindow.CheckIfCanBeTranslated">
+            <summary> Checks if this language can be translated by the automatic translator </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.TranslateLanguageWindow.OnTextFieldGUI(System.Collections.Generic.KeyValuePair{System.String,SmartLocalization.LocalizedObject},System.Int32)">
+            <summary>
+            Shows the GUI for a key with the type of STRING
+            </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.TranslateLanguageWindow.OnGameObjectGUI(System.Collections.Generic.KeyValuePair{System.String,SmartLocalization.LocalizedObject},System.Int32)">
+            <summary> Shows the GUI for a key with the type of GAME_OBJECT </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.TranslateLanguageWindow.OnAudioGUI(System.Collections.Generic.KeyValuePair{System.String,SmartLocalization.LocalizedObject},System.Int32)">
+            <summary>Shows the GUI for a key with the type of AUDIO </summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.TranslateLanguageWindow.OnTextureGUI(System.Collections.Generic.KeyValuePair{System.String,SmartLocalization.LocalizedObject},System.Int32)">
+            <summary>Shows the GUI for a key with the type of TEXTURE</summary>
+        </member>
+        <member name="M:SmartLocalization.Editor.TranslateLanguageWindow.ShowWindow(SmartLocalization.SmartCultureInfo,SmartLocalization.Editor.SmartLocalizationWindow)">
+            <summary> Shows the translate window window. </summary>
+        </member>
+    </members>
+</doc>

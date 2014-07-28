@@ -5,7 +5,6 @@ using System;
 
 public class MainClass : MonoBehaviour {
 
-    private const string SCORE_LEADER_BOARD = "leaderboardMoveCrushLeaderboard";
 
 	private static MainClass instance;
 	public static MainClass Instance
@@ -153,7 +152,7 @@ public class MainClass : MonoBehaviour {
         Ini.SaveGameState(arr);
         int score = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", ""));
         Ini.SaveScore(score);
-        GooglePlayServices.Instance.UpdateRecord(SCORE_LEADER_BOARD, score);
+        GooglePlayServices.Instance.UpdateRecord(GooglePlayServices.SCORE_LEADER_BOARD, score);
     }
 
     void OnApplicationPause(bool pauseStatus)
