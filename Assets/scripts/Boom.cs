@@ -4,10 +4,6 @@ using System;
 
 public class Boom : MonoBehaviour {
 
-    private const string ACHIEVE_NOWICE_BUILDER = "achievementNoviceBuilder";
-    private const string ACHIEVE_ADVANCED_BUILDER = "achievementAdvancedBuilder";
-    private const string ACHIEVE_MASTER_BUILDER = "achievementMasterBuilder";
-
 
 	private static Boom instance;
 	public static Boom Instance
@@ -146,6 +142,7 @@ public class Boom : MonoBehaviour {
 
 		if (count >= minFigureSize)
 		{
+            GooglePlayServices.Instance.UpdateRecord(GooglePlayServices.FIGURE_SIZE_LEADER_BOARD,count);
 			for (int i = 0; i < 10; i++)
 			{
 				for (int j = 0; j < 10; j++)
@@ -222,15 +219,15 @@ public class Boom : MonoBehaviour {
     {
         if (count >= 5)
         {
-            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_NOWICE_BUILDER, 100);
+            GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_NOWICE_BUILDER, 100);
         }
         if (count >= 7)
         {
-            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_ADVANCED_BUILDER, 100);
+            GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_ADVANCED_BUILDER, 100);
         }
         if (count >= 10)
         {
-            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_MASTER_BUILDER, 100);
+            GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_MASTER_BUILDER, 100);
         }
     }
 }

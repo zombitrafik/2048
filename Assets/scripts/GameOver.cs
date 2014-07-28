@@ -4,9 +4,6 @@ using System;
 
 public class GameOver : MonoBehaviour {
 
-    private const string SCORE_LEADER_BOARD = "leaderboardMoveCrushLeaderboard";
-    private const string ACHIEVE_EPIC_FAIL = "achievementEpicFail";
-
 	private static GameOver instance;
 	public static GameOver Instance
 	{
@@ -31,10 +28,10 @@ public class GameOver : MonoBehaviour {
         MainClass.Instance.isGameOver = true;
         Ini.DeleteSavedGame();
         int score = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", ""));
-        GooglePlayServices.Instance.UpdateRecord(SCORE_LEADER_BOARD, score);
+        GooglePlayServices.Instance.UpdateRecord(GooglePlayServices.SCORE_LEADER_BOARD, score);
         if (score == 0)
         {
-            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_EPIC_FAIL, 100);
+            GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_EPIC_FAIL, 100);
         }
         
         MenuGUI.Instance.ShowGameOverMenu();

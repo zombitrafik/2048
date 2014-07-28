@@ -4,8 +4,7 @@ using System;
 
 public class MainMenu : MonoBehaviour {
 
-    private const string SCORE_LEADER_BOARD = "leaderboardMoveCrushLeaderboard";
-    private const string COMBO_LEADER_BOARD = "leaderboardComboLeaderboard";
+    
 	// Main
 	public GameObject play;
 	private GameObject playCopy;
@@ -72,6 +71,7 @@ public class MainMenu : MonoBehaviour {
             isFirstGame=false;
         }else{
             Ini.SaveDifficulty("easy");
+            Ini.SaveGeneratingCount(3);
         }
 		ShowMenu();
 	}
@@ -215,7 +215,7 @@ public class MainMenu : MonoBehaviour {
 				}
 				if (activeClicked.GetComponent<Button>().GetName() == "about" && hit.transform.gameObject.name == "about_down(Clone)")
 				{
-					GooglePlayServices.Instance.ShowLeaderBoard(COMBO_LEADER_BOARD);
+                    GooglePlayServices.Instance.ShowLeaderBoard(GooglePlayServices.FIGURE_SIZE_LEADER_BOARD);
 				}
 				if (activeClicked.GetComponent<Button>().GetName() == "exit" && hit.transform.gameObject.name == "exit_down(Clone)")
 				{

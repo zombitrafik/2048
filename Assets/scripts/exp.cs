@@ -3,16 +3,7 @@ using System.Collections;
 using System;
 
 public class Exp : MonoBehaviour {
-    private const string ACHIEVE_1000_POINTS = "achievement1000Points";
-    private const string ACHIEVE_FIRST_STEP = "achievementFirstStep";
-    private const string ACHIEVE_10000_POINTS = "achievement10000Points";
-    private const string ACHIEVE_100000_POINTS = "achievement10000Points";
-    private const string ACHIEVE_1000000_POINTS = "achievementHeyStopItd";
-    private const string ACHIEVE_FIRST_COMBO = "achievementFirstCombo";
-    private const string ACHIEVE_X10_COMBO = "achievementX10Combo";
-    private const string ACHIEVE_X15_COMBO = "achievementX15Combo";
-    private const string ACHIEVE_X20_COMBO = "achievementCcccomboBreaker";
-    private const string COMBO_LEADER_BOARD = "leaderboardComboLeaderboard";
+    
 
 
 
@@ -42,22 +33,22 @@ public class Exp : MonoBehaviour {
 
 	public static void UpdateCombo(int value)
     {
-        GooglePlayServices.Instance.UpdateRecord(COMBO_LEADER_BOARD, value);
+        GooglePlayServices.Instance.UpdateRecord(GooglePlayServices.COMBO_LEADER_BOARD, value);
         if (value >= 5)
         {
-            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_FIRST_COMBO, 100);
+            GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_FIRST_COMBO, 100);
         }
         if (value >= 10)
         {
-            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_X10_COMBO, 100);
+            GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_X10_COMBO, 100);
         }
         if (value >= 15)
         {
-            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_X15_COMBO, 100);
+            GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_X15_COMBO, 100);
         }
         if (value >= 20)
         {
-            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_X20_COMBO, 100);
+            GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_X20_COMBO, 100);
         }
 		GameObject.Find("Combo").GetComponent<TextMesh>().text = "x " + value;
 		if (value <= 1) return;
@@ -66,7 +57,7 @@ public class Exp : MonoBehaviour {
 
 	public static void UpdateScore(int newVal)
 	{
-        GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_FIRST_STEP, 100);
+        GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_FIRST_STEP, 100);
 
 		int oldValue = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", ""));
 		GameObject.Find("Score").GetComponent<TextMesh>().text = "Score: " + (oldValue + newVal);
@@ -77,19 +68,19 @@ public class Exp : MonoBehaviour {
 		}
         if (newVal + oldValue >= 1000)
         {
-            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_1000_POINTS, 100);
+            GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_1000_POINTS, 100);
         }
         if (newVal + oldValue >= 10000)
         {
-            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_10000_POINTS, 100);
+            GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_10000_POINTS, 100);
         }
         if (newVal + oldValue >= 100000)
         {
-            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_100000_POINTS, 100);
+            GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_100000_POINTS, 100);
         }
         if (newVal + oldValue >= 1000000)
         {
-            GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_1000000_POINTS, 100);
+            GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_1000000_POINTS, 100);
         }
 	}
 

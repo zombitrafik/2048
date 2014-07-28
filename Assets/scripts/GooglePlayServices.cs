@@ -10,25 +10,46 @@ public class GooglePlayServices : MonoBehaviour {
     private bool isAuth = false;
     private static GooglePlayServices instance;
 
+    public int test;
 
-    private Hashtable resMap = new Hashtable(){
-        {"achievementFirstStep","CgkI8PPD1pcBEAIQAQ"},
-        {"achievement1000Points","CgkI8PPD1pcBEAIQAg"},
-        {"achievement10000Points","CgkI8PPD1pcBEAIQAw"},
-        {"achievement100000Points","CgkI8PPD1pcBEAIQBA"},
-        {"achievementHeyStopItd","CgkI8PPD1pcBEAIQBQ"},
-        {"achievementEpicFail","CgkI8PPD1pcBEAIQBw"},
-        {"achievementFirstCombo","CgkI8PPD1pcBEAIQCA"},
-        {"achievementX10Combo","CgkI8PPD1pcBEAIQCQ"},
-        {"achievementX15Combo","CgkI8PPD1pcBEAIQCg"},
-        {"achievementCcccomboBreaker","CgkI8PPD1pcBEAIQCw"},
-        {"achievementNoviceBuilder","CgkI8PPD1pcBEAIQDA"},
-        {"achievementAdvancedBuilder","CgkI8PPD1pcBEAIQDQ"},
-        {"achievementMasterBuilder","CgkI8PPD1pcBEAIQDg"},
-        {"achievementSociallyActive","CgkI8PPD1pcBEAIQDw"},
-        {"leaderboardMoveCrushLeaderboard","CgkI8PPD1pcBEAIQBg"},
-        {"leaderboardComboLeaderboard","CgkI8PPD1pcBEAIQEA"}
-    };
+    public const string ACHIEVE_NOWICE_BUILDER = "CgkI8PPD1pcBEAIQDA";
+    public const string ACHIEVE_ADVANCED_BUILDER = "CgkI8PPD1pcBEAIQDQ";
+    public const string ACHIEVE_MASTER_BUILDER = "CgkI8PPD1pcBEAIQDg";
+    public const string ACHIEVE_EPIC_FAIL = "CgkI8PPD1pcBEAIQBw";
+    public const string ACHIEVE_SOCIALLY_ACTIVE = "CgkI8PPD1pcBEAIQDw";
+    public const string ACHIEVE_1000_POINTS = "CgkI8PPD1pcBEAIQAg";
+    public const string ACHIEVE_FIRST_STEP = "CgkI8PPD1pcBEAIQAQ";
+    public const string ACHIEVE_10000_POINTS = "CgkI8PPD1pcBEAIQAw";
+    public const string ACHIEVE_100000_POINTS = "CgkI8PPD1pcBEAIQAw";
+    public const string ACHIEVE_1000000_POINTS = "CgkI8PPD1pcBEAIQBQ";
+    public const string ACHIEVE_FIRST_COMBO = "CgkI8PPD1pcBEAIQCA";
+    public const string ACHIEVE_X10_COMBO = "CgkI8PPD1pcBEAIQCQ";
+    public const string ACHIEVE_X15_COMBO = "CgkI8PPD1pcBEAIQCg";
+    public const string ACHIEVE_X20_COMBO = "CgkI8PPD1pcBEAIQCw";
+
+    public const string FIGURE_SIZE_LEADER_BOARD = "CgkI8PPD1pcBEAIQEQ";
+    public const string COMBO_LEADER_BOARD = "CgkI8PPD1pcBEAIQEA";
+    public const string SCORE_LEADER_BOARD = "CgkI8PPD1pcBEAIQBg";
+
+    //private Hashtable resMap = new Hashtable(){
+    //    {"achievementFirstStep","CgkI8PPD1pcBEAIQAQ"},
+    //    {"achievement1000Points","CgkI8PPD1pcBEAIQAg"},
+    //    {"achievement10000Points","CgkI8PPD1pcBEAIQAw"},
+    //    {"achievement100000Points","CgkI8PPD1pcBEAIQBA"},
+    //    {"achievementHeyStopItd","CgkI8PPD1pcBEAIQBQ"},
+    //    {"achievementEpicFail","CgkI8PPD1pcBEAIQBw"},
+    //    {"achievementFirstCombo","CgkI8PPD1pcBEAIQCA"},
+    //    {"achievementX10Combo","CgkI8PPD1pcBEAIQCQ"},
+    //    {"achievementX15Combo","CgkI8PPD1pcBEAIQCg"},
+    //    {"achievementCcccomboBreaker","CgkI8PPD1pcBEAIQCw"},
+    //    {"achievementNoviceBuilder","CgkI8PPD1pcBEAIQDA"},
+    //    {"achievementAdvancedBuilder","CgkI8PPD1pcBEAIQDQ"},
+    //    {"achievementMasterBuilder","CgkI8PPD1pcBEAIQDg"},
+    //    {"achievementSociallyActive","CgkI8PPD1pcBEAIQDw"},
+    //    {"leaderboardMoveCrushLeaderboard","CgkI8PPD1pcBEAIQBg"},
+    //    {"leaderboardComboLeaderboard","CgkI8PPD1pcBEAIQEA"},
+    //    {"leaderboardFigureSizeLeaderboard","CgkI8PPD1pcBEAIQEQ"}
+    //};
     public static GooglePlayServices Instance
     {
         get
@@ -51,7 +72,7 @@ public class GooglePlayServices : MonoBehaviour {
 
     public void UpdateRecord(string leaderBoardName, int score)
     {
-        string name = (string)resMap[leaderBoardName];
+        string name = leaderBoardName;
         if (isAuth)
         {
             Social.ReportScore(score, name, (bool success) =>
@@ -90,18 +111,15 @@ public class GooglePlayServices : MonoBehaviour {
 
     public void ShowLeaderBoard(string leaderBoardName)
     {
-        string name = (string)resMap[leaderBoardName];
+        string name = leaderBoardName;
         ((PlayGamesPlatform)Social.Active).ShowLeaderboardUI(name);
     }
 
     public void UpdateAchieveProgress(string achName, double progress)
     {
-        string name = (string)resMap[achName];
-        progress += GetAchieveProgress(name);
+        progress += GetAchieveProgress(achName);
         progress = progress > 100 ? 100 : progress;
-        Social.ReportProgress(name, progress, (bool success) =>
-        {
-        });
+        Social.ReportProgress(achName, progress, (bool success) =>{});
     }
 
     private double GetAchieveProgress(string achName)

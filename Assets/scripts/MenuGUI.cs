@@ -4,7 +4,7 @@ using System;
 
 public class MenuGUI : MonoBehaviour {
 
-    private const string ACHIEVE_SOCIALLY_ACTIVE = "achievementSociallyActive";
+    
 
 	private static MenuGUI instance;
 	public static MenuGUI Instance
@@ -82,7 +82,7 @@ public class MenuGUI : MonoBehaviour {
         {
             if (score == bestScore)
             {
-                GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_SOCIALLY_ACTIVE, 20);
+                GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_SOCIALLY_ACTIVE, 20);
             }
             achieveChecked = true;
         }    
