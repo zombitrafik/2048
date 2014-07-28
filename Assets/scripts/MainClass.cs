@@ -5,6 +5,8 @@ using System;
 
 public class MainClass : MonoBehaviour {
 
+    private const string SCORE_LEADER_BOARD = "leaderboardMoveCrushLeaderboard";
+
 	private static MainClass instance;
 	public static MainClass Instance
 	{
@@ -53,11 +55,20 @@ public class MainClass : MonoBehaviour {
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			if (!MenuGUI.Instance.IsShow()) MenuGUI.Instance.ShowBackMenu();
-			else MenuGUI.Instance.HideBackMenu();
+            if (!MenuGUI.Instance.IsShow() && !isGameOver)
+            {
+                isPauseMenu = true;
+                MenuGUI.Instance.ShowBackMenu();
+                SaveProgress();
+            }
+            else
+            {
+                isPauseMenu = false;
+                MenuGUI.Instance.HideBackMenu();
+            }
 		}
 
-        if (Time.time-lastSwipe>=swipeCD && !isGameOver)
+        if (Time.time-lastSwipe>=swipeCD && !isGameOver && !isPauseMenu)
         {
             
             Swipes();
@@ -137,12 +148,19 @@ public class MainClass : MonoBehaviour {
 		arr = Generating.Instance.GeneratePositions();
 	}
 
+    public void SaveProgress()
+    {
+        Ini.SaveGameState(arr);
+        int score = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", ""));
+        Ini.SaveScore(score);
+        GooglePlayServices.Instance.UpdateRecord(SCORE_LEADER_BOARD, score);
+    }
+
     void OnApplicationPause(bool pauseStatus)
     {
         if (pauseStatus && !isGameOver)
         {
-            Ini.SaveGameState(arr);
-            Ini.SaveScore(Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", "")));
+            SaveProgress();
         }
     }
 

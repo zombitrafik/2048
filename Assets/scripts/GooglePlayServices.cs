@@ -26,7 +26,8 @@ public class GooglePlayServices : MonoBehaviour {
         {"achievementAdvancedBuilder","CgkI8PPD1pcBEAIQDQ"},
         {"achievementMasterBuilder","CgkI8PPD1pcBEAIQDg"},
         {"achievementSociallyActive","CgkI8PPD1pcBEAIQDw"},
-        {"leaderboardMoveCrushLeaderboard","CgkI8PPD1pcBEAIQBg"}
+        {"leaderboardMoveCrushLeaderboard","CgkI8PPD1pcBEAIQBg"},
+        {"leaderboardComboLeaderboard","CgkI8PPD1pcBEAIQEA"}
     };
     public static GooglePlayServices Instance
     {

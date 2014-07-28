@@ -4,7 +4,8 @@ using System;
 
 public class MainMenu : MonoBehaviour {
 
-	private const string NORMAL_MODE_BOARD = "leaderboardMoveCrushLeaderboard";
+    private const string SCORE_LEADER_BOARD = "leaderboardMoveCrushLeaderboard";
+    private const string COMBO_LEADER_BOARD = "leaderboardComboLeaderboard";
 	// Main
 	public GameObject play;
 	private GameObject playCopy;
@@ -214,7 +215,7 @@ public class MainMenu : MonoBehaviour {
 				}
 				if (activeClicked.GetComponent<Button>().GetName() == "about" && hit.transform.gameObject.name == "about_down(Clone)")
 				{
-					GooglePlayServices.Instance.ShowLeaderBoard(NORMAL_MODE_BOARD);
+					GooglePlayServices.Instance.ShowLeaderBoard(COMBO_LEADER_BOARD);
 				}
 				if (activeClicked.GetComponent<Button>().GetName() == "exit" && hit.transform.gameObject.name == "exit_down(Clone)")
 				{
@@ -238,12 +239,14 @@ public class MainMenu : MonoBehaviour {
                     switch (oldValue)
                     {
                         case "easy": break;
-                        case "normal": 
+                        case "normal":
+                            Ini.DeleteSavedGame();
                             Ini.SaveDifficulty("easy");
                             Ini.SaveGeneratingCount(3);
                             value_min.GetComponent<TextMesh>().text = "easy";
                             break;
                         case "hard":
+                            Ini.DeleteSavedGame();
                             Ini.SaveDifficulty("normal");
                             Ini.SaveGeneratingCount(4);
                             value_min.GetComponent<TextMesh>().text = "normal";
@@ -257,10 +260,12 @@ public class MainMenu : MonoBehaviour {
                     switch (oldValue)
                     {
                         case "easy": Ini.SaveDifficulty("normal");
+                            Ini.DeleteSavedGame();
                             Ini.SaveGeneratingCount(4);
                             value_min.GetComponent<TextMesh>().text = "normal";
                             break;
                         case "normal":
+                            Ini.DeleteSavedGame();
                             Ini.SaveDifficulty("hard");
                             Ini.SaveGeneratingCount(5);
                             value_min.GetComponent<TextMesh>().text = "hard";

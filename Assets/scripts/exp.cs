@@ -12,6 +12,8 @@ public class Exp : MonoBehaviour {
     private const string ACHIEVE_X10_COMBO = "achievementX10Combo";
     private const string ACHIEVE_X15_COMBO = "achievementX15Combo";
     private const string ACHIEVE_X20_COMBO = "achievementCcccomboBreaker";
+    private const string COMBO_LEADER_BOARD = "leaderboardComboLeaderboard";
+
 
 
 	public static void newExp(int value, Vector3 position, Color color)
@@ -40,6 +42,7 @@ public class Exp : MonoBehaviour {
 
 	public static void UpdateCombo(int value)
     {
+        GooglePlayServices.Instance.UpdateRecord(COMBO_LEADER_BOARD, value);
         if (value >= 5)
         {
             GooglePlayServices.Instance.UpdateAchieveProgress(ACHIEVE_FIRST_COMBO, 100);
