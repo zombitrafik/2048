@@ -44,10 +44,29 @@ public class MenuGUI : MonoBehaviour {
 	public Texture twitter;
 	public Texture vk;
 	public GUIStyle style;
+
 	void Start()
 	{
 		instance = this;
 	}
+
+    void Repost(string subject, string text, string chooserTitle)
+    {
+        try
+        {
+            AndroidJavaClass ajc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+            AndroidJavaObject ajo = ajc.GetStatic<AndroidJavaObject>("currentActivity");
+
+            AndroidJavaClass jc = new AndroidJavaClass("com.kimreik.moveandcrush.MainActivity");
+            jc.CallStatic("shareText", ajo, subject, text, chooserTitle);
+            //AndroidJavaObject jo = jc.GetStatic<AndroidJavaObject>("currentActivity");
+            //jo.Call("shareText", subject, text, chooserTitle);
+        }
+        catch (Exception e)
+        {
+        }
+        
+    }
 
 
 	void OnGUI()
@@ -56,7 +75,8 @@ public class MenuGUI : MonoBehaviour {
 		{
 			if (GUI.Button(new Rect(Screen.width / 2 - 32, Screen.height / 2 + 32, 64, 64), facebook, style))
 			{
-				Application.OpenURL("https://www.facebook.com/sharer/sharer.php?m2w&u=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");
+                Repost("test", "this is JNE repost", "Share");
+                //Application.OpenURL("https://www.facebook.com/sharer/sharer.php?m2w&u=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");
                 CheckAchieve();
             }
 			if (GUI.Button(new Rect(Screen.width / 2 - 128, Screen.height / 2 + 32, 64, 64), twitter, style))
@@ -225,6 +245,7 @@ public class MenuGUI : MonoBehaviour {
 				if (activeClicked.GetComponent<Button>().GetName() == "back" && hit.transform.gameObject.name == "back_down(Clone)")
 				{
 					pause = false;
+                    MainClass.Instance.isPauseMenu = false;
 					HideBackMenu();
 				}
 				if (activeClicked.GetComponent<Button>().GetName() == "exit" && hit.transform.gameObject.name == "exit_down(Clone)")

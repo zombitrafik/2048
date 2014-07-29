@@ -276,14 +276,14 @@
  <Reference Include="GPGSUtils">
  <HintPath>D:/programming/2048/Assets/Plugins/GPGSUtils.dll</HintPath>
  </Reference>
- <Reference Include="UnityEditor.Graphs">
- <HintPath>D:/programming/unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
- </Reference>
  <Reference Include="SmartLocalization_Runtime">
  <HintPath>D:/programming/2048/Assets/SmartLocalization/SmartLocalization_Runtime.dll</HintPath>
  </Reference>
  <Reference Include="SmartLocalization_Editor">
  <HintPath>D:/programming/2048/Assets/SmartLocalization/Editor/SmartLocalization_Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Graphs">
+ <HintPath>D:/programming/unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
