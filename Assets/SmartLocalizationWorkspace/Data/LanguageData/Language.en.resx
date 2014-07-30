@@ -116,10 +116,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+	<data name="Game.repostLink" xml:space="preserve">
+		<value>https://play.google.com/store/apps/details?id=com.kimreik.moveandcrush&amp;hl=en</value>
+	</data>
+	<data name="Game.repostText" xml:space="preserve">
+		<value>My score in Move and Crush - </value>
+	</data>
 	<data name="MainMenu.Play" xml:space="preserve">
 		<value>Play</value>
-	</data>
-	<data name="New Key" xml:space="preserve">
-		<value>New Value</value>
 	</data>
 </root>

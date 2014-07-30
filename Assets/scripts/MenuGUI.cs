@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SmartLocalization;
 using System;
 
 public class MenuGUI : MonoBehaviour {
@@ -45,27 +46,27 @@ public class MenuGUI : MonoBehaviour {
 	public Texture vk;
 	public GUIStyle style;
 
+    LanguageManager langMan;
+
+    
 	void Start()
 	{
+        langMan = LanguageManager.Instance;
+
+        if (langMan.GetSupportedSystemLanguage() != null)
+        {
+            langMan.ChangeLanguage(langMan.GetSupportedSystemLanguage());
+        }
 		instance = this;
 	}
 
     void Repost(string subject, string text, string chooserTitle)
     {
-        try
-        {
-            AndroidJavaClass ajc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-            AndroidJavaObject ajo = ajc.GetStatic<AndroidJavaObject>("currentActivity");
+        AndroidJavaClass ajc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        AndroidJavaObject ajo = ajc.GetStatic<AndroidJavaObject>("currentActivity");
 
-            AndroidJavaClass jc = new AndroidJavaClass("com.kimreik.moveandcrush.MainActivity");
-            jc.CallStatic("shareText", ajo, subject, text, chooserTitle);
-            //AndroidJavaObject jo = jc.GetStatic<AndroidJavaObject>("currentActivity");
-            //jo.Call("shareText", subject, text, chooserTitle);
-        }
-        catch (Exception e)
-        {
-        }
-        
+        AndroidJavaClass jc = new AndroidJavaClass("com.kimreik.moveandcrush.MainActivity");
+        jc.CallStatic("shareText", ajo, subject, text, chooserTitle);
     }
 
 
@@ -75,7 +76,7 @@ public class MenuGUI : MonoBehaviour {
 		{
 			if (GUI.Button(new Rect(Screen.width / 2 - 32, Screen.height / 2 + 32, 64, 64), facebook, style))
 			{
-                Repost("test", "this is JNE repost", "Share");
+                Repost("test", GetRepostText(), "Share");
                 //Application.OpenURL("https://www.facebook.com/sharer/sharer.php?m2w&u=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");
                 CheckAchieve();
             }
@@ -95,6 +96,16 @@ public class MenuGUI : MonoBehaviour {
 
 		}
 	}
+
+    string GetRepostText()
+    {
+        string res = "";
+        res += langMan.GetTextValue("Game.repostText");
+        res += score;
+        res += " " + langMan.GetTextValue("Game.repostLink");
+        return res;
+
+    }
 
     private void CheckAchieve()
     {

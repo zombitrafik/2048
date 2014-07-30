@@ -6,5 +6,10 @@
       <englishName>English</englishName>
       <nativeName>English</nativeName>
     </CultureInfo>
+    <CultureInfo>
+      <languageCode>ru</languageCode>
+      <englishName>Russian</englishName>
+      <nativeName>Русский</nativeName>
+    </CultureInfo>
   </CultureInfos>
 </SmartCultureCollections>
