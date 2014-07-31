@@ -27,7 +27,7 @@ public class GameOver : MonoBehaviour {
 	{
         MainClass.Instance.isGameOver = true;
         Ini.DeleteSavedGame();
-        int score = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", ""));
+        int score = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace(Localization.GetWord("Score") + ": ", ""));
         GooglePlayServices.Instance.UpdateRecord(GooglePlayServices.SCORE_LEADER_BOARD, score);
         if (score == 0)
         {

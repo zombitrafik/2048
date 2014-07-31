@@ -27,7 +27,15 @@ public class MainClass : MonoBehaviour {
 
 	public bool isPauseMenu = false;
 
+	private bool swipeControlSelected = true; 
+
 	void Start () {
+
+		GameObject.Find("Score").GetComponent<TextMesh>().text = Localization.GetWord("Score") + ": 0";
+		GameObject.Find("BestScore").GetComponent<TextMesh>().text = Localization.GetWord("You best score") + ": 0";
+
+		if (Ini.LoadControl() != "swipe") swipeControlSelected = false;
+
         if (GoogleAnalytics.instance)
         {
             GoogleAnalytics.instance.LogScreen("game");
@@ -40,7 +48,7 @@ public class MainClass : MonoBehaviour {
         {
             Generating.Instance.Init(arr);
             Generating.Instance.GeneratePositions(Ini.LoadGameState());
-            GameObject.Find("Score").GetComponent<TextMesh>().text = "Score: " + Ini.LoadScore();
+            GameObject.Find("Score").GetComponent<TextMesh>().text = Localization.GetWord("Score") + ": " + Ini.LoadScore();
         }
         else
         {
@@ -63,33 +71,28 @@ public class MainClass : MonoBehaviour {
             else
             {
                 isPauseMenu = false;
-                MenuGUI.Instance.HideBackMenu();
+                MenuGUI.Instance.HideAll();
             }
 		}
 
         if (Time.time-lastSwipe>=swipeCD && !isGameOver && !isPauseMenu)
         {
-            
-            Swipes();
+			if (swipeControlSelected) Swipes();
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                lastSwipe = Time.time;
-				if (MovieControlls.MoveItemsLeft(arr)) GeneratePos(); else Neon.Instance.NeonLight("left");
+				MoveLeft();
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                lastSwipe = Time.time;
-				if (MovieControlls.MoveItemsRight(arr)) GeneratePos(); else Neon.Instance.NeonLight("right");
+				MoveRight();
             }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                lastSwipe = Time.time;
-				if (MovieControlls.MoveItemsUp(arr)) GeneratePos(); else Neon.Instance.NeonLight("up");
+				MoveUp();
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                lastSwipe = Time.time;
-				if (MovieControlls.MoveItemsDown(arr)) GeneratePos(); else Neon.Instance.NeonLight("down");
+				MoveDown();
             }
         }
 	}
@@ -141,7 +144,7 @@ public class MainClass : MonoBehaviour {
 		}
 	}
 
-	private void GeneratePos()
+	public void GeneratePos()
 	{
 		Generating.Instance.Init(arr);
 		arr = Generating.Instance.GeneratePositions();
@@ -163,4 +166,48 @@ public class MainClass : MonoBehaviour {
         }
     }
 
+
+	public void MoveLeft()
+	{
+		if (Time.time - lastSwipe >= swipeCD && !isGameOver && !isPauseMenu)
+		{
+			lastSwipe = Time.time;
+			if (MovieControlls.MoveItemsLeft(arr)) GeneratePos(); else Neon.Instance.NeonLight("left");
+		}
+		else return;
+		
+	}
+
+	public void MoveRight()
+	{
+		if (Time.time - lastSwipe >= swipeCD && !isGameOver && !isPauseMenu)
+		{
+			lastSwipe = Time.time;
+			if (MovieControlls.MoveItemsRight(arr)) GeneratePos(); else Neon.Instance.NeonLight("right");
+		}
+		else return;
+		
+	}
+
+	public void MoveUp()
+	{
+		if (Time.time - lastSwipe >= swipeCD && !isGameOver && !isPauseMenu)
+		{
+			lastSwipe = Time.time;
+			if (MovieControlls.MoveItemsUp(arr)) GeneratePos(); else Neon.Instance.NeonLight("up");
+		}
+		else return;
+		
+	}
+
+	public void MoveDown()
+	{
+		if (Time.time - lastSwipe >= swipeCD && !isGameOver && !isPauseMenu)
+		{
+			lastSwipe = Time.time;
+			if (MovieControlls.MoveItemsDown(arr)) GeneratePos(); else Neon.Instance.NeonLight("down");
+		}
+		else return;
+		
+	}
 }

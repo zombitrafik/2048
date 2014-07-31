@@ -36,7 +36,7 @@ public class Ini : MonoBehaviour {
 		if (File.Exists(fileName))
 		{
 			fileReader = File.OpenText(fileName);
-			GameObject.Find("BestScore").GetComponent<TextMesh>().text = "Your best score: " + fileReader.ReadLine();
+			GameObject.Find("BestScore").GetComponent<TextMesh>().text = Localization.GetWord("You best score") + ": " + fileReader.ReadLine();
 			fileReader.Close();
 		}
 	}
@@ -205,5 +205,29 @@ public class Ini : MonoBehaviour {
         fileWriter.WriteLine(value);
         fileWriter.Close();
     }
+
+	public static void SaveControl(string value)
+	{
+		StreamWriter fileWriter;
+		string fileName = Application.persistentDataPath + "/control.txt";
+		File.WriteAllText(fileName, String.Empty);
+		fileWriter = File.CreateText(fileName);
+		fileWriter.WriteLine(value);
+		fileWriter.Close();
+	}
+
+	public static string LoadControl()
+	{
+		StreamReader fileReader;
+		string fileName = Application.persistentDataPath + "/control.txt";
+		string res = "";
+		if (File.Exists(fileName))
+		{
+			fileReader = File.OpenText(fileName);
+			res = fileReader.ReadLine();
+			fileReader.Close();
+		}
+		return res;
+	}
 
 }

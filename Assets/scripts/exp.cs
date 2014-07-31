@@ -59,12 +59,12 @@ public class Exp : MonoBehaviour {
 	{
         GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_FIRST_STEP, 100);
 
-		int oldValue = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", ""));
-		GameObject.Find("Score").GetComponent<TextMesh>().text = "Score: " + (oldValue + newVal);
+		int oldValue = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace(Localization.GetWord("Score") + ": ", ""));
+		GameObject.Find("Score").GetComponent<TextMesh>().text = Localization.GetWord("Score") + ": " + (oldValue + newVal);
 
-		if ((newVal + oldValue) > Convert.ToInt32(GameObject.Find("BestScore").GetComponent<TextMesh>().text.Replace("Your best score: ", "")))
+		if ((newVal + oldValue) > Convert.ToInt32(GameObject.Find("BestScore").GetComponent<TextMesh>().text.Replace(Localization.GetWord("You best score") +": ", "")))
 		{
-			GameObject.Find("BestScore").GetComponent<TextMesh>().text = "Your best score: " + (oldValue + newVal);
+			GameObject.Find("BestScore").GetComponent<TextMesh>().text = Localization.GetWord("You best score") + ": " + (oldValue + newVal);
 		}
         if (newVal + oldValue >= 1000)
         {
