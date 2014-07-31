@@ -116,13 +116,79 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-	<data name="Game.repostLink" xml:space="preserve">
-		<value>https://play.google.com/store/apps/details?id=com.kimreik.moveandcrush&amp;hl=ru</value>
+	<data name="Game.MainMenu" xml:space="preserve">
+		<value>Меню</value>
 	</data>
-	<data name="Game.repostText" xml:space="preserve">
-		<value>Мой счёт в Move and Crush - </value>
+	<data name="Game.Retry" xml:space="preserve">
+		<value>Заново</value>
+	</data>
+	<data name="Game.Score" xml:space="preserve">
+		<value>Очки</value>
+	</data>
+	<data name="Game.Share" xml:space="preserve">
+		<value>Поделиться с друзьями</value>
+	</data>
+	<data name="Game.YBScore" xml:space="preserve">
+		<value>Рекорд</value>
+	</data>
+	<data name="MainMenu.Back" xml:space="preserve">
+		<value>Назад</value>
+	</data>
+	<data name="MainMenu.Buttons" xml:space="preserve">
+		<value>Кнопки</value>
+	</data>
+	<data name="MainMenu.Control" xml:space="preserve">
+		<value>Управление</value>
+	</data>
+	<data name="MainMenu.Difficult" xml:space="preserve">
+		<value>Сложность</value>
+	</data>
+	<data name="MainMenu.Easy" xml:space="preserve">
+		<value>Легкий</value>
+	</data>
+	<data name="MainMenu.English" xml:space="preserve">
+		<value />
+	</data>
+	<data name="MainMenu.German" xml:space="preserve">
+		<value />
+	</data>
+	<data name="MainMenu.Hard" xml:space="preserve">
+		<value>Сложный</value>
+	</data>
+	<data name="MainMenu.Language" xml:space="preserve">
+		<value>Язык</value>
+	</data>
+	<data name="MainMenu.Normal" xml:space="preserve">
+		<value>Нормальный</value>
 	</data>
 	<data name="MainMenu.Play" xml:space="preserve">
 		<value>Играть</value>
+	</data>
+	<data name="MainMenu.Rate" xml:space="preserve">
+		<value>Оценить</value>
+	</data>
+	<data name="MainMenu.Ratings" xml:space="preserve">
+		<value>Достижения</value>
+	</data>
+	<data name="MainMenu.Selected" xml:space="preserve">
+		<value>Выбрано</value>
+	</data>
+	<data name="MainMenu.Set_difficulty" xml:space="preserve">
+		<value>Сложность</value>
+	</data>
+	<data name="MainMenu.Settings" xml:space="preserve">
+		<value>Настройки</value>
+	</data>
+	<data name="MainMenu.Swipe" xml:space="preserve">
+		<value>Провести пальцем</value>
+	</data>
+	<data name="MainMenu.Tutorial" xml:space="preserve">
+		<value>Обучение</value>
+	</data>
+	<data name="MainMenu.Russian" xml:space="preserve">
+		<value />
+	</data>
+	<data name="MainMenu.French" xml:space="preserve">
+		<value />
 	</data>
 </root>
