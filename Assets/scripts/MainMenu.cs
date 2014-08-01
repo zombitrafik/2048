@@ -298,7 +298,7 @@ public class MainMenu : MonoBehaviour
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "evaluation" && hit.transform.parent.name == "but_evaluation(Clone)")
 					{
-						Application.Quit();
+                        Application.OpenURL("market://details?id=com.kimreik.moveandcrush");
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "control" && hit.transform.parent.name == "but_control(Clone)")
 					{
