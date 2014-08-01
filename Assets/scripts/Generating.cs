@@ -49,7 +49,6 @@ public class Generating : MonoBehaviour {
                 activeItems++;
             }
         }
-        iTween.MoveTo(gameObject, iTween.Hash("position", gameObject.transform.position, "time", 0f, "delay", 0.3f, "onComplete", "RunEnd", "onCompleteTarget", gameObject));
     }
 
 	public int[,] GeneratePositions()

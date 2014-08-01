@@ -49,6 +49,7 @@ public class MainClass : MonoBehaviour {
             Generating.Instance.Init(arr);
             Generating.Instance.GeneratePositions(Ini.LoadGameState());
             GameObject.Find("Score").GetComponent<TextMesh>().text = Localization.GetWord("Score") + ": " + Ini.LoadScore();
+            GameObject.Find("Combo").GetComponent<TextMesh>().text = "x " + Ini.LoadCombo();
         }
         else
         {
@@ -155,6 +156,8 @@ public class MainClass : MonoBehaviour {
         Ini.SaveGameState(arr);
         int score = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", ""));
         Ini.SaveScore(score);
+        int combo = Convert.ToInt32(GameObject.Find("Combo").GetComponent<TextMesh>().text.Replace("x ", ""));
+        Ini.SaveCombo(combo);
         GooglePlayServices.Instance.UpdateRecord(GooglePlayServices.SCORE_LEADER_BOARD, score);
     }
 

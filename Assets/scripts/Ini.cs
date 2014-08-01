@@ -177,6 +177,7 @@ public class Ini : MonoBehaviour {
         {
             File.Delete(Application.persistentDataPath + "/savedGame.txt");
             File.Delete(Application.persistentDataPath + "/savedScore.txt");
+            File.Delete(Application.persistentDataPath + "/savedCombo.txt");
         }
         catch (Exception) { }
         
@@ -229,5 +230,31 @@ public class Ini : MonoBehaviour {
 		}
 		return res;
 	}
+
+    public static int LoadCombo()
+    {
+        StreamReader fileReader;
+        string fileName = Application.persistentDataPath + "/savedCombo.txt";
+        int res = 1;
+        if (File.Exists(fileName))
+        {
+            fileReader = File.OpenText(fileName);
+            res = Convert.ToInt32(fileReader.ReadLine());
+            fileReader.Close();
+        }
+        return res;
+    }
+
+    public static void SaveCombo(int value)
+    {
+        StreamWriter fileWriter;
+        string fileName = Application.persistentDataPath + "/savedCombo.txt";
+        File.WriteAllText(fileName, String.Empty);
+        fileWriter = File.CreateText(fileName);
+        fileWriter.WriteLine(value);
+        fileWriter.Close();
+    }
+
+
 
 }

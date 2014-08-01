@@ -16,18 +16,22 @@ public class Boom : MonoBehaviour {
 
 	Hashtable hash = new Hashtable();
 	private int[,] figures = new int[10, 10];
-	private int comboValue = 0;
+	public int comboValue = 1;
 	public int minFigureSize = 0;
 
 
 	public int[,] arr;
 	public int activeItems;
 
-	void Start()
-	{
-		minFigureSize = Ini.LoadMinBoom();
-		instance = this;
-	}
+    void Start()
+    {
+        if (Ini.HaveSavedGame())
+        {
+            comboValue = Ini.LoadCombo();
+        }
+        minFigureSize = Ini.LoadMinBoom();
+        instance = this;
+    }
 
 	public void Init(int[,] mas, int active_items)
 	{
