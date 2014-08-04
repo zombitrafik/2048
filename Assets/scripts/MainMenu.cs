@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.IO;
 
 public class MainMenu : MonoBehaviour
 {
@@ -289,11 +290,12 @@ public class MainMenu : MonoBehaviour
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "tutorial" && hit.transform.gameObject.name == "tutorial_down(Clone)")
 					{
+                        
 						GooglePlayServices.Instance.ShowAchievements();
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "achievements" && hit.transform.parent.name == "but_achievements(Clone)")
 					{
-						HideAll();
+                        HideAll();
 						ShowAchievementsMenu();
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "evaluation" && hit.transform.parent.name == "but_evaluation(Clone)")

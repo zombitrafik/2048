@@ -119,6 +119,15 @@
 	<data name="Game.MainMenu" xml:space="preserve">
 		<value />
 	</data>
+	<data name="Game.Repost_link" xml:space="preserve">
+		<value />
+	</data>
+	<data name="Game.Repost_text" xml:space="preserve">
+		<value />
+	</data>
+	<data name="Game.Repost_title" xml:space="preserve">
+		<value />
+	</data>
 	<data name="Game.Retry" xml:space="preserve">
 		<value />
 	</data>
@@ -149,6 +158,9 @@
 	<data name="MainMenu.English" xml:space="preserve">
 		<value />
 	</data>
+	<data name="MainMenu.French" xml:space="preserve">
+		<value />
+	</data>
 	<data name="MainMenu.German" xml:space="preserve">
 		<value />
 	</data>
@@ -170,6 +182,9 @@
 	<data name="MainMenu.Ratings" xml:space="preserve">
 		<value />
 	</data>
+	<data name="MainMenu.Russian" xml:space="preserve">
+		<value />
+	</data>
 	<data name="MainMenu.Selected" xml:space="preserve">
 		<value />
 	</data>
@@ -185,10 +200,7 @@
 	<data name="MainMenu.Tutorial" xml:space="preserve">
 		<value />
 	</data>
-	<data name="MainMenu.Russian" xml:space="preserve">
-		<value />
-	</data>
-	<data name="MainMenu.French" xml:space="preserve">
+	<data name="Game.Repost_tags" xml:space="preserve">
 		<value />
 	</data>
 </root>

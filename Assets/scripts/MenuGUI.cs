@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.IO;
 
 public class MenuGUI : MonoBehaviour {
 
@@ -39,6 +40,8 @@ public class MenuGUI : MonoBehaviour {
 	public Texture vk;
 	public GUIStyle style;
 
+
+    private string debug = "";
 	void Start()
 	{
 		
@@ -59,7 +62,7 @@ public class MenuGUI : MonoBehaviour {
 		GameObject.Find("down").GetComponent<BoxCollider2D>().enabled = false;
 	}
 
-    void Repost(string subject, string text, string chooserTitle)
+    void Repost(string text, string chooserTitle)
     {
         try
         {
@@ -67,9 +70,16 @@ public class MenuGUI : MonoBehaviour {
             AndroidJavaObject ajo = ajc.GetStatic<AndroidJavaObject>("currentActivity");
 
             AndroidJavaClass jc = new AndroidJavaClass("com.kimreik.moveandcrush.MainActivity");
-            jc.CallStatic("shareText", ajo, subject, text, chooserTitle);
-            //AndroidJavaObject jo = jc.GetStatic<AndroidJavaObject>("currentActivity");
-            //jo.Call("shareText", subject, text, chooserTitle);
+                        
+            Application.CaptureScreenshot("testasd.png");
+
+            string picPath = jc.CallStatic<string>("getExternalStorageDirectory");
+
+            File.Move(Application.persistentDataPath + "/testasd.png", jc.CallStatic<string>("getExternalStorageDirectory"));
+
+            jc.CallStatic("shareText", ajo, picPath, text, chooserTitle);
+
+
         }
         catch (Exception e)
         {
@@ -78,19 +88,40 @@ public class MenuGUI : MonoBehaviour {
     }
 
 
+    string MergeRepostText()
+    {
+        string res = "";
+        res += Localization.GetWord("Repost text");
+        res += score+" ";
+        res += Localization.GetWord("Repost link")+" ";
+        res += Localization.GetWord("Repost tags");
+        return res;
+    }
+
+
 	void OnGUI()
 	{
+        debug = GUI.TextArea(new Rect(5, 5, 400, 200), debug);
 		if (showRepostIco)
 		{
 			if (GUI.Button(new Rect(Screen.width / 2 - 32, Screen.height / 2 + 32, 64, 64), facebook, style))
 			{
-                Repost("test", "this is JNE repost", "Share");
+                try
+                {
+                    Repost(MergeRepostText(), Localization.GetWord("Repost title"));
+                }
+                catch (Exception e)
+                {
+                    debug = e.ToString();
+                }
+                
                 //Application.OpenURL("https://www.facebook.com/sharer/sharer.php?m2w&u=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");
                 CheckAchieve();
             }
 			if (GUI.Button(new Rect(Screen.width / 2 - 128, Screen.height / 2 + 32, 64, 64), twitter, style))
 			{
-				Application.OpenURL("https://twitter.com/intent/tweet?text=&url=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");
+                	
+				//Application.OpenURL("https://twitter.com/intent/tweet?text=&url=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");
                 CheckAchieve();
             }
 			if (GUI.Button(new Rect(Screen.width / 2 + 64, Screen.height / 2 + 32, 64, 64), vk, style))
@@ -109,10 +140,7 @@ public class MenuGUI : MonoBehaviour {
     {
         if (!achieveChecked)
         {
-            if (score == bestScore)
-            {
-                GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_SOCIALLY_ACTIVE, 20);
-            }
+            GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_SOCIALLY_ACTIVE, 100);
             achieveChecked = true;
         }    
     }
