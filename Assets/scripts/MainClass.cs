@@ -108,39 +108,48 @@ public class MainClass : MonoBehaviour {
 				SwipeID = T.fingerId;
 				StartPos = P;
 			}
-			else if (T.fingerId == SwipeID)
-			{
-				var delta = P - StartPos;
-				if (T.phase == TouchPhase.Moved && delta.magnitude > minMovement)
-				{
-					SwipeID = -1;
-					if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
-					{
-						if (delta.x > 0)
-						{
-							lastSwipe = Time.time;
-							if (MovieControlls.MoveItemsRight(arr)) GeneratePos(); else Neon.Instance.NeonLight("right"); 
-						}
-						else
-						{
-							lastSwipe = Time.time;
-							if (MovieControlls.MoveItemsLeft(arr)) GeneratePos(); else Neon.Instance.NeonLight("left"); 
-						}
-					}
-					else
-					{
-						if (delta.y > 0)
-						{
-							lastSwipe = Time.time;
-							if (MovieControlls.MoveItemsUp(arr)) GeneratePos(); else Neon.Instance.NeonLight("up"); 
-						}
-						else
-						{
-							lastSwipe = Time.time;
-							if (MovieControlls.MoveItemsDown(arr)) GeneratePos(); else Neon.Instance.NeonLight("down"); 
-						}
-					}
-				}
+			else
+            {
+                if (T.fingerId == SwipeID)
+                {
+                    var delta = P - StartPos;
+                    
+                    if (T.phase == TouchPhase.Moved && delta.magnitude > minMovement)
+                    {
+                        SwipeID = -1;
+                        if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
+                        {
+                            if (delta.x > 0)
+                            {
+                                lastSwipe = Time.time;
+                                if (MovieControlls.MoveItemsRight(arr)) GeneratePos(); else Neon.Instance.NeonLight("right");
+                            }
+                            else
+                            {
+                                lastSwipe = Time.time;
+                                if (MovieControlls.MoveItemsLeft(arr)) GeneratePos(); else Neon.Instance.NeonLight("left");
+                            }
+                        }
+                        else
+                        {
+                            if (delta.y > 0)
+                            {
+                                lastSwipe = Time.time;
+                                if (MovieControlls.MoveItemsUp(arr)) GeneratePos(); else Neon.Instance.NeonLight("up");
+                            }
+                            else
+                            {
+                                lastSwipe = Time.time;
+                                if (MovieControlls.MoveItemsDown(arr)) GeneratePos(); else Neon.Instance.NeonLight("down");
+                            }
+                        }
+                    }
+                    if (T.phase == TouchPhase.Canceled || T.phase == TouchPhase.Ended)
+                    {
+                        SwipeID = -1;
+                        return;
+                    }
+                }
 			}
 		}
 	}

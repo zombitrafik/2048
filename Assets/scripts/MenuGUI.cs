@@ -41,7 +41,6 @@ public class MenuGUI : MonoBehaviour {
 	public GUIStyle style;
 
 
-    private string debug = "";
 	void Start()
 	{
 		
@@ -101,7 +100,6 @@ public class MenuGUI : MonoBehaviour {
 
 	void OnGUI()
 	{
-        debug = GUI.TextArea(new Rect(5, 5, 400, 200), debug);
 		if (showRepostIco)
 		{
 			if (GUI.Button(new Rect(Screen.width / 2 - 32, Screen.height / 2 + 32, 64, 64), facebook, style))
@@ -112,7 +110,6 @@ public class MenuGUI : MonoBehaviour {
                 }
                 catch (Exception e)
                 {
-                    debug = e.ToString();
                 }
                 
                 //Application.OpenURL("https://www.facebook.com/sharer/sharer.php?m2w&u=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");
