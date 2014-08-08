@@ -168,7 +168,7 @@ public class MainMenu : MonoBehaviour
 					activeClicked = hit.transform.parent.gameObject;
 					activeClicked.GetComponent<Button>().SetButtonDown();
 				}
-				if (hit.transform.parent.name == "tutorial_up(Clone)")
+				if (hit.transform.parent.name == "but_tutorial(Clone)")
 				{
                     activeClicked = hit.transform.parent.gameObject;
 					activeClicked.GetComponent<Button>().SetButtonDown();
@@ -290,9 +290,8 @@ public class MainMenu : MonoBehaviour
 						HideAll();
 						ShowSettingsMenu();
 					}
-					if (activeClicked.GetComponent<Button>().GetName() == "tutorial" && hit.transform.gameObject.name == "tutorial_down(Clone)")
+					if (activeClicked.GetComponent<Button>().GetName() == "tutorial" && hit.transform.parent.name == "but_tutorial(Clone)")
 					{
-                        Debug.Log("work");
                         GooglePlayServices.Instance.ShowAchievements();
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "achievements" && hit.transform.parent.name == "but_achievements(Clone)")
