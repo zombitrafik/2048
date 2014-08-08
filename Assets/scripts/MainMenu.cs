@@ -80,9 +80,11 @@ public class MainMenu : MonoBehaviour
 		{
 			Ini.SaveControl("swipe");
 		}
-		if (Ini.LoadDifficulty() == "hard") Ini.SaveDifficulty("Hard");
-		if (Ini.LoadDifficulty() == "normal") Ini.SaveDifficulty("Normal");
-		if (Ini.LoadDifficulty() == "easy") Ini.SaveDifficulty("Easy");
+
+        if (!Ini.HaveSavedGame())
+        {
+            Ini.SaveGeneratingCount(3);
+        }
 
 		Ini.SaveMinBoom(4);
 		ShowMenu();
@@ -168,7 +170,7 @@ public class MainMenu : MonoBehaviour
 				}
 				if (hit.transform.parent.name == "tutorial_up(Clone)")
 				{
-					activeClicked = GameObject.Find("but_tutorial(Clone)");
+                    activeClicked = hit.transform.parent.gameObject;
 					activeClicked.GetComponent<Button>().SetButtonDown();
 				}
 				if (hit.transform.parent.name == "but_achievements(Clone)")
@@ -290,8 +292,8 @@ public class MainMenu : MonoBehaviour
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "tutorial" && hit.transform.gameObject.name == "tutorial_down(Clone)")
 					{
-                        
-						GooglePlayServices.Instance.ShowAchievements();
+                        Debug.Log("work");
+                        GooglePlayServices.Instance.ShowAchievements();
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "achievements" && hit.transform.parent.name == "but_achievements(Clone)")
 					{
@@ -363,13 +365,13 @@ public class MainMenu : MonoBehaviour
 							case "Normal":
 								Ini.DeleteSavedGame();
 								Ini.SaveDifficulty("Easy");
-								Ini.SaveGeneratingCount(3);
+								Ini.SaveGeneratingCount(5);
 								value_min.GetComponent<TextMesh>().text = Localization.GetWord("Easy");
 								break;
 							case "Hard":
 								Ini.DeleteSavedGame();
 								Ini.SaveDifficulty("Normal");
-								Ini.SaveGeneratingCount(4);
+								Ini.SaveGeneratingCount(6);
 								value_min.GetComponent<TextMesh>().text = Localization.GetWord("Normal");
 								break;
 						}
@@ -382,13 +384,13 @@ public class MainMenu : MonoBehaviour
 						{
 							case "Easy": Ini.SaveDifficulty("Normal");
 								Ini.DeleteSavedGame();
-								Ini.SaveGeneratingCount(4);
+								Ini.SaveGeneratingCount(6);
 								value_min.GetComponent<TextMesh>().text = Localization.GetWord("Normal");
 								break;
 							case "Normal":
 								Ini.DeleteSavedGame();
 								Ini.SaveDifficulty("Hard");
-								Ini.SaveGeneratingCount(5);
+								Ini.SaveGeneratingCount(7);
 								value_min.GetComponent<TextMesh>().text = Localization.GetWord("Hard");
 								break;
 							case "Hard": break;

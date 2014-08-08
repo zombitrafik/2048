@@ -163,11 +163,12 @@ public class MainClass : MonoBehaviour {
     public void SaveProgress()
     {
         Ini.SaveGameState(arr);
-        int score = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace("Score: ", ""));
+        int score = Convert.ToInt32(GameObject.Find("Score").GetComponent<TextMesh>().text.Replace(Localization.GetWord("Score") + ": ", ""));
         Ini.SaveScore(score);
         int combo = Convert.ToInt32(GameObject.Find("Combo").GetComponent<TextMesh>().text.Replace("x ", ""));
         Ini.SaveCombo(combo);
         GooglePlayServices.Instance.UpdateRecord(GooglePlayServices.SCORE_LEADER_BOARD, score);
+        Ini.SaveDebuff(Debuff.Instance.debuffValue);
     }
 
     void OnApplicationPause(bool pauseStatus)

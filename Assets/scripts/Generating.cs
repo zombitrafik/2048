@@ -26,7 +26,7 @@ public class Generating : MonoBehaviour {
 
 	void Start()
 	{
-		startCount = Ini.LoadGeneratingCount();
+        startCount = Ini.LoadGeneratingCount();
 		instance = this;
 	}
 
@@ -121,7 +121,11 @@ public class Generating : MonoBehaviour {
         if (activeItems >= 100)
         {
             GameOver.Instance.Over();
-           // MainClass.Instance.isGameOverMenu = true;
         }
 	}
+
+    public void UpdateGeneratingCount(int value)
+    {
+        startCount = value;
+    }
 }

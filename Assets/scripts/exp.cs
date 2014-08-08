@@ -3,9 +3,9 @@ using System.Collections;
 using System;
 
 public class Exp : MonoBehaviour {
-    
 
-
+    private static int oldCombo=1;
+    private static int debuffCounter=5;
 
 	public static void newExp(int value, Vector3 position, Color color)
 	{
@@ -34,6 +34,11 @@ public class Exp : MonoBehaviour {
 	public static void UpdateCombo(int value)
     {
         GooglePlayServices.Instance.UpdateRecord(GooglePlayServices.COMBO_LEADER_BOARD, value);
+        if (value >= debuffCounter)
+        {
+            Debuff.Instance.Decrement();
+            debuffCounter += 5;
+        }
         if (value >= 5)
         {
             GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_FIRST_COMBO, 100);
@@ -50,9 +55,21 @@ public class Exp : MonoBehaviour {
         {
             GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_X20_COMBO, 100);
         }
+
 		GameObject.Find("Combo").GetComponent<TextMesh>().text = "x " + value;
-		if (value <= 1) return;
-		Exp.newCombo(value, new Vector3(0, 5.5f, 1f), Color.white);
+        if (value > 1)
+        {
+            Exp.newCombo(value, new Vector3(0, 5.5f, 1f), Color.white);
+        }
+        else
+        {
+            if (oldCombo != 1)
+            {
+                Debuff.Instance.Increment();
+                debuffCounter = 5;
+            }
+        }
+        oldCombo=value;
 	}
 
 	public static void UpdateScore(int newVal)

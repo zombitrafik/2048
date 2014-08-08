@@ -178,10 +178,37 @@ public class Ini : MonoBehaviour {
             File.Delete(Application.persistentDataPath + "/savedGame.txt");
             File.Delete(Application.persistentDataPath + "/savedScore.txt");
             File.Delete(Application.persistentDataPath + "/savedCombo.txt");
+            File.Delete(Application.persistentDataPath + "/savedDebuff.txt");
+            Ini.SaveGeneratingCount(3);
         }
         catch (Exception) { }
         
     }
+
+    public static int LoadDebuff()
+    {
+        StreamReader fileReader;
+        string fileName = Application.persistentDataPath + "/savedDebuff.txt";
+        int res = 0;
+        if (File.Exists(fileName))
+        {
+            fileReader = File.OpenText(fileName);
+            res = Convert.ToInt32(fileReader.ReadLine());
+            fileReader.Close();
+        }
+        return res;
+    }
+
+    public static void SaveDebuff(int value)
+    {
+        StreamWriter fileWriter;
+        string fileName = Application.persistentDataPath + "/savedDebuff.txt";
+        File.WriteAllText(fileName, String.Empty);
+        fileWriter = File.CreateText(fileName);
+        fileWriter.WriteLine(value);
+        fileWriter.Close();
+    }
+
 
     public static int LoadScore()
     {
