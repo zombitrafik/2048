@@ -77,6 +77,7 @@ public class Debuff : MonoBehaviour {
         genVal += value;
         selectedSprite = SelectSprite(genVal);
         Ini.SaveGeneratingCount(genVal);
+        Exp.genCoeff = genVal;
         Generating.Instance.UpdateGeneratingCount(genVal);
     }
 

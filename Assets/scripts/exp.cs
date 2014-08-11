@@ -5,7 +5,8 @@ using System;
 public class Exp : MonoBehaviour {
 
     private static int oldCombo=1;
-    private static int debuffCounter=5;
+    private static int debuffCounter=1;
+    public static int genCoeff = 3;
 
 	public static void newExp(int value, Vector3 position, Color color)
 	{
@@ -34,10 +35,11 @@ public class Exp : MonoBehaviour {
 	public static void UpdateCombo(int value)
     {
         GooglePlayServices.Instance.UpdateRecord(GooglePlayServices.COMBO_LEADER_BOARD, value);
-        if (value >= debuffCounter)
+        if (value >= debuffCounter*genCoeff)
         {
             Debuff.Instance.Decrement();
-            debuffCounter += 5;
+            Debug.Log("debC " + debuffCounter + "  genCof " + genCoeff);
+            debuffCounter++;
         }
         if (value >= 5)
         {
@@ -66,7 +68,7 @@ public class Exp : MonoBehaviour {
             if (oldCombo != 1)
             {
                 Debuff.Instance.Increment();
-                debuffCounter = 5;
+                debuffCounter = 1;
             }
         }
         oldCombo=value;
