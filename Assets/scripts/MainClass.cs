@@ -63,6 +63,10 @@ public class MainClass : MonoBehaviour {
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
+			if (isGameOver)
+			{
+				return;
+			}
             if (!MenuGUI.Instance.IsShow() && !isGameOver)
             {
                 isPauseMenu = true;

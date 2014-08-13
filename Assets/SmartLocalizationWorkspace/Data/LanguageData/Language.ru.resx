@@ -143,6 +143,9 @@
 	<data name="Game.YBScore" xml:space="preserve">
 		<value>Рекорд</value>
 	</data>
+	<data name="MainMenu.Achive" xml:space="preserve">
+		<value>Достижения</value>
+	</data>
 	<data name="MainMenu.Back" xml:space="preserve">
 		<value>Назад</value>
 	</data>
@@ -159,16 +162,22 @@
 		<value>Легкий</value>
 	</data>
 	<data name="MainMenu.English" xml:space="preserve">
-		<value />
+		<value>Английский</value>
 	</data>
 	<data name="MainMenu.French" xml:space="preserve">
-		<value />
+		<value>Французский</value>
 	</data>
 	<data name="MainMenu.German" xml:space="preserve">
-		<value />
+		<value>Немецкий</value>
 	</data>
 	<data name="MainMenu.Hard" xml:space="preserve">
 		<value>Сложный</value>
+	</data>
+	<data name="MainMenu.LadderCombo" xml:space="preserve">
+		<value>Комбо</value>
+	</data>
+	<data name="MainMenu.LadderFigSize" xml:space="preserve">
+		<value>Размер фигуры</value>
 	</data>
 	<data name="MainMenu.Language" xml:space="preserve">
 		<value>Язык</value>
@@ -186,7 +195,7 @@
 		<value>Достижения</value>
 	</data>
 	<data name="MainMenu.Russian" xml:space="preserve">
-		<value />
+		<value>Русский</value>
 	</data>
 	<data name="MainMenu.Selected" xml:space="preserve">
 		<value>Выбрано</value>

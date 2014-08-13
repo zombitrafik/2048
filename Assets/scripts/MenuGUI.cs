@@ -36,8 +36,6 @@ public class MenuGUI : MonoBehaviour {
 
 	private bool showRepostIco = false;
 	public Texture facebook;
-	public Texture twitter;
-	public Texture vk;
 	public GUIStyle style;
 
 
@@ -102,28 +100,9 @@ public class MenuGUI : MonoBehaviour {
 	{
 		if (showRepostIco)
 		{
-			if (GUI.Button(new Rect(Screen.width / 2 - 32, Screen.height / 2 + 32, 64, 64), facebook, style))
+			if (GUI.Button(new Rect(Screen.width / 2 - 64, Screen.height / 2 + 40, 128, 128), facebook, style))
 			{
-                try
-                {
-                    Repost(MergeRepostText(), Localization.GetWord("Repost title"));
-                }
-                catch (Exception e)
-                {
-                }
-                
-                //Application.OpenURL("https://www.facebook.com/sharer/sharer.php?m2w&u=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");
-                CheckAchieve();
-            }
-			if (GUI.Button(new Rect(Screen.width / 2 - 128, Screen.height / 2 + 32, 64, 64), twitter, style))
-			{
-                	
 				//Application.OpenURL("https://twitter.com/intent/tweet?text=&url=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");
-                CheckAchieve();
-            }
-			if (GUI.Button(new Rect(Screen.width / 2 + 64, Screen.height / 2 + 32, 64, 64), vk, style))
-			{
-				Application.OpenURL("http://vk.com/share.php?url=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html&title=&description=&");
                 CheckAchieve();
             }
 			//twitter   Application.OpenURL("https://twitter.com/intent/tweet?text=&url=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");

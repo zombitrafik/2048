@@ -37,6 +37,10 @@ public class Localization : MonoBehaviour {
             case "Repost title": return languageManager.GetTextValue("Game.Repost_title");
             case "Repost link": return languageManager.GetTextValue("Game.Repost_link");
             case "Repost tags": return languageManager.GetTextValue("Game.Repost_tags");
+			case "Achievements": return languageManager.GetTextValue("MainMenu.Achive");
+			case "Combo": return languageManager.GetTextValue("MainMenu.LadderCombo");
+			case "Figure size": return languageManager.GetTextValue("MainMenu.LadderFigSize");
+
 			default: return "Different key";
 		}
 	}

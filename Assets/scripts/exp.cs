@@ -39,7 +39,7 @@ public class Exp : MonoBehaviour {
         {
             Debuff.Instance.Decrement();
             Debug.Log("debC " + debuffCounter + "  genCof " + genCoeff);
-            debuffCounter++;
+            debuffCounter += 10;//++;
         }
         if (value >= 5)
         {

@@ -122,6 +122,9 @@
 	<data name="Game.Repost_link" xml:space="preserve">
 		<value>https://play.google.com/store/apps/details?id=com.kimreik.moveandcrush</value>
 	</data>
+	<data name="Game.Repost_tags" xml:space="preserve">
+		<value>#MoveAndCrush</value>
+	</data>
 	<data name="Game.Repost_text" xml:space="preserve">
 		<value>My score is</value>
 	</data>
@@ -139,6 +142,9 @@
 	</data>
 	<data name="Game.YBScore" xml:space="preserve">
 		<value>You best score</value>
+	</data>
+	<data name="MainMenu.Achive" xml:space="preserve">
+		<value>Achievements</value>
 	</data>
 	<data name="MainMenu.Back" xml:space="preserve">
 		<value>Back</value>
@@ -166,6 +172,12 @@
 	</data>
 	<data name="MainMenu.Hard" xml:space="preserve">
 		<value>Hard</value>
+	</data>
+	<data name="MainMenu.LadderCombo" xml:space="preserve">
+		<value>Combo</value>
+	</data>
+	<data name="MainMenu.LadderFigSize" xml:space="preserve">
+		<value>Figure Size</value>
 	</data>
 	<data name="MainMenu.Language" xml:space="preserve">
 		<value>Language</value>
@@ -199,8 +211,5 @@
 	</data>
 	<data name="MainMenu.Tutorial" xml:space="preserve">
 		<value>Tutorial</value>
-	</data>
-	<data name="Game.Repost_tags" xml:space="preserve">
-		<value>#MoveAndCrush</value>
 	</data>
 </root>
