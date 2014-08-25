@@ -294,7 +294,12 @@ public class MainMenu : MonoBehaviour
 					if (activeClicked.GetComponent<Button>().GetName() == "achievements" && hit.transform.parent.name == "but_achievements(Clone)")
 					{
                         HideAll();
-						ShowAchiveMenu();
+						if(GooglePlayServices.Instance.Authenticate()!=false){
+							ShowAchiveMenu();
+						} else{
+							ShowAchiveErrorMenu();
+						}
+
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "evaluation" && hit.transform.parent.name == "but_evaluation(Clone)")
 					{
@@ -531,6 +536,19 @@ public class MainMenu : MonoBehaviour
 		backCopy = (GameObject)Instantiate(back, new Vector3(9, -6, -5), Quaternion.identity);
 		iTween.MoveTo(backCopy, iTween.Hash("position", new Vector3(1.1f, -6, -5), "time", 0.5f, "delay", 0.28f, "easetype", iTween.EaseType.easeOutSine));
 		iTween.MoveTo(backCopy, iTween.Hash("position", new Vector3(1.5f, -6, -5), "time", 0.2f, "delay", 0.78f, "easetype", iTween.EaseType.easeOutSine));
+	}
+
+	public void ShowAchiveErrorMenu(){
+
+		//labelMain = Exp.Label( Localization.GetWord("Selected")+":", 0.2f);
+		labelMain = Exp.Label("Internet connection error!", 0.2f);
+		labelMain.transform.position = new Vector3(9, 0, -5);
+		iTween.MoveTo(labelMain, iTween.Hash("position", new Vector3(-0.4f, 0, -5), "time", 0.5f, "delay", 0.24f, "easetype", iTween.EaseType.easeOutSine));
+		iTween.MoveTo(labelMain, iTween.Hash("position", new Vector3(0, 0, -5), "time", 0.2f, "delay", 0.74f, "easetype", iTween.EaseType.easeOutSine));
+
+		backCopy = (GameObject)Instantiate(back, new Vector3(9, -6, -5), Quaternion.identity);
+		iTween.MoveTo(backCopy, iTween.Hash("position", new Vector3(-0.4f, -6, -5), "time", 0.5f, "delay", 0.28f, "easetype", iTween.EaseType.easeOutSine));
+		iTween.MoveTo(backCopy, iTween.Hash("position", new Vector3(0, -6, -5), "time", 0.2f, "delay", 0.78f, "easetype", iTween.EaseType.easeOutSine));
 	}
 
 	public void ShowSelectControlMenu()
