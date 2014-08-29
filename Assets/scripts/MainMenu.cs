@@ -85,6 +85,8 @@ public class MainMenu : MonoBehaviour
 			Ini.SaveControl("swipe");
 		}
 
+        Localization.Initialize();
+
         if (!Ini.HaveSavedGame())
         {
             Ini.SaveGeneratingCount(3);
@@ -127,6 +129,7 @@ public class MainMenu : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
 			HideAll();
+            HideTutorial();
 			ShowMenu();
 		}
 
@@ -291,20 +294,8 @@ public class MainMenu : MonoBehaviour
 					if (activeClicked.GetComponent<Button>().GetName() == "back" && hit.transform.parent.name == "but_back(Clone)")
 					{
 						HideAll();
+                        HideTutorial();
 						ShowMenu();
-						GameObject.Find("ico").GetComponent<SpriteRenderer>().enabled = true;
-						Camera.main.gameObject.transform.position = new Vector3(0,0,-10);
-						Destroy(GameObject.Find("tut_1"));
-						Destroy(GameObject.Find("tut_2"));
-				        Destroy(GameObject.Find("tut_3"));
-				        Destroy(GameObject.Find("tut_4"));
-						Destroy(GameObject.Find("tut_5"));
-
-						GameObject.Find ("tut_1_img").GetComponent<SpriteRenderer> ().enabled = false;
-						GameObject.Find ("tut_2_img").GetComponent<SpriteRenderer> ().enabled = false;
-						GameObject.Find ("tut_3_img").GetComponent<SpriteRenderer> ().enabled = false;
-						GameObject.Find ("tut_4_img").GetComponent<SpriteRenderer> ().enabled = false;
-						GameObject.Find ("tut_5_img").GetComponent<SpriteRenderer> ().enabled = false;
 					}
 
 					if (activeClicked.GetComponent<Button>().GetName() == "play" && hit.transform.parent.name == "but_play(Clone)")
@@ -325,7 +316,8 @@ public class MainMenu : MonoBehaviour
 					if (activeClicked.GetComponent<Button>().GetName() == "achievements" && hit.transform.parent.name == "but_achievements(Clone)")
 					{
                         HideAll();
-						if(GooglePlayServices.Instance.Authenticate()!=false){
+                        if (GooglePlayServices.Instance.CheckConnection("http://google.com") != "")
+                        {
 							ShowAchiveMenu();
 						} else{
 							ShowAchiveErrorMenu();
@@ -334,7 +326,15 @@ public class MainMenu : MonoBehaviour
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "evaluation" && hit.transform.parent.name == "but_evaluation(Clone)")
 					{
-                        Application.OpenURL("market://details?id=com.kimreik.moveandcrush");
+                        if (GooglePlayServices.Instance.CheckConnection("http://google.com") != "")
+                        {
+                            Application.OpenURL("market://details?id=com.kimreik.moveandcrush");
+                        }
+                        else
+                        {
+                            HideAll();
+                            ShowAchiveErrorMenu();
+                        }
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "control" && hit.transform.parent.name == "but_control(Clone)")
 					{
@@ -348,19 +348,19 @@ public class MainMenu : MonoBehaviour
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "ru" && hit.transform.parent.name == "but_ru(Clone)")
 					{
-						Localization.languageManager.ChangeLanguage("ru");
+                        Localization.ChangeLanguage("ru");
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "en" && hit.transform.parent.name == "but_en(Clone)")
 					{
-						Localization.languageManager.ChangeLanguage("en");
+                        Localization.ChangeLanguage("en");
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "de" && hit.transform.parent.name == "but_de(Clone)")
 					{
-						Localization.languageManager.ChangeLanguage("ge");
+                        Localization.ChangeLanguage("de");
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "fr" && hit.transform.parent.name == "but_fr(Clone)")
 					{
-						Localization.languageManager.ChangeLanguage("fr");
+                        Localization.ChangeLanguage("fr");
 					}
 
 					// <achive>
@@ -611,7 +611,7 @@ public class MainMenu : MonoBehaviour
 	public void ShowAchiveErrorMenu(){
 
 		//labelMain = Exp.Label( Localization.GetWord("Selected")+":", 0.2f);
-		labelMain = Exp.Label("Internet connection error!", 0.2f);
+        labelMain = Exp.Label(Localization.GetWord("internet_required"), 0.2f);
 		labelMain.transform.position = new Vector3(9, 0, -5);
 		iTween.MoveTo(labelMain, iTween.Hash("position", new Vector3(-0.4f, 0, -5), "time", 0.5f, "delay", 0.24f, "easetype", iTween.EaseType.easeOutSine));
 		iTween.MoveTo(labelMain, iTween.Hash("position", new Vector3(0, 0, -5), "time", 0.2f, "delay", 0.74f, "easetype", iTween.EaseType.easeOutSine));
@@ -699,6 +699,24 @@ public class MainMenu : MonoBehaviour
 		backCopy.transform.parent = Camera.main.gameObject.transform;
 	}
 
+    private void HideTutorial()
+    {
+        GameObject.Find("ico").GetComponent<SpriteRenderer>().enabled = true;
+        GameObject.Find("but_volume").transform.Translate(0, -100, 0);
+        Camera.main.gameObject.transform.position = new Vector3(0, 0, -10);
+        Destroy(GameObject.Find("tut_1"));
+        Destroy(GameObject.Find("tut_2"));
+        Destroy(GameObject.Find("tut_3"));
+        Destroy(GameObject.Find("tut_4"));
+        Destroy(GameObject.Find("tut_5"));
+
+        GameObject.Find("tut_1_img").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.Find("tut_2_img").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.Find("tut_3_img").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.Find("tut_4_img").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.Find("tut_5_img").GetComponent<SpriteRenderer>().enabled = false;
+    }
+
 	public void ShowTutorialSlides(){
 
 		GameObject.Find("ico").GetComponent<SpriteRenderer>().enabled = false;
@@ -728,5 +746,6 @@ public class MainMenu : MonoBehaviour
 		GameObject.Find ("tut_3_img").GetComponent<SpriteRenderer> ().enabled = true;
 		GameObject.Find ("tut_4_img").GetComponent<SpriteRenderer> ().enabled = true;
 		GameObject.Find ("tut_5_img").GetComponent<SpriteRenderer> ().enabled = true;
+        GameObject.Find("but_volume").transform.Translate(0, 100, 0);
 	}
 }

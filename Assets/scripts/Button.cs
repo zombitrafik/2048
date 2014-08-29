@@ -32,7 +32,7 @@ public class Button : MonoBehaviour {
 		but_caption.transform.localPosition = Vector3.zero + new Vector3(0,0, -1);
 		but_caption.GetComponent<TextMesh>().text = Localization.GetWord(caption);
 		but_caption.GetComponent<TextMesh>().color = Color.gray;
-		but_caption.GetComponent<TextMesh>().characterSize = 0.16f;
+		but_caption.GetComponent<TextMesh>().characterSize = 0.12f;//0.16f;
 		ic = new GameObject();
 		ic.AddComponent<SpriteRenderer>();
 		ic.GetComponent<SpriteRenderer>().sprite = ico;

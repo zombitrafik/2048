@@ -4,13 +4,30 @@ using SmartLocalization;
 
 public class Localization : MonoBehaviour {
 
-	public static LanguageManager languageManager = LanguageManager.Instance;
+	private static LanguageManager languageManager = LanguageManager.Instance;
+
+    public static void Initialize()
+    {
+        string lang = Ini.LoadLanguage();
+        if (languageManager.IsLanguageSupported(lang))
+        {
+            languageManager.ChangeLanguage(lang);
+        }
+        else
+        {
+            if (languageManager.GetSupportedSystemLanguage() != null)
+            {
+                languageManager.ChangeLanguage(languageManager.GetSupportedSystemLanguage());
+            }
+            else
+            {
+                languageManager.ChangeLanguage("en");
+            }
+            Ini.SaveLanguage(languageManager.LoadedLanguage);
+        }
+    }
 
 	public static string GetWord(string val){
-		if (languageManager.IsLanguageSupported(languageManager.GetSupportedSystemLanguage()))
-		{
-			languageManager.ChangeLanguage(languageManager.GetSupportedSystemLanguage());
-		}
 		switch(val) {
 			case "Play": return languageManager.GetTextValue("MainMenu.Play");
 			case "Settings": return languageManager.GetTextValue("MainMenu.Settings");
@@ -49,10 +66,21 @@ public class Localization : MonoBehaviour {
 			case "English": return languageManager.GetTextValue("English");
 			case "Français": return languageManager.GetTextValue("French");
 			case "Русский": return languageManager.GetTextValue("Russian");
-
+            case "internet_required": return languageManager.GetTextValue("Intenet_requied");
 
 			default: return "Different key";
 		}
 	}
+
+    public static void ChangeLanguage(string langStr)
+    {
+        if (languageManager.IsLanguageSupported(langStr))
+        {
+            languageManager.ChangeLanguage(langStr);
+            Ini.SaveLanguage(langStr);
+            Debug.Log("lang changed");
+            Application.LoadLevel(Application.loadedLevel);
+        }
+    }
 
 }

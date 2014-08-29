@@ -5,6 +5,32 @@ using System.IO;
 
 public class Ini : MonoBehaviour {
 
+    public static string LoadLanguage()
+    {
+        StreamReader fileReader;
+        string fileName = Application.persistentDataPath + "/language.txt";
+        string res = "";
+        if (File.Exists(fileName))
+        {
+            fileReader = File.OpenText(fileName);
+            res += fileReader.ReadLine();
+            fileReader.Close();
+        }
+        return res;
+    }
+
+    public static void SaveLanguage(string value)
+    {
+        StreamWriter fileWriter;
+        string fileName = Application.persistentDataPath + "/language.txt";
+        File.WriteAllText(fileName, String.Empty);
+        fileWriter = File.CreateText(fileName);
+        fileWriter.WriteLine(value);
+        fileWriter.Close();
+    }
+
+
+
 	public static void LoadRecord()
 	{
 		StreamReader fileReader;

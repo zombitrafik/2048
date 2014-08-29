@@ -102,25 +102,15 @@ public class MenuGUI : MonoBehaviour {
 		{
 			if (GUI.Button(new Rect(Screen.width / 2 - 64, Screen.height / 2 + 40, 128, 128), facebook, style))
 			{
-				//Application.OpenURL("https://twitter.com/intent/tweet?text=&url=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");
-                CheckAchieve();
+                if (GooglePlayServices.Instance.CheckConnection("http://google.com") != "")
+                {
+                    Repost(MergeRepostText(), Localization.GetWord("Repost title"));
+                    GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_SOCIALLY_ACTIVE, 100);
+                }
             }
-			//twitter   Application.OpenURL("https://twitter.com/intent/tweet?text=&url=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");
-			//facebook  Application.OpenURL("https://www.facebook.com/sharer/sharer.php?m2w&u=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html");
-			//vk.com    Application.OpenURL("http://vk.com/share.php?url=http%3A%2F%2Fkimreik.zz.mu%2FMoveandcrush%2Findex.html&title=&description=");
-
 		}
 	}
-
-    private void CheckAchieve()
-    {
-        if (!achieveChecked)
-        {
-            GooglePlayServices.Instance.UpdateAchieveProgress(GooglePlayServices.ACHIEVE_SOCIALLY_ACTIVE, 100);
-            achieveChecked = true;
-        }    
-    }
-
+    
 	public void ShowGameOverMenu()
 	{
 
@@ -148,7 +138,7 @@ public class MenuGUI : MonoBehaviour {
 		if (score == bestScore) Ini.SaveRecord(bestScore);
 		
 		showRepostIco = true;
-		GameObject.Find("Share").GetComponent<TextMesh>().text = Localization.GetWord("Share") + ":";
+		GameObject.Find("Share").GetComponent<TextMesh>().text = Localization.GetWord("Share");
 	}
 
 	void changeColor(float val)

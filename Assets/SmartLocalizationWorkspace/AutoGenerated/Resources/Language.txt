@@ -116,6 +116,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+	<data name="Deutsch" xml:space="preserve">
+		<value>Deutsch</value>
+	</data>
+	<data name="English" xml:space="preserve">
+		<value>English</value>
+	</data>
+	<data name="French" xml:space="preserve">
+		<value>Français</value>
+	</data>
 	<data name="Game.MainMenu" xml:space="preserve">
 		<value>Main menu</value>
 	</data>
@@ -152,15 +161,6 @@
 	<data name="MainMenu.Control" xml:space="preserve">
 		<value>Control</value>
 	</data>
-	<data name="English" xml:space="preserve">
-		<value>English</value>
-	</data>
-	<data name="French" xml:space="preserve">
-		<value>Français</value>
-	</data>
-	<data name="Deutsch" xml:space="preserve">
-		<value>Deutsch</value>
-	</data>
 	<data name="MainMenu.LadderCombo" xml:space="preserve">
 		<value>Combo</value>
 	</data>
@@ -179,14 +179,14 @@
 	<data name="MainMenu.Ratings" xml:space="preserve">
 		<value>Ratings</value>
 	</data>
-	<data name="Russian" xml:space="preserve">
-		<value>Русский</value>
-	</data>
 	<data name="MainMenu.Settings" xml:space="preserve">
 		<value>Settings</value>
 	</data>
 	<data name="MainMenu.Tutorial" xml:space="preserve">
 		<value>Tutorial</value>
+	</data>
+	<data name="Russian" xml:space="preserve">
+		<value>Русский</value>
 	</data>
 	<data name="Toturial5" xml:space="preserve">
 		<value>When the panel is full, the number of the appearing tiles increases</value>
@@ -202,5 +202,8 @@
 	</data>
 	<data name="Tutorial4" xml:space="preserve">
 		<value>If you got the combo equal to the number of appearing tiles, one tile is removed from the panel</value>
+	</data>
+	<data name="Intenet_requied" xml:space="preserve">
+		<value>Internet connection required</value>
 	</data>
 </root>
