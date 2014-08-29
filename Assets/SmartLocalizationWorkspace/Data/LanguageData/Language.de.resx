@@ -117,100 +117,99 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 	<data name="Game.MainMenu" xml:space="preserve">
-		<value>Main menu</value>
+		<value />
 	</data>
 	<data name="Game.Repost_link" xml:space="preserve">
-		<value>https://play.google.com/store/apps/details?id=com.kimreik.moveandcrush</value>
+		<value />
 	</data>
 	<data name="Game.Repost_tags" xml:space="preserve">
-		<value>#MoveAndCrush</value>
+		<value />
 	</data>
 	<data name="Game.Repost_text" xml:space="preserve">
-		<value>My score in "Move and Crush" - </value>
+		<value />
 	</data>
 	<data name="Game.Repost_title" xml:space="preserve">
-		<value>Aktie</value>
+		<value />
 	</data>
 	<data name="Game.Retry" xml:space="preserve">
-		<value>Wieder</value>
+		<value />
 	</data>
 	<data name="Game.Score" xml:space="preserve">
-		<value>Score</value>
+		<value />
 	</data>
 	<data name="Game.Share" xml:space="preserve">
-		<value>Mit freunden teilen</value>
+		<value />
 	</data>
 	<data name="Game.YBScore" xml:space="preserve">
-		<value>Best score</value>
+		<value />
 	</data>
 	<data name="MainMenu.Achive" xml:space="preserve">
-		<value>Erfolge</value>
+		<value />
 	</data>
 	<data name="MainMenu.Back" xml:space="preserve">
-		<value>zurück</value>
+		<value />
+	</data>
+	<data name="MainMenu.Buttons" xml:space="preserve">
+		<value />
 	</data>
 	<data name="MainMenu.Control" xml:space="preserve">
-		<value>Kontrolle</value>
+		<value />
 	</data>
-	<data name="English" xml:space="preserve">
-		<value>English</value>
+	<data name="MainMenu.Difficult" xml:space="preserve">
+		<value />
 	</data>
-	<data name="French" xml:space="preserve">
-		<value>Français</value>
+	<data name="MainMenu.Easy" xml:space="preserve">
+		<value />
 	</data>
-	<data name="Deutsch" xml:space="preserve">
-		<value>Deutsch</value>
+	<data name="MainMenu.English" xml:space="preserve">
+		<value />
+	</data>
+	<data name="MainMenu.French" xml:space="preserve">
+		<value />
+	</data>
+	<data name="MainMenu.German" xml:space="preserve">
+		<value />
+	</data>
+	<data name="MainMenu.Hard" xml:space="preserve">
+		<value />
 	</data>
 	<data name="MainMenu.LadderCombo" xml:space="preserve">
-		<value>Combo</value>
+		<value />
 	</data>
 	<data name="MainMenu.LadderFigSize" xml:space="preserve">
-		<value>Figur Größe</value>
+		<value />
 	</data>
 	<data name="MainMenu.Language" xml:space="preserve">
-		<value>Language</value>
+		<value />
+	</data>
+	<data name="MainMenu.Normal" xml:space="preserve">
+		<value />
 	</data>
 	<data name="MainMenu.Play" xml:space="preserve">
-		<value>Spielen</value>
+		<value />
 	</data>
 	<data name="MainMenu.Rate" xml:space="preserve">
-		<value>Rate</value>
+		<value />
 	</data>
 	<data name="MainMenu.Ratings" xml:space="preserve">
-		<value>Wertung</value>
+		<value />
 	</data>
-	<data name="Russian" xml:space="preserve">
-		<value>Русский</value>
+	<data name="MainMenu.Russian" xml:space="preserve">
+		<value />
+	</data>
+	<data name="MainMenu.Selected" xml:space="preserve">
+		<value />
+	</data>
+	<data name="MainMenu.Set_difficulty" xml:space="preserve">
+		<value />
 	</data>
 	<data name="MainMenu.Settings" xml:space="preserve">
-		<value>Settings</value>
+		<value />
+	</data>
+	<data name="MainMenu.Swipe" xml:space="preserve">
+		<value />
 	</data>
 	<data name="MainMenu.Tutorial" xml:space="preserve">
-		<value>Tutorial</value>
-	</data>
-	<data name="Toturial5" xml:space="preserve">
-		<value>Wenn die Tafel voll ist,
-		 die Anzahl der auftretenden 
-		 Fliesen steigert</value>
-	</data>
-	<data name="Tutorial1" xml:space="preserve">
-		<value>Um die Fliesen bewegen können
-		 Sie swipe oder tippen Pfeile 
-		 (Schalt in den Einstellungen)</value>
-	</data>
-	<data name="Tutorial2" xml:space="preserve">
-		<value>Dieses Panel zeigt die 
-			Anzahl der erscheinenden Fliesen</value>
-	</data>
-	<data name="Tutorial3" xml:space="preserve">
-		<value>Wenn Sie Combo zu brechen,
-		 wird die Tafel auf einer 
-		 Fliese gefüllt</value>
-	</data>
-	<data name="Tutorial4" xml:space="preserve">
-		<value>Wenn Sie die Combo gleich 
-			der Anzahl der erscheinenden 
-			Fliesen bekam, ist eine Fliese 
-			von der Platte entfernt</value>
+		<value />
 	</data>
 </root>

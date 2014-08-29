@@ -126,7 +126,7 @@
 		<value>#MoveAndCrush</value>
 	</data>
 	<data name="Game.Repost_text" xml:space="preserve">
-		<value>Мой счёт в "Move and Crush" - </value>
+		<value>Мой счёт в Move and Crush - </value>
 	</data>
 	<data name="Game.Repost_title" xml:space="preserve">
 		<value>Поделиться</value>
@@ -149,17 +149,29 @@
 	<data name="MainMenu.Back" xml:space="preserve">
 		<value>Назад</value>
 	</data>
+	<data name="MainMenu.Buttons" xml:space="preserve">
+		<value>Кнопки</value>
+	</data>
 	<data name="MainMenu.Control" xml:space="preserve">
 		<value>Управление</value>
 	</data>
-	<data name="English" xml:space="preserve">
-		<value>English</value>
+	<data name="MainMenu.Difficult" xml:space="preserve">
+		<value>Сложность</value>
 	</data>
-	<data name="French" xml:space="preserve">
-		<value>Français</value>
+	<data name="MainMenu.Easy" xml:space="preserve">
+		<value>Легкий</value>
 	</data>
-	<data name="Deutsch" xml:space="preserve">
-		<value>Deutsch</value>
+	<data name="MainMenu.English" xml:space="preserve">
+		<value>Английский</value>
+	</data>
+	<data name="MainMenu.French" xml:space="preserve">
+		<value>Французский</value>
+	</data>
+	<data name="MainMenu.German" xml:space="preserve">
+		<value>Немецкий</value>
+	</data>
+	<data name="MainMenu.Hard" xml:space="preserve">
+		<value>Сложный</value>
 	</data>
 	<data name="MainMenu.LadderCombo" xml:space="preserve">
 		<value>Комбо</value>
@@ -168,7 +180,10 @@
 		<value>Размер фигуры</value>
 	</data>
 	<data name="MainMenu.Language" xml:space="preserve">
-		<value>Language</value>
+		<value>Язык</value>
+	</data>
+	<data name="MainMenu.Normal" xml:space="preserve">
+		<value>Нормальный</value>
 	</data>
 	<data name="MainMenu.Play" xml:space="preserve">
 		<value>Играть</value>
@@ -177,37 +192,24 @@
 		<value>Оценить</value>
 	</data>
 	<data name="MainMenu.Ratings" xml:space="preserve">
-		<value>Рейтинг</value>
+		<value>Достижения</value>
 	</data>
-	<data name="Russian" xml:space="preserve">
+	<data name="MainMenu.Russian" xml:space="preserve">
 		<value>Русский</value>
+	</data>
+	<data name="MainMenu.Selected" xml:space="preserve">
+		<value>Выбрано</value>
+	</data>
+	<data name="MainMenu.Set_difficulty" xml:space="preserve">
+		<value>Сложность</value>
 	</data>
 	<data name="MainMenu.Settings" xml:space="preserve">
 		<value>Настройки</value>
 	</data>
+	<data name="MainMenu.Swipe" xml:space="preserve">
+		<value>Провести пальцем</value>
+	</data>
 	<data name="MainMenu.Tutorial" xml:space="preserve">
 		<value>Обучение</value>
-	</data>
-	<data name="Toturial5" xml:space="preserve">
-		<value>Когда панель заполнена, количество
-     появляющихся плиток увеличивается</value>
-	</data>
-	<data name="Tutorial1" xml:space="preserve">
-		<value>Для передвижения плиток Вы можете
-     проводить пальцем или нажимать 
-     на стрелки (выбирается в опциях)</value>
-	</data>
-	<data name="Tutorial2" xml:space="preserve">
-		<value>Эта панель отображает количество
-     появляющихся плиток</value>
-	</data>
-	<data name="Tutorial3" xml:space="preserve">
-		<value>Когда вы прерываете комбо, 
-      панель заполняется на одну плитку</value>
-	</data>
-	<data name="Tutorial4" xml:space="preserve">
-		<value>Если вы получили комбо, равное
-     количеству появляющихся плиток, 
-     с панели снимается одна плитка</value>
 	</data>
 </root>

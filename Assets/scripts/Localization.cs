@@ -40,16 +40,6 @@ public class Localization : MonoBehaviour {
 			case "Achievements": return languageManager.GetTextValue("MainMenu.Achive");
 			case "Combo": return languageManager.GetTextValue("MainMenu.LadderCombo");
 			case "Figure size": return languageManager.GetTextValue("MainMenu.LadderFigSize");
-			case "tutorial_1": return languageManager.GetTextValue("Tutorial1");
-			case "tutorial_2": return languageManager.GetTextValue("Tutorial2");
-			case "tutorial_3": return languageManager.GetTextValue("Tutorial3");
-			case "tutorial_4": return languageManager.GetTextValue("Tutorial4");
-			case "tutorial_5": return languageManager.GetTextValue("Toturial5");
-			case "Deutsch": return languageManager.GetTextValue("Deutsch");
-			case "English": return languageManager.GetTextValue("English");
-			case "Français": return languageManager.GetTextValue("French");
-			case "Русский": return languageManager.GetTextValue("Russian");
-
 
 			default: return "Different key";
 		}

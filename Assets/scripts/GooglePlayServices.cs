@@ -91,7 +91,7 @@ public class GooglePlayServices : MonoBehaviour {
         }
     }
 
-    public bool Authenticate()
+    private bool Authenticate()
     {
         if (CheckConnection("http://google.com") == "")
         {

@@ -117,99 +117,99 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 	<data name="Game.MainMenu" xml:space="preserve">
-		<value>Menu</value>
+		<value />
 	</data>
 	<data name="Game.Repost_link" xml:space="preserve">
-		<value>https://play.google.com/store/apps/details?id=com.kimreik.moveandcrush</value>
+		<value />
 	</data>
 	<data name="Game.Repost_tags" xml:space="preserve">
-		<value>#MoveAndCrush</value>
+		<value />
 	</data>
 	<data name="Game.Repost_text" xml:space="preserve">
-		<value>Mon score dans le "Move and Crush" - </value>
+		<value />
 	</data>
 	<data name="Game.Repost_title" xml:space="preserve">
-		<value>Partager</value>
+		<value />
 	</data>
 	<data name="Game.Retry" xml:space="preserve">
-		<value>Derechef</value>
+		<value />
 	</data>
 	<data name="Game.Score" xml:space="preserve">
-		<value>Score</value>
+		<value />
 	</data>
 	<data name="Game.Share" xml:space="preserve">
-		<value>Partager avec des amis</value>
+		<value />
 	</data>
 	<data name="Game.YBScore" xml:space="preserve">
-		<value>Record</value>
+		<value />
 	</data>
 	<data name="MainMenu.Achive" xml:space="preserve">
-		<value>réalisations</value>
+		<value />
 	</data>
 	<data name="MainMenu.Back" xml:space="preserve">
-		<value>Back</value>
+		<value />
+	</data>
+	<data name="MainMenu.Buttons" xml:space="preserve">
+		<value />
 	</data>
 	<data name="MainMenu.Control" xml:space="preserve">
-		<value>Gestion</value>
+		<value />
 	</data>
-	<data name="English" xml:space="preserve">
-		<value>English</value>
+	<data name="MainMenu.Difficult" xml:space="preserve">
+		<value />
 	</data>
-	<data name="French" xml:space="preserve">
-		<value>Français</value>
+	<data name="MainMenu.Easy" xml:space="preserve">
+		<value />
 	</data>
-	<data name="Deutsch" xml:space="preserve">
-		<value>Deutsch</value>
+	<data name="MainMenu.English" xml:space="preserve">
+		<value />
+	</data>
+	<data name="MainMenu.French" xml:space="preserve">
+		<value />
+	</data>
+	<data name="MainMenu.German" xml:space="preserve">
+		<value />
+	</data>
+	<data name="MainMenu.Hard" xml:space="preserve">
+		<value />
 	</data>
 	<data name="MainMenu.LadderCombo" xml:space="preserve">
-		<value>Combo</value>
+		<value />
 	</data>
 	<data name="MainMenu.LadderFigSize" xml:space="preserve">
-		<value>Figures de taille</value>
+		<value />
 	</data>
 	<data name="MainMenu.Language" xml:space="preserve">
-		<value>Language</value>
+		<value />
+	</data>
+	<data name="MainMenu.Normal" xml:space="preserve">
+		<value />
 	</data>
 	<data name="MainMenu.Play" xml:space="preserve">
-		<value>Jouer</value>
+		<value />
 	</data>
 	<data name="MainMenu.Rate" xml:space="preserve">
-		<value>Taux</value>
+		<value />
 	</data>
 	<data name="MainMenu.Ratings" xml:space="preserve">
-		<value>Réalisations</value>
+		<value />
 	</data>
-	<data name="Russian" xml:space="preserve">
-		<value>Русский</value>
+	<data name="MainMenu.Russian" xml:space="preserve">
+		<value />
+	</data>
+	<data name="MainMenu.Selected" xml:space="preserve">
+		<value />
+	</data>
+	<data name="MainMenu.Set_difficulty" xml:space="preserve">
+		<value />
 	</data>
 	<data name="MainMenu.Settings" xml:space="preserve">
-		<value>Paramètres</value>
+		<value />
+	</data>
+	<data name="MainMenu.Swipe" xml:space="preserve">
+		<value />
 	</data>
 	<data name="MainMenu.Tutorial" xml:space="preserve">
-		<value>Tutoriel</value>
-	</data>
-	<data name="Toturial5" xml:space="preserve">
-		<value>Quand le panneau est rempli, 
-      la quantité apparaissant 
-      dalles augmente</value>
-	</data>
-	<data name="Tutorial1" xml:space="preserve">
-		<value>Pour le déplacement dalles 
-      vous pouvez passer par le doigt 
-      ou appuyer sur les flèches 
-      (sort dans les options)</value>
-	</data>
-	<data name="Tutorial2" xml:space="preserve">
-		<value>Ce panneau reflète la 
-      quantité apparaissant dalles</value>
-	</data>
-	<data name="Tutorial3" xml:space="preserve">
-		<value>Quand vous interrompez combo, 
-      le panneau est rempli sur une dalle</value>
-	</data>
-	<data name="Tutorial4" xml:space="preserve">
-		<value>Si vous avez reçu комбо, 
-      égal à la quantité apparaissant dalles, 
-      du panneau se photographie une dalle</value>
+		<value />
 	</data>
 </root>
