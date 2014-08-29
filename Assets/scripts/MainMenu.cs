@@ -59,6 +59,13 @@ public class MainMenu : MonoBehaviour
 	public GameObject swipe;
 	private GameObject swipeCopy;
 
+	//Tutorial
+	public GameObject left;
+	private GameObject leftCopy;
+	
+	public GameObject right;
+	private GameObject rightCopy;
+
 	// Settings
 	public GameObject back;
 	private GameObject backCopy;
@@ -130,7 +137,16 @@ public class MainMenu : MonoBehaviour
 
 			if (hit.collider != null)
 			{
-
+				if (hit.transform.parent.name == "but_left(Clone)")
+				{
+					activeClicked = hit.transform.parent.gameObject;
+					activeClicked.GetComponent<Selecting>().SetButtonDown();
+				}
+				if (hit.transform.parent.name == "but_right(Clone)")
+				{
+					activeClicked = hit.transform.parent.gameObject;
+					activeClicked.GetComponent<Selecting>().SetButtonDown();
+				}
 				if (hit.transform.parent.name == "but_back(Clone)")
 				{
 					activeClicked = hit.transform.parent.gameObject;
@@ -276,7 +292,21 @@ public class MainMenu : MonoBehaviour
 					{
 						HideAll();
 						ShowMenu();
+						GameObject.Find("ico").GetComponent<SpriteRenderer>().enabled = true;
+						Camera.main.gameObject.transform.position = new Vector3(0,0,-10);
+						Destroy(GameObject.Find("tut_1"));
+						Destroy(GameObject.Find("tut_2"));
+				        Destroy(GameObject.Find("tut_3"));
+				        Destroy(GameObject.Find("tut_4"));
+						Destroy(GameObject.Find("tut_5"));
+
+						GameObject.Find ("tut_1_img").GetComponent<SpriteRenderer> ().enabled = false;
+						GameObject.Find ("tut_2_img").GetComponent<SpriteRenderer> ().enabled = false;
+						GameObject.Find ("tut_3_img").GetComponent<SpriteRenderer> ().enabled = false;
+						GameObject.Find ("tut_4_img").GetComponent<SpriteRenderer> ().enabled = false;
+						GameObject.Find ("tut_5_img").GetComponent<SpriteRenderer> ().enabled = false;
 					}
+
 					if (activeClicked.GetComponent<Button>().GetName() == "play" && hit.transform.parent.name == "but_play(Clone)")
 					{
 						HideAll();
@@ -289,7 +319,8 @@ public class MainMenu : MonoBehaviour
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "tutorial" && hit.transform.parent.name == "but_tutorial(Clone)")
 					{
-                        
+						HideAll();
+						ShowTutorial();
 					}
 					if (activeClicked.GetComponent<Button>().GetName() == "achievements" && hit.transform.parent.name == "but_achievements(Clone)")
 					{
@@ -376,7 +407,32 @@ public class MainMenu : MonoBehaviour
 				// <Selecting>()
 				else
 				{
-	
+					if (activeClicked.GetComponent<Selecting>().GetName() == "left" && hit.transform.parent.name == "but_left(Clone)")
+					{
+						if(activeClicked.GetComponent<Selecting>().enabled != false && Camera.main.gameObject.transform.position.x != 0) {
+							GameObject cam = Camera.main.gameObject;
+							hit.transform.parent.transform.parent = cam.transform;
+							GameObject.Find("but_right(Clone)").transform.parent = cam.transform;
+							Vector3 camPos = cam.transform.position - new Vector3(15,0,0);
+							GameObject.Find("but_left(Clone)").GetComponent<Selecting>().enabled = false;
+							GameObject.Find("but_right(Clone)").GetComponent<Selecting>().enabled = false;
+							iTween.MoveTo(cam, iTween.Hash("position", camPos, "time", 1f,  "easetype", iTween.EaseType.easeOutSine, "oncomplete", "setEnable"));
+						}
+
+					}
+					if (activeClicked.GetComponent<Selecting>().GetName() == "right" && hit.transform.parent.name == "but_right(Clone)")
+					{
+						//Установить границу(количество) слайдов в if`е
+						if(activeClicked.GetComponent<Selecting>().enabled != false && Camera.main.gameObject.transform.position.x != 60) {
+							GameObject cam = Camera.main.gameObject;
+							hit.transform.parent.transform.parent = cam.transform;
+							GameObject.Find("but_left(Clone)").transform.parent = cam.transform;
+							Vector3 camPos = cam.transform.position + new Vector3(15,0,0);
+							GameObject.Find("but_left(Clone)").GetComponent<Selecting>().enabled = false;
+							GameObject.Find("but_right(Clone)").GetComponent<Selecting>().enabled = false;
+							iTween.MoveTo(cam, iTween.Hash("position", camPos, "time", 1f,  "easetype", iTween.EaseType.easeOutSine, "oncomplete", "setEnable"));
+						}
+					}
 				}
 			}
 			if (activeClicked.GetComponent<Button>() != null)
@@ -388,6 +444,10 @@ public class MainMenu : MonoBehaviour
 		}
 	}
 
+	public void setEnable(){
+		GameObject.Find("but_left(Clone)").GetComponent<Selecting>().enabled = true;
+		GameObject.Find("but_right(Clone)").GetComponent<Selecting>().enabled = true;
+	}
 
 	// Зарефакторить
 	private void HideAll()
@@ -492,6 +552,16 @@ public class MainMenu : MonoBehaviour
 			iTween.FadeTo(achievementCopy, iTween.Hash("alpha", 0, "time", 0.3f));
 			Destroy(achievementCopy, 0.3f);
 		}
+		if (leftCopy != null)
+		{
+			iTween.FadeTo(leftCopy, iTween.Hash("alpha", 0, "time", 0.3f));
+			Destroy(leftCopy, 0.3f);
+		}
+		if (rightCopy != null)
+		{
+			iTween.FadeTo(rightCopy, iTween.Hash("alpha", 0, "time", 0.3f));
+			Destroy(rightCopy, 0.3f);
+		}
 		
 
 		GameObject.Find("swipe_ico").GetComponent<SpriteRenderer>().enabled = false;
@@ -555,17 +625,25 @@ public class MainMenu : MonoBehaviour
 	{
 		
 		swipeCopy = (GameObject)Instantiate(swipe, new Vector3(9, 2, -5), Quaternion.identity);
-		iTween.MoveTo(swipeCopy, iTween.Hash("position", new Vector3(-1.4f, 2, -5), "time", 0.5f, "delay", 0.14f, "easetype", iTween.EaseType.easeOutSine));
-		iTween.MoveTo(swipeCopy, iTween.Hash("position", new Vector3(-1f, 2, -5), "time", 0.2f, "delay", 0.64f, "easetype", iTween.EaseType.easeOutSine));
+		iTween.MoveTo(swipeCopy, iTween.Hash("position", new Vector3(-0.4f, 2, -5), "time", 0.5f, "delay", 0.14f, "easetype", iTween.EaseType.easeOutSine));
+		iTween.MoveTo(swipeCopy, iTween.Hash("position", new Vector3(0f, 2, -5), "time", 0.2f, "delay", 0.64f, "easetype", iTween.EaseType.easeOutSine));
 
 		keyboardCopy = (GameObject)Instantiate(keyboard, new Vector3(9, 0, -5), Quaternion.identity);
-		iTween.MoveTo(keyboardCopy, iTween.Hash("position", new Vector3(-0.9f, 0, -5), "time", 0.5f, "delay", 0.16f, "easetype", iTween.EaseType.easeOutSine));
-		iTween.MoveTo(keyboardCopy, iTween.Hash("position", new Vector3(-0.5f, 0, -5), "time", 0.2f, "delay", 0.66f, "easetype", iTween.EaseType.easeOutSine));
+		iTween.MoveTo(keyboardCopy, iTween.Hash("position", new Vector3(-0.4f, 0, -5), "time", 0.5f, "delay", 0.16f, "easetype", iTween.EaseType.easeOutSine));
+		iTween.MoveTo(keyboardCopy, iTween.Hash("position", new Vector3(0f, 0, -5), "time", 0.2f, "delay", 0.66f, "easetype", iTween.EaseType.easeOutSine));
+		foreach (Transform child in keyboardCopy.transform)
+		{
+			if(child.gameObject.name=="New Game Object"){
+				child.transform.position =  new Vector3(0, 0, -1);
+			}
+		}
 
+		/*
 		labelMain = Exp.Label( Localization.GetWord("Selected")+":", 0.2f);
 		labelMain.transform.position = new Vector3(9, -2, -5);
 		iTween.MoveTo(labelMain, iTween.Hash("position", new Vector3(-0.4f, -2, -5), "time", 0.5f, "delay", 0.24f, "easetype", iTween.EaseType.easeOutSine));
 		iTween.MoveTo(labelMain, iTween.Hash("position", new Vector3(0, -2, -5), "time", 0.2f, "delay", 0.74f, "easetype", iTween.EaseType.easeOutSine));
+		*/
 
 		if (Ini.LoadControl() == "swipe")
 		{
@@ -577,8 +655,8 @@ public class MainMenu : MonoBehaviour
 		}
 
 		backCopy = (GameObject)Instantiate(back, new Vector3(9.5f, -6, -5), Quaternion.identity);
-		iTween.MoveTo(backCopy, iTween.Hash("position", new Vector3(1.4f, -6, -5), "time", 0.5f, "delay", 0.18f, "easetype", iTween.EaseType.easeOutSine));
-		iTween.MoveTo(backCopy, iTween.Hash("position", new Vector3(1f, -6, -5), "time", 0.2f, "delay", 0.68f, "easetype", iTween.EaseType.easeOutSine));		
+		iTween.MoveTo(backCopy, iTween.Hash("position", new Vector3(-0.4f, -6, -5), "time", 0.5f, "delay", 0.18f, "easetype", iTween.EaseType.easeOutSine));
+		iTween.MoveTo(backCopy, iTween.Hash("position", new Vector3(0f, -6, -5), "time", 0.2f, "delay", 0.68f, "easetype", iTween.EaseType.easeOutSine));		
 	}
 
 	public void ShowSelectLanguageMenu()
@@ -602,5 +680,53 @@ public class MainMenu : MonoBehaviour
 		backCopy = (GameObject)Instantiate(back, new Vector3(9.5f, -6, -5), Quaternion.identity);
 		iTween.MoveTo(backCopy, iTween.Hash("position", new Vector3(1.4f, -6, -5), "time", 0.5f, "delay", 0.22f, "easetype", iTween.EaseType.easeOutSine));
 		iTween.MoveTo(backCopy, iTween.Hash("position", new Vector3(1f, -6, -5), "time", 0.2f, "delay", 0.72f, "easetype", iTween.EaseType.easeOutSine));		
+	}
+
+	public void ShowTutorial() {
+		ShowTutorialSlides();
+		leftCopy = (GameObject)Instantiate(left, new Vector3(9, -4, -5), Quaternion.identity);
+		iTween.MoveTo(leftCopy, iTween.Hash("position", new Vector3(-2.4f, -4, -5), "time", 0.5f, "delay", 0.20f, "easetype", iTween.EaseType.easeOutSine));
+		iTween.MoveTo(leftCopy, iTween.Hash("position", new Vector3(-2f, -4, -5), "time", 0.2f, "delay", 0.70f, "easetype", iTween.EaseType.easeOutSine));
+		
+		rightCopy = (GameObject)Instantiate(right, new Vector3(9.5f, -4, -5), Quaternion.identity);
+		iTween.MoveTo(rightCopy, iTween.Hash("position", new Vector3(1.6f, -4, -5), "time", 0.5f, "delay", 0.22f, "easetype", iTween.EaseType.easeOutSine));
+		iTween.MoveTo(rightCopy, iTween.Hash("position", new Vector3(2f, -4, -5), "time", 0.2f, "delay", 0.72f, "easetype", iTween.EaseType.easeOutSine));		
+
+
+		backCopy = (GameObject)Instantiate(back, new Vector3(9.5f, -6, -5), Quaternion.identity);
+		iTween.MoveTo(backCopy, iTween.Hash("position", new Vector3(-0.4f, -6, -5), "time", 0.5f, "delay", 0.22f, "easetype", iTween.EaseType.easeOutSine));
+		iTween.MoveTo(backCopy, iTween.Hash("position", new Vector3(0f, -6, -5), "time", 0.2f, "delay", 0.72f, "easetype", iTween.EaseType.easeOutSine));		
+		backCopy.transform.parent = Camera.main.gameObject.transform;
+	}
+
+	public void ShowTutorialSlides(){
+
+		GameObject.Find("ico").GetComponent<SpriteRenderer>().enabled = false;
+
+		labelMain = Exp.Label(Localization.GetWord("tutorial_1"), 0.15f);
+		labelMain.transform.position = new Vector3(0, 0, -5);
+		labelMain.name = "tut_1";
+
+		labelMain = Exp.Label(Localization.GetWord("tutorial_2"), 0.15f);
+		labelMain.transform.position = new Vector3(15, 0, -5);
+		labelMain.name = "tut_2";
+
+		labelMain = Exp.Label(Localization.GetWord("tutorial_3"), 0.15f);
+		labelMain.transform.position = new Vector3(30, 0, -5);
+		labelMain.name = "tut_3";
+
+		labelMain = Exp.Label(Localization.GetWord("tutorial_4"), 0.15f);
+		labelMain.transform.position = new Vector3(45, 0, -5);
+		labelMain.name = "tut_4";
+
+		labelMain = Exp.Label(Localization.GetWord("tutorial_5"), 0.15f);
+		labelMain.transform.position = new Vector3(60, 0, -5);
+		labelMain.name = "tut_5";
+
+		GameObject.Find ("tut_1_img").GetComponent<SpriteRenderer> ().enabled = true;
+		GameObject.Find ("tut_2_img").GetComponent<SpriteRenderer> ().enabled = true;
+		GameObject.Find ("tut_3_img").GetComponent<SpriteRenderer> ().enabled = true;
+		GameObject.Find ("tut_4_img").GetComponent<SpriteRenderer> ().enabled = true;
+		GameObject.Find ("tut_5_img").GetComponent<SpriteRenderer> ().enabled = true;
 	}
 }
