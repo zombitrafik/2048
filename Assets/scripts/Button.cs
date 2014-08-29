@@ -32,13 +32,17 @@ public class Button : MonoBehaviour {
 		but_caption.transform.localPosition = Vector3.zero + new Vector3(0,0, -1);
 		but_caption.GetComponent<TextMesh>().text = Localization.GetWord(caption);
 		but_caption.GetComponent<TextMesh>().color = Color.gray;
-		but_caption.GetComponent<TextMesh>().characterSize = 0.2f;
+		but_caption.GetComponent<TextMesh>().characterSize = 0.16f;
 		ic = new GameObject();
 		ic.AddComponent<SpriteRenderer>();
 		ic.GetComponent<SpriteRenderer>().sprite = ico;
 		ic.GetComponent<SpriteRenderer>().color = getColor();
 		ic.transform.parent = but_up.transform;
-		ic.transform.localPosition = Vector3.zero + new Vector3(-2.1f, 0, -1);
+		if (GetName () != "keyboard" && GetName () != "swipe") {
+			ic.transform.localPosition = Vector3.zero + new Vector3 (-2.1f, 0, -1);
+		} else {
+			ic.transform.localPosition = Vector3.zero + new Vector3 (0, 0, -1);	
+		}
 
 		but_up.AddComponent<BoxCollider2D>();
 		but_down.AddComponent<BoxCollider2D>();
@@ -53,26 +57,27 @@ public class Button : MonoBehaviour {
 
 	public void SetButtonDown()
 	{
-		but_up.GetComponent<SpriteRenderer>().enabled = false;
-		but_down.GetComponent<SpriteRenderer>().enabled = true;
+			but_up.GetComponent<SpriteRenderer>().enabled = false;
+			but_down.GetComponent<SpriteRenderer>().enabled = true;
 
-		but_up.transform.position -= new Vector3(0, 0, -1);
-		but_down.transform.position += new Vector3(0, 0, -1);
+			but_up.transform.position -= new Vector3(0, 0, -1);
+			but_down.transform.position += new Vector3(0, 0, -1);
 
-		but_caption.GetComponent<TextMesh>().color = Color.white;
-		ic.GetComponent<SpriteRenderer>().color = Color.white;
+			but_caption.GetComponent<TextMesh>().color = Color.white;
+			ic.GetComponent<SpriteRenderer>().color = Color.white;	
 	}
 
 	public void SetButtonUp()
 	{
-		but_up.GetComponent<SpriteRenderer>().enabled = true;
-		but_down.GetComponent<SpriteRenderer>().enabled = false;
+			but_up.GetComponent<SpriteRenderer>().enabled = true;
+			but_down.GetComponent<SpriteRenderer>().enabled = false;
+			
+			but_up.transform.position += new Vector3(0, 0, -1);
+			but_down.transform.position -= new Vector3(0, 0, -1);
+			
+			but_caption.GetComponent<TextMesh>().color = Color.gray;
+			ic.GetComponent<SpriteRenderer>().color = getColor();
 
-		but_up.transform.position += new Vector3(0, 0, -1);
-		but_down.transform.position -= new Vector3(0, 0, -1);
-
-		but_caption.GetComponent<TextMesh>().color = Color.gray;
-		ic.GetComponent<SpriteRenderer>().color = getColor();
 	}
 
 	void OnDestroy()

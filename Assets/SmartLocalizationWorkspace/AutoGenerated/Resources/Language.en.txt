@@ -117,19 +117,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 	<data name="Game.MainMenu" xml:space="preserve">
-		<value>Main menu</value>
+		<value>Menu</value>
 	</data>
 	<data name="Game.Repost_link" xml:space="preserve">
-		<value />
+		<value>https://play.google.com/store/apps/details?id=com.kimreik.moveandcrush</value>
 	</data>
 	<data name="Game.Repost_tags" xml:space="preserve">
-		<value />
+		<value>#MoveAndCrush</value>
 	</data>
 	<data name="Game.Repost_text" xml:space="preserve">
-		<value />
+		<value>My score in "Move and Crush" - </value>
 	</data>
 	<data name="Game.Repost_title" xml:space="preserve">
-		<value />
+		<value>Share</value>
 	</data>
 	<data name="Game.Retry" xml:space="preserve">
 		<value>Retry</value>
@@ -138,52 +138,37 @@
 		<value>Score</value>
 	</data>
 	<data name="Game.Share" xml:space="preserve">
-		<value>Share with your friends</value>
+		<value>Share with friends</value>
 	</data>
 	<data name="Game.YBScore" xml:space="preserve">
-		<value>You best score</value>
+		<value>Best score</value>
 	</data>
 	<data name="MainMenu.Achive" xml:space="preserve">
-		<value />
+		<value>Achievements</value>
 	</data>
 	<data name="MainMenu.Back" xml:space="preserve">
 		<value>Back</value>
 	</data>
-	<data name="MainMenu.Buttons" xml:space="preserve">
-		<value>Buttons</value>
-	</data>
 	<data name="MainMenu.Control" xml:space="preserve">
 		<value>Control</value>
 	</data>
-	<data name="MainMenu.Difficult" xml:space="preserve">
-		<value>Difficult</value>
+	<data name="English" xml:space="preserve">
+		<value>English</value>
 	</data>
-	<data name="MainMenu.Easy" xml:space="preserve">
-		<value>Easy</value>
+	<data name="French" xml:space="preserve">
+		<value>Français</value>
 	</data>
-	<data name="MainMenu.English" xml:space="preserve">
-		<value />
-	</data>
-	<data name="MainMenu.French" xml:space="preserve">
-		<value />
-	</data>
-	<data name="MainMenu.German" xml:space="preserve">
-		<value />
-	</data>
-	<data name="MainMenu.Hard" xml:space="preserve">
-		<value>Hard</value>
+	<data name="Deutsch" xml:space="preserve">
+		<value>Deutsch</value>
 	</data>
 	<data name="MainMenu.LadderCombo" xml:space="preserve">
-		<value />
+		<value>Combo</value>
 	</data>
 	<data name="MainMenu.LadderFigSize" xml:space="preserve">
-		<value />
+		<value>Figure Size</value>
 	</data>
 	<data name="MainMenu.Language" xml:space="preserve">
 		<value>Language</value>
-	</data>
-	<data name="MainMenu.Normal" xml:space="preserve">
-		<value>Normal</value>
 	</data>
 	<data name="MainMenu.Play" xml:space="preserve">
 		<value>Play</value>
@@ -194,22 +179,36 @@
 	<data name="MainMenu.Ratings" xml:space="preserve">
 		<value>Ratings</value>
 	</data>
-	<data name="MainMenu.Russian" xml:space="preserve">
-		<value />
-	</data>
-	<data name="MainMenu.Selected" xml:space="preserve">
-		<value>Selected</value>
-	</data>
-	<data name="MainMenu.Set_difficulty" xml:space="preserve">
-		<value>Set difficulty</value>
+	<data name="Russian" xml:space="preserve">
+		<value>Русский</value>
 	</data>
 	<data name="MainMenu.Settings" xml:space="preserve">
 		<value>Settings</value>
 	</data>
-	<data name="MainMenu.Swipe" xml:space="preserve">
-		<value>Swipe</value>
-	</data>
 	<data name="MainMenu.Tutorial" xml:space="preserve">
 		<value>Tutorial</value>
+	</data>
+	<data name="Toturial5" xml:space="preserve">
+		<value>When the panel is full, 
+			the number of the appearing 
+			tiles increases</value>
+	</data>
+	<data name="Tutorial1" xml:space="preserve">
+		<value>To move the tiles you can 
+			swipe or tap arrows 
+			(switching in settings)</value>
+	</data>
+	<data name="Tutorial2" xml:space="preserve">
+		<value>This panel displays the 
+			number of appearing tiles</value>
+	</data>
+	<data name="Tutorial3" xml:space="preserve">
+		<value>When you break combo, 
+			the panel is filled on one tile</value>
+	</data>
+	<data name="Tutorial4" xml:space="preserve">
+		<value>If you got the combo equal 
+			to the number of appearing tiles, 
+			one tile is removed from the panel</value>
 	</data>
 </root>
